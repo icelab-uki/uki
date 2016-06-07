@@ -1,0 +1,19 @@
+Base Posture Recognizing
+Please wait
+ until the time reach zero
+
+Have a nice break
+Welcome Back
+It's time to take a break
+pitching is detected
+You have work for a long time.
+Let's take a break.
+Your risk have reach Level 1	<< Your risk have reached Level 1
+The system is searching for a skeleton
+
+The system is searching for a skele ton.
+
+
+-------------------------
+You're pitching
+twisting posture is detected

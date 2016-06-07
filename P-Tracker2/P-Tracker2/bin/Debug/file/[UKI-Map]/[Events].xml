@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<events>
+  <event name="ReleaseAll" enabled="1" expand="0">
+    <then type="0" press="0" key="Left" />
+    <then type="0" press="0" key="Right" />
+    <then type="0" press="0" key="Up" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="D_DR_R" enabled="1" expand="0">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="D_DL_L" enabled="1" expand="0">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="R_RD_D_DL_L" enabled="1" expand="0">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="L_LD_D_DR_R" enabled="1" expand="0">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="R_RD_R" enabled="1" expand="0">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="L_LD_L" enabled="1" expand="1">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="1" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Left" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="0" key="Down" />
+  </event>
+  <event name="F_D_DF(FTG)" enabled="1" expand="1">
+    <then type="1" v="ReleaseAll" />
+    <then type="0" press="-1" key="Right" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Down" />
+    <then type="-1" value_d="0.05" />
+    <then type="0" press="1" key="Right" />
+  </event>
+</events>

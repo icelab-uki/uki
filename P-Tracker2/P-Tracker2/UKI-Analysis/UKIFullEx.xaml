@@ -1,0 +1,82 @@
+﻿<Window x:Class="P_Tracker2.UKIFullEx"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UKI Experiment" Height="390" Width="574" Background="#FF0D0D0D" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed">
+    <Grid>
+        <TabControl Height="100" HorizontalAlignment="Left" Margin="1,0,0,0" Name="tabControl1" VerticalAlignment="Bottom" Width="546" Background="#FF003B48">
+            <TabItem Header="Evaluation" Name="tabItem1">
+                <Grid Background="#FF095A90">
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Load Instance" Height="26" HorizontalAlignment="Left" Margin="6,8,0,0" Name="butBrowseRaw" VerticalAlignment="Top" Width="88" Click="butBrowseRaw_Click" />
+                    <Button Name="openFolder" Margin="68,37,0,6" HorizontalAlignment="Left" Width="27" Click="butOpenFolderClick">
+                        <Image Source="/P_Tracker2;component/img/folder.gif"></Image>
+                    </Button>
+                    <Button Content="Analyze" Height="23" HorizontalAlignment="Left" Margin="472,6,0,0" Name="butAnalyze" VerticalAlignment="Top" Width="58" Click="butAnalyze_Click" IsEnabled="False" />
+                    <Button Content="Help" Height="21" HorizontalAlignment="Left" Margin="34,37,0,0" Name="butHelp" VerticalAlignment="Top" Width="31" FontSize="10" Click="butHelp_Click" />
+                    <GroupBox Header="Partial" Height="68" HorizontalAlignment="Left" Margin="98,-4,0,0" Name="groupBox1" VerticalAlignment="Top" Width="121" Foreground="Yellow">
+                        <Grid>
+                            <CheckBox Content="Subject" Height="16" HorizontalAlignment="Left" Name="checkPartial" VerticalAlignment="Top" Margin="2,1,0,0" Foreground="Cyan" IsChecked="True" />
+                            <Label Content="Motion" Height="28" HorizontalAlignment="Left" Margin="15,21,0,0" Name="label1" VerticalAlignment="Top" Foreground="Cyan" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="64,-2,0,0" Name="textSID" VerticalAlignment="Top" Width="42" Text="1-20" TextChanged="textSID_TextChanged" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="64,24,0,0" Name="textMID" VerticalAlignment="Top" Width="42" Text="1-30" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Lime" Header="Selection Loop" Height="72" HorizontalAlignment="Left" Margin="222,-5,0,0" Name="groupBox2" VerticalAlignment="Top" Width="207">
+                        <Grid>
+                            <CheckBox Content="MaxTRUE" Foreground="#FFC4FFFF" HorizontalAlignment="Left" Margin="0,2,0,22" Name="checkLoopMaxTrue" IsChecked="True" />
+                            <CheckBox Content="MinF with tradeoff =" Foreground="#FFC4FFFF" Height="16" HorizontalAlignment="Left" Margin="0,19,0,0" Name="checkMinF" VerticalAlignment="Top" IsChecked="True" />
+                            <CheckBox Content="Opt. Threshold" Foreground="#FFC4FFFF" Height="16" HorizontalAlignment="Left" IsChecked="False" IsEnabled="True" Margin="0,35,0,0" Name="checkOptThre" VerticalAlignment="Top" />
+                            <CheckBox Content="Avoid Gabage" Foreground="#FFD1C4FF" Height="16" IsChecked="False" IsEnabled="True" Margin="101,35,0,0" Name="checkAvoidGabage" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="132,13,0,0" Name="txtTradeOff" VerticalAlignment="Top" Width="25" Text="30" />
+                        </Grid>
+                    </GroupBox>
+                    <Button Content="Editor" Height="26" HorizontalAlignment="Left" Margin="486,35,0,0" Name="butEditor" VerticalAlignment="Top" Width="44" Click="butEditor_Click" />
+                    <Button Content="loop" Height="23" HorizontalAlignment="Left" IsEnabled="True" Margin="435,6,0,0" Name="butLoop" VerticalAlignment="Top" Width="34" Click="butLoop_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Setting 1" Name="tabItem3">
+                <Grid Background="#FF095A90">
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="364,7,0,0" Name="txtPartitionRange" Text="0.14" VerticalAlignment="Top" Width="31" />
+                    <Label Content="Partition Range" Height="28" Margin="273,5,0,0" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Foreground="White" />
+
+                    <GroupBox Header="Algorithms" Height="62" HorizontalAlignment="Left" Margin="0,-2,0,0" Name="groupBox3" VerticalAlignment="Top" Width="165" Foreground="#FF01E3FF">
+                        <Grid>
+                            <CheckBox Content="Greedy,DIFS,CMIM,JMIM" Height="16" HorizontalAlignment="Left" Margin="5,0,0,0" Name="checkAlgo_Entropy" VerticalAlignment="Top" Foreground="#FFC7FFFF" IsChecked="True" />
+                            <CheckBox Content="DCFS" Height="16" HorizontalAlignment="Left" Margin="5,19,0,0" Name="checkAlgo_DCFS" VerticalAlignment="Top" Foreground="#FFC7FFFF" IsChecked="True" />
+                        </Grid>
+                    </GroupBox>
+                    <CheckBox Content="Extra Feature" Foreground="#FFFFFFAF" Height="16" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="169,10,0,0" Name="checkExtraFeature" VerticalAlignment="Top" />
+                    <CheckBox Content="Test Unseen" Foreground="#FF84FF57" Height="16" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="169,27,0,0" Name="checkTestUnseen" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Setting 2" Name="tabItem4">
+                <Grid Background="#FF095A90">
+                    <GroupBox Header="Posture Segmentation" Height="72" HorizontalAlignment="Left" Margin="6,-4,0,0" Name="groupBox4" VerticalAlignment="Top" Width="325" Foreground="Yellow">
+                        <Grid>
+                            <Button Content="Count" Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="3,0,0,0" Name="butCountPose" VerticalAlignment="Top" Width="71" Click="butCountPose_Click" />
+                            <CheckBox Content="Re-Compute" Foreground="#FF8EFFFF" HorizontalAlignment="Left" IsChecked="False" Margin="82,1,0,31" Name="checkReCal" Checked="checkReCal_Checked" />
+                            <CheckBox Content="Capture Jump" Foreground="#FF8EFFFF" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="82,32,0,0" Name="checkPoseCapJump" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="280,1,0,0" Name="txtThreStill" Text="0.30" VerticalAlignment="Top" Width="31" />
+                            <Label Content="Still Threshold" Foreground="#FFFFFF5A" Height="28" HorizontalAlignment="Left" Margin="185,1,0,0" Name="label3" VerticalAlignment="Top" />
+                            <Label Content="Jump Threshold" Foreground="#FFFFFF5A" Height="28" HorizontalAlignment="Left" Margin="185,24,0,0" Name="label4" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="280,27,0,0" Name="txtThreJump" Text="0.05" VerticalAlignment="Top" Width="31" />
+                            <CheckBox Content="Save Key" Foreground="White" HorizontalAlignment="Left" IsChecked="False" Margin="105,17,0,17" Name="checkSaveKey" Width="91" />
+                            <CheckBox Content="export" Foreground="#FFBABABA" HorizontalAlignment="Left" IsChecked="False" Margin="16,27,0,7" Name="checkPoseSegExport" Width="58" />
+                        </Grid>
+                    </GroupBox>
+                    <Button Content="Export Table" Height="26" HorizontalAlignment="Left" Margin="455,5,0,0" Name="butExport" VerticalAlignment="Top" Width="75" Click="butExport_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="DB MGT" Name="tabItem2">
+                <Grid Background="#FF095A90">
+                    <Button Content="Auto Renaming" Height="26" HorizontalAlignment="Left" Margin="6,5,0,0" Name="butAutoRename" VerticalAlignment="Top" Width="91" Click="butAutoRename_Click" />
+                    <Button Content= "Count Inst" Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="455,0,0,0" Name="butCountInst" VerticalAlignment="Top" Width="75" Click="butCountInst_Click" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <DataGrid Margin="1,1,5,102" Name="dataGrid" CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="True" CanUserAddRows="False">
+        </DataGrid>
+        <Label Content="Row: 0" Height="28" HorizontalAlignment="Right" Margin="0,0,6,72" Name="txtRow" VerticalAlignment="Bottom" Foreground="White" HorizontalContentAlignment="Right" Width="132" />
+    </Grid>
+</Window>

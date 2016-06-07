@@ -1,0 +1,12 @@
+﻿<Window x:Class="P_Tracker2.UKI_addThen_ReplaceKey"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Key Replacement Event" Height="67" Width="387" WindowStyle="ToolWindow" Icon="/P_Tracker2;component/img/iconP.png" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Background="Black">
+        <Label Content="Replace" Height="28" HorizontalAlignment="Left" Name="txt01" VerticalAlignment="Top" Foreground="Yellow" Margin="3,2,0,0" />
+        <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="321,3,0,0" Name="butAdd" VerticalAlignment="Top" Width="42" Click="butAdd_Click" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="57,3,0,0" Name="comboV1" VerticalAlignment="Top" Width="113" />
+        <Label Content="with" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="171,2,0,0" Name="label1" VerticalAlignment="Top" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="203,3,0,0" Name="comboV2" VerticalAlignment="Top" Width="113" />
+    </Grid>
+</Window>

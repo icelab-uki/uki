@@ -1,0 +1,18 @@
+@relation '1121 NoN rand3-weka.filters.unsupervised.attribute.Remove-R1-3-weka.filters.unsupervised.attribute.Remove-R52-66-weka.filters.unsupervised.attribute.Remove-R2-3,5-23,25-28,30-51'
+
+@attribute class2 {S,M}
+@attribute Head_Dist_Avg numeric
+@attribute ElbowLeft_Dist_Avg numeric
+@attribute ElbowRight_Dist_Avg numeric
+
+@data
+S,0.000145,0.000218,0.00163
+S,0.000102,0.000189,0.0001
+S,0.000313,0.000243,0.000063
+S,0.001192,0.001707,0.001046
+M,0.004457,0.010492,0.006567
+S,0.00009,0.000123,0.000034
+S,0.001242,0.00244,0.000284
+M,0.008756,0.023305,0.013521
+S,0.000244,0.003486,0.000098
+S,0.000266,0.000031,0.00023

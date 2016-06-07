@@ -1,0 +1,8 @@
+http://oringz.com/freeringtones/sound-effects/
+
+p_correct	0 sounds-767-arpeggio	right posture
+p_wrong	sounds-1066-may-i-have-your-attention	wrong post
+lv0	0 sounds-1053-jubilation	reach lv 0
+lv1	sounds-892-do-not-press-this-button	reach lv 1
+lv2	3 sounds-897-alarm-frenzy
+t_break	sounds-924-long-chime-sound	Let Break

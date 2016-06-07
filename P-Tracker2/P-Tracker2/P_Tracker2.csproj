@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BF885E89-060E-4E1F-BD76-33CEA9749278}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>P_Tracker2</RootNamespace>
+    <AssemblyName>P_Tracker2</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="3DTools">
+      <HintPath>.\3DTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>.\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.AWT.WinForms">
+      <HintPath>.\IKVM.AWT.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Beans">
+      <HintPath>.\IKVM.OpenJDK.Beans.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Charsets">
+      <HintPath>.\IKVM.OpenJDK.Charsets.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Corba, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\IKVM.OpenJDK.Corba.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core">
+      <HintPath>.\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Jdbc">
+      <HintPath>.\IKVM.OpenJDK.Jdbc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Management">
+      <HintPath>.\IKVM.OpenJDK.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Media">
+      <HintPath>.\IKVM.OpenJDK.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Misc">
+      <HintPath>.\IKVM.OpenJDK.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Naming">
+      <HintPath>.\IKVM.OpenJDK.Naming.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Remoting">
+      <HintPath>.\IKVM.OpenJDK.Remoting.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Security">
+      <HintPath>.\IKVM.OpenJDK.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT">
+      <HintPath>.\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text">
+      <HintPath>.\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Tools">
+      <HintPath>.\IKVM.OpenJDK.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API">
+      <HintPath>.\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Bind">
+      <HintPath>.\IKVM.OpenJDK.XML.Bind.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Crypto">
+      <HintPath>.\IKVM.OpenJDK.XML.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Parse">
+      <HintPath>.\IKVM.OpenJDK.XML.Parse.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Transform">
+      <HintPath>.\IKVM.OpenJDK.XML.Transform.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.WebServices">
+      <HintPath>.\IKVM.OpenJDK.XML.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.XPath">
+      <HintPath>.\IKVM.OpenJDK.XML.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Reflection">
+      <HintPath>.\IKVM.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime">
+      <HintPath>.\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime.JNI">
+      <HintPath>.\IKVM.Runtime.JNI.dll</HintPath>
+    </Reference>
+    <Reference Include="InputManager">
+      <HintPath>.\InputManager.dll</HintPath>
+    </Reference>
+    <Reference Include="libsvm">
+      <HintPath>libsvm.net.2.1.8\lib\libsvm.dll</HintPath>
+    </Reference>
+    <Reference Include="LIBSVM.NET">
+      <HintPath>libsvm.net.2.1.8\lib\LIBSVM.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.DirectX.DirectInput.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="weka">
+      <HintPath>.\weka.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="UKI\TheInitialPosture.cs" />
+    <Compile Include="UKI\UKI_addIf_5FlexionAngle.xaml.cs">
+      <DependentUpon>UKI_addIf_5FlexionAngle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addIf_4SphereAngle.xaml.cs">
+      <DependentUpon>UKI_addIf_4SphereAngle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addThen_2Mouse.xaml.cs">
+      <DependentUpon>UKI_addThen_2Mouse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\TheData.cs" />
+    <Compile Include="UKI-Analysis\UKI_Preprocessor.cs" />
+    <Compile Include="UKI-Analysis\InstanceContainer.cs" />
+    <Compile Include="UKI-Analysis\UKI_ModelGenerator.cs" />
+    <Compile Include="OtherMenu.xaml.cs">
+      <DependentUpon>OtherMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FaceDetector\FaceData.cs" />
+    <Compile Include="FaceDetector\FaceDetector.xaml.cs">
+      <DependentUpon>FaceDetector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TheClass\TheEntropy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TheClass\TheOther.cs" />
+    <Compile Include="UKI\UKI_addIf_3Change.xaml.cs">
+      <DependentUpon>UKI_addIf_3Change.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_Offline.cs" />
+    <Compile Include="UKI-Analysis\TheRuleTester.cs" />
+    <Compile Include="TheClass\TheExternalDataConverter.cs" />
+    <Compile Include="TheClass\TheTest.cs" />
+    <Compile Include="UKI\UKI_Data.cs" />
+    <Compile Include="UKI-Analysis\UKIFullEx.xaml.cs">
+      <DependentUpon>UKIFullEx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI-Analysis\EntropyAnalyser.xaml.cs">
+      <DependentUpon>EntropyAnalyser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI-Analysis\UKIAnalyser.xaml.cs">
+      <DependentUpon>UKIAnalyser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\TheUKI.cs" />
+    <Compile Include="UKI\CalSparse_XYZ.cs" />
+    <Compile Include="UKI\Data.cs" />
+    <Compile Include="UKI\UKI_addIf_9Variable.xaml.cs">
+      <DependentUpon>UKI_addIf_9Variable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addThen_9Variable.xaml.cs">
+      <DependentUpon>UKI_addThen_9Variable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_add_Detection.xaml.cs">
+      <DependentUpon>UKI_add_Detection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_add_Variable.xaml.cs">
+      <DependentUpon>UKI_add_Variable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addIf_1Relative.xaml.cs">
+      <DependentUpon>UKI_addIf_1Relative.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addIf_2Atomic.xaml.cs">
+      <DependentUpon>UKI_addIf_2Atomic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addIf_-1Time.xaml.cs">
+      <DependentUpon>UKI_addIf_-1Time.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_add_Icon.xaml.cs">
+      <DependentUpon>UKI_add_Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addThen_8ReplaceKey.xaml.cs">
+      <DependentUpon>UKI_addThen_8ReplaceKey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_add_Database.xaml.cs">
+      <DependentUpon>UKI_add_Database.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addThen_-1Time.xaml.cs">
+      <DependentUpon>UKI_addThen_-1Time.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\UKI_addThen_1Key.xaml.cs">
+      <DependentUpon>UKI_addThen_1Key.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\ThePosExtract.cs" />
+    <Compile Include="UKI\TheMapData.cs" />
+    <Compile Include="UKI\PosExtract.cs" />
+    <Compile Include="UKI\MapData.cs" />
+    <Compile Include="UKI\Editor.xaml.cs">
+      <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\TheKeySender2.cs" />
+    <Compile Include="UKI\UKI.xaml.cs">
+      <DependentUpon>UKI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UKI\TheKeySender.cs" />
+    <Compile Include="Tracker\GraphVisualizer.xaml.cs">
+      <DependentUpon>GraphVisualizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracker\MySetting.cs" />
+    <Compile Include="TheClass\TheURL.cs" />
+    <Compile Include="TheClass\TheTool_Draw.cs" />
+    <Compile Include="Tracker\TheSound.cs" />
+    <Compile Include="Tracker\TheTool_DetectorReportData.cs" />
+    <Compile Include="Tracker\DetectorReportData.cs" />
+    <Compile Include="UKI\UKI_FightingICE.cs" />
+    <Compile Include="UKI\UKI_add_Head.xaml.cs">
+      <DependentUpon>UKI_add_Head.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Unused\DetectorReport.xaml.cs">
+      <DependentUpon>DetectorReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\Viewer_UKI.xaml.cs">
+      <DependentUpon>Viewer_UKI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Weka\TheProlongSitDetector.cs" />
+    <Compile Include="TheClass\TheMinMaxNormaliz.cs" />
+    <Compile Include="TheClass\Debugger.xaml.cs">
+      <DependentUpon>Debugger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lib\CSVReader.cs" />
+    <Compile Include="TheClass\TheMicroCmd.cs" />
+    <Compile Include="TheClass\TheTool_micro.cs" />
+    <Compile Include="Viewer\SubViewer_Extend.cs" />
+    <Compile Include="Weka\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TheClass\ThePostureCal.cs" />
+    <Compile Include="Weka\TheWeka.cs" />
+    <Compile Include="Lib\StringConverter.cs" />
+    <Compile Include="TheClass\TheTool_Stat.cs" />
+    <Compile Include="TheClass\TheSys.cs" />
+    <Compile Include="Viewer\SubViewer.xaml.cs">
+      <DependentUpon>SubViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracker\TotalCounter.cs" />
+    <Compile Include="Tracker\PersonD.cs" />
+    <Compile Include="Tracker\Detector.xaml.cs">
+      <DependentUpon>Detector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracker\FaceTrackingViewer.xaml.cs">
+      <DependentUpon>FaceTrackingViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracker\TexturedFaceMeshViewer.xaml.cs">
+      <DependentUpon>TexturedFaceMeshViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TheClass\TheTool.cs" />
+    <Compile Include="TheClass\TheStore.cs" />
+    <Compile Include="Tracker\Person.cs" />
+    <Compile Include="Tracker\TheTool_Person.cs" />
+    <Compile Include="Tracker\UserTracker.xaml.cs">
+      <DependentUpon>UserTracker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Unused\Unused.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Viewer\TotalViewer.xaml.cs">
+      <DependentUpon>TotalViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\Viewer_OWS.xaml.cs">
+      <DependentUpon>Viewer_OWS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Weka\Weka.xaml.cs">
+      <DependentUpon>Weka.xaml</DependentUpon>
+    </Compile>
+    <Page Include="OtherMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FaceDetector\FaceDetector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UKI-Analysis\UKIFullEx.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI-Analysis\EntropyAnalyser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI-Analysis\UKIAnalyser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_5FlexionAngle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_4SphereAngle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addThen_2Mouse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_3Change.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_9Variable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addThen_9Variable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_add_Detection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_add_Variable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_1Relative.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_2Atomic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addIf_-1Time.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_add_Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addThen_8ReplaceKey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_add_Database.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addThen_-1Time.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\UKI_addThen_1Key.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UKI\Editor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UKI\UKI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tracker\GraphVisualizer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UKI\UKI_add_Head.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Unused\DetectorReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TheClass\Debugger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Viewer\Viewer_UKI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Weka\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tracker\Detector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tracker\FaceTrackingViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Viewer\SubViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tracker\TexturedFaceMeshViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Tracker\UserTracker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Viewer\TotalViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Viewer\Viewer_OWS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Weka\Weka.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\KinectSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microsoft.Kinect.Toolkit.FaceTracking\Microsoft.Kinect.Toolkit.FaceTracking.csproj">
+      <Project>{1BCF9CEE-DF01-430E-B49D-41A9A88963EB}</Project>
+      <Name>Microsoft.Kinect.Toolkit.FaceTracking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.Kinect.Toolkit\Microsoft.Kinect.Toolkit.csproj">
+      <Project>{C6F9C31B-6130-4443-A5CC-EF0664552ECD}</Project>
+      <Name>Microsoft.Kinect.Toolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\View.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\folder.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Snap1.png" />
+    <Resource Include="img\Snap2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\face.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\iconP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_main4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_a0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_f0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_m.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_main1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ows_a1.png" />
+    <Resource Include="img\ows_a2.png" />
+    <Resource Include="img\ows_f1.png" />
+    <Resource Include="img\ows_f2.png" />
+    <Resource Include="img\ows_fp00.png" />
+    <Resource Include="img\ows_fp01.png" />
+    <Resource Include="img\ows_fp02.png" />
+    <Resource Include="img\ows_fp10.png" />
+    <Resource Include="img\ows_fp11.png" />
+    <Resource Include="img\ows_fp12.png" />
+    <Resource Include="img\ows_fp20.png" />
+    <Resource Include="img\ows_fp21.png" />
+    <Resource Include="img\ows_fp22.png" />
+    <Resource Include="img\ows_main2.jpg" />
+    <Resource Include="img\ows_main3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\copy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\down.gif" />
+    <Resource Include="img\left.gif" />
+    <Resource Include="img\paste.gif" />
+    <Resource Include="img\right.gif" />
+    <Resource Include="img\up.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\folder2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\head3d.JPG" />
+    <Content Include="Lib\FaceTrackData.dll" />
+    <Content Include="Lib\FaceTrackLib.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,345 @@
+﻿<Window x:Class="P_Tracker2.Detector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Detector" Height="547" Width="400" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed" Closing="Window_Closing" DataContext="{Binding}" ResizeMode="NoResize" BorderBrush="Black">
+    
+    <Grid Background="Black" Width="Auto">
+        <Label Foreground="Yellow" Height="46" HorizontalAlignment="Left" Margin="49,-6,0,0" Name="txtState" VerticalAlignment="Top" FontSize="28" Width="333" FontStyle="Italic" FontFamily="Times New Roman" />
+        <Label FontSize="40" Foreground="#FF7EFFFF" Height="56" Margin="0,25,4,0" Name="txtCool" VerticalAlignment="Top" HorizontalAlignment="Right" Width="65" FontFamily="Segoe UI" HorizontalContentAlignment="Right" />
+        <Label FontSize="20" Foreground="Lime" Height="38" HorizontalAlignment="Left" Margin="57,25,0,0" Name="txtMove" VerticalAlignment="Top" Width="235" FontStyle="Italic" FontFamily="Times New Roman" />
+        <TabControl Height="383" HorizontalAlignment="Left" Margin="3,122,0,0" Name="tabControl2" VerticalAlignment="Top" Width="371" Background="White" BorderBrush="Black">
+            <TabItem Header="Health Risks" Name="tab02">
+                <Grid Background="Black">
+                    <Button Content="HR Reset" Height="23" HorizontalAlignment="Left" Margin="7,153,0,0" Name="butHRL_reset" VerticalAlignment="Top" Width="95" Click="butHRL_reset_Click" />
+                    <GroupBox Foreground="Yellow" Header="Health Risk" Height="167" HorizontalAlignment="Left" Margin="5,182,0,0" Name="groupBox7" VerticalAlignment="Top" Width="278" Background="#FF005479">
+                        <Grid>
+                            <Label Content="Prolonged Sitting" FontFamily="Segoe UI" FontSize="14" Foreground="Cyan" Height="30" HorizontalAlignment="Left" Name="txtPsdLv" VerticalAlignment="Top" Margin="3,-4,0,0" />
+                            <Label Content="Pitch" FontFamily="Segoe UI" FontSize="14" Foreground="Cyan" Height="28" HorizontalAlignment="Left" Margin="3,37,0,0" Name="txtPitchLv" VerticalAlignment="Top" />
+                            <Label Content="Twisted Posture" FontFamily="Segoe UI" FontSize="14" Foreground="Cyan" Height="28" HorizontalAlignment="Left" Margin="3,77,0,0" Name="label9" VerticalAlignment="Top" />
+                            <Label Content="Score : 0" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="191,18,0,0" Name="txtScorePS" VerticalAlignment="Top" />
+                            <ProgressBar Foreground="Lime" Height="17" HorizontalAlignment="Left" LargeChange="0" Margin="34,23,0,0" Maximum="1" Minimum="0" Name="progressPS" VerticalAlignment="Top" Width="159" SmallChange="0.01" Value="0" IsIndeterminate="False" Padding="0" DataContext="{Binding}">
+                                <ProgressBar.Background>
+                                    <SolidColorBrush />
+                                </ProgressBar.Background>
+                                <ProgressBar.BorderBrush>
+                                    <SolidColorBrush />
+                                </ProgressBar.BorderBrush>
+                            </ProgressBar>
+                            <Label Content="Score : 0" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="190,57,0,0" Name="txtScorePitch" VerticalAlignment="Top" />
+                            <ProgressBar Foreground="Lime" Height="17" HorizontalAlignment="Left" LargeChange="0" Margin="33,62,0,0" Maximum="1" Minimum="0" Name="progressPitch" VerticalAlignment="Top" Width="159" SmallChange="0.01">
+                                <ProgressBar.Background>
+                                    <SolidColorBrush />
+                                </ProgressBar.Background>
+                                <ProgressBar.BorderBrush>
+                                    <SolidColorBrush />
+                                </ProgressBar.BorderBrush>
+                            </ProgressBar>
+                            <Label Content="Score : 0" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="191,99,0,0" Name="txtScoreTwist" VerticalAlignment="Top" />
+                            <ProgressBar Foreground="Lime" Height="17" HorizontalAlignment="Left" LargeChange="0" Margin="34,104,0,0" Maximum="1" Minimum="0" Name="progressTwist" VerticalAlignment="Top" Width="159" SmallChange="0.01">
+                                <ProgressBar.Background>
+                                    <SolidColorBrush />
+                                </ProgressBar.Background>
+                                <ProgressBar.BorderBrush>
+                                    <SolidColorBrush />
+                                </ProgressBar.BorderBrush>
+                            </ProgressBar>
+                            <Button Content="+" Height="19" HorizontalAlignment="Left" Margin="158,41,0,0" Name="button1" VerticalAlignment="Top" Width="16" Click="button1_Click" />
+                            <Button Content="-" Height="19" HorizontalAlignment="Left" Margin="176,41,0,0" Name="button2" VerticalAlignment="Top" Width="16" Click="button2_Click" />
+                            <Button Content="+" Height="19" HorizontalAlignment="Left" Margin="158,81,0,0" Name="button3" VerticalAlignment="Top" Width="16" Click="button3_Click" />
+                            <Button Content="-" Height="19" HorizontalAlignment="Left" Margin="176,81,0,0" Name="button4" VerticalAlignment="Top" Width="16" Click="button4_Click" />
+                            <Button Content="+" Height="19" HorizontalAlignment="Left" Margin="158,123,0,0" Name="button5" VerticalAlignment="Top" Width="16" Click="button5_Click" />
+                            <Button Content="-" Height="19" HorizontalAlignment="Left" Margin="176,123,0,0" Name="button6" VerticalAlignment="Top" Width="16" Click="button6_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <Image Height="180" HorizontalAlignment="Left" Margin="108,4,0,0" Name="imgMain" Stretch="Uniform" VerticalAlignment="Top" Width="180" Source="/P_Tracker2;component/img/ows_main1.jpg" />
+                    <Image Height="40" HorizontalAlignment="Left" Margin="240,44,0,0" Name="imgTR" Source="/P_Tracker2;component/img/ows_a0.png" Stretch="Uniform" VerticalAlignment="Top" Width="40" />
+                    <Image Height="40" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="119,44,0,0" Name="imgTL" Source="/P_Tracker2;component/img/ows_a0.png" Stretch="Uniform" VerticalAlignment="Top" Width="40">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Height="40" HorizontalAlignment="Left" Margin="179,10,0,0" Name="imgFace" Source="/P_Tracker2;component/img/ows_f0.png" Stretch="Uniform" VerticalAlignment="Top" Width="40" />
+                    <Image Height="29" HorizontalAlignment="Left" Margin="230,7,0,0" Name="imgMove" Source="/P_Tracker2;component/img/ows_m.png" Stretch="Uniform" VerticalAlignment="Top" Width="56" />
+                    <CheckBox Content="Visualiz." FontSize="12" Foreground="#FF9EDEFC" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="295,6,0,0" Name="checkVMan" VerticalAlignment="Top" Width="90" Visibility="Hidden" />
+                    <ProgressBar Height="236" HorizontalAlignment="Left" Margin="308,67,0,0" Maximum="100" Minimum="0" Name="pgTRisk" Orientation="Vertical" SmallChange="0.1" Value="0" VerticalAlignment="Top" Width="32" LargeChange="0" Panel.ZIndex="0" Opacity="1" IsHitTestVisible="True" UseLayoutRounding="True" Foreground="Red">
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                    </ProgressBar>
+                    <Label Content="Score : 0" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="298,300,0,0" Name="txtScoreTRisk" VerticalAlignment="Top" FlowDirection="RightToLeft" />
+                    <Label Content="Total Risk" FontFamily="Segoe UI" FontSize="14" Foreground="Cyan" Height="30" HorizontalAlignment="Left" Margin="286,316,0,0" Name="label24" VerticalAlignment="Top" />
+                    <Rectangle Height="24" HorizontalAlignment="Left" Margin="114,7,0,0" Name="rectTRisk" VerticalAlignment="Top" Width="41" Fill="Lime" />
+                    <Button Height="26" HorizontalAlignment="Left" Margin="6,8,0,0" Name="butBreak" VerticalAlignment="Top" Width="96" Click="butBreak_Click" Content="Break" FontWeight="Bold"></Button>
+                    <Button Height="27" HorizontalAlignment="Left" Margin="7,39,0,0" Name="butBackToWork" VerticalAlignment="Top" Width="95" Content="Back to work" FontWeight="Bold" IsEnabled="False" Click="butBackToWork_Click"></Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Angles" Name="tab01">
+                <Grid Background="Black" >
+                    <ProgressBar HorizontalAlignment="Left" Margin="312,57,0,0" Maximum="1" Minimum="-1" Name="pgBar_HeadBase" Orientation="Vertical" SmallChange="0.001" Value="0" VerticalAlignment="Top" Foreground="Blue" Width="12" Height="215" Opacity="1">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <ProgressBar HorizontalAlignment="Left" Margin="322,57,0,0" Maximum="1" Minimum="-1" Name="pgBar_HeadCur" Orientation="Vertical" SmallChange="0.001" Value="0" VerticalAlignment="Top" Width="24" Height="215" Foreground="Blue">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <ProgressBar Foreground="#FF01D328" HorizontalAlignment="Left" Margin="312,57,0,0" Maximum="1" Minimum="-1" Name="pgBar_ShouldBase" Orientation="Vertical" SmallChange="0.001" Value="0" VerticalAlignment="Top" Width="12" Height="215" Opacity="1">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <ProgressBar HorizontalAlignment="Left" Margin="322,57,0,0" Maximum="1" Minimum="-1" Name="pgBar_ShouldCur" Orientation="Vertical" SmallChange="0.001" Value="0" VerticalAlignment="Top" Width="24" Height="215" Foreground="#FF01D328" Opacity="1">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <Label Content="Range: 000" FontFamily="Segoe UI" FontSize="18" Foreground="#FF00EBFF" Height="37" HorizontalAlignment="Left" Margin="180,0,0,0" Name="txtRange" VerticalAlignment="Top" Width="175" />
+                    <Label Content="Height" FontFamily="Segoe UI" FontSize="14" Foreground="#FFFFFF8D" Height="28" HorizontalAlignment="Left" Margin="303,32,0,0" Name="label2" VerticalAlignment="Top" />
+                    <Image Height="231" HorizontalAlignment="Left" Margin="41,41,0,0" Name="image2" Source="/P_Tracker2;component/img/face.jpg" Stretch="Uniform" VerticalAlignment="Top" Width="242" />
+                    <Label FontFamily="Segoe UI" FontSize="26" Foreground="Blue" Height="38" HorizontalAlignment="Left" Margin="204,142,0,0" Name="txtPitch" VerticalAlignment="Top" Content="00" />
+                    <Label FontFamily="Segoe UI" FontSize="26" Foreground="Blue" Height="39" HorizontalAlignment="Left" Margin="43,134,0,0" Name="txtRoll" VerticalAlignment="Top" Content="00" />
+                    <ProgressBar Height="24" HorizontalAlignment="Left" Margin="85,281,0,0" Name="pgBalance" VerticalAlignment="Top" Width="159" Maximum="45" LargeChange="0" Minimum="-45" Foreground="#FFFF2AFF">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <Label Content="Shoulder" FontFamily="Segoe UI" FontSize="16" Foreground="White" Height="35" HorizontalAlignment="Left" Margin="3,268,0,0" Name="label6" VerticalAlignment="Top" Width="83" />
+                    <Label FontFamily="Segoe UI" FontSize="20" Foreground="#FF00EBFF" Height="44" HorizontalAlignment="Left" Margin="243,275,0,0" Name="txtBal" VerticalAlignment="Top" Content="00" Width="125" />
+                    <Label Content="Bend" FontFamily="Segoe UI" FontSize="18" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="30,304,0,0" Name="label1" VerticalAlignment="Top" />
+                    <ProgressBar Foreground="Red" Height="22" HorizontalAlignment="Left" LargeChange="0" Margin="86,311,0,0" Maximum="45" Minimum="-45" Name="pgBend" VerticalAlignment="Top" Width="159">
+                        <ProgressBar.BorderBrush>
+                            <SolidColorBrush />
+                        </ProgressBar.BorderBrush>
+                        <ProgressBar.Background>
+                            <SolidColorBrush />
+                        </ProgressBar.Background>
+                    </ProgressBar>
+                    <Label FontFamily="Segoe UI" FontSize="20" Foreground="#FF00EBFF" Height="44" HorizontalAlignment="Left" Margin="243,303,0,0" Name="txtBend" VerticalAlignment="Top" Content="00" Width="120" />
+                    <Label Content="00" FontFamily="Segoe UI" FontSize="16" Foreground="Red" Height="28" HorizontalAlignment="Left" Margin="48,117,0,0" Name="txtRollBase" VerticalAlignment="Top" />
+                    <Label Content="00" FontFamily="Segoe UI" FontSize="16" Foreground="Red" Height="28" HorizontalAlignment="Left" Margin="210,125,0,0" Name="txtPitchBase" VerticalAlignment="Top" />
+                    <Label Content="Facing: 000" FontFamily="Segoe UI" FontSize="18" Foreground="#FF00EBFF" Height="39" HorizontalAlignment="Left" Name="txtFace" VerticalAlignment="Top" Margin="3,0,0,0" Width="171" />
+                    <Label Content="Balance" FontFamily="Segoe UI" FontSize="16" Foreground="White" Height="35" HorizontalAlignment="Left" Margin="13,282,0,0" Name="label19" VerticalAlignment="Top" Width="74" />
+                    <CheckBox Content="V.Hip" Foreground="White" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="309,329,0,0" Name="checkVHip" VerticalAlignment="Top" Checked="checkVHip_Checked" Unchecked="checkVHip_Checked" />
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Setting" Name="tabItem5">
+                <Grid Background="#FF005479">
+                    <GroupBox Header="Base Posture" Height="48" HorizontalAlignment="Left" Margin="6,224,0,0" Name="groupBox1" VerticalAlignment="Top" Width="235" Foreground="Yellow">
+                        <Grid>
+                            <TextBox Background="White" FontSize="14" Height="24" HorizontalAlignment="Left" Margin="75,-2,0,0" Name="txtWait" PreviewTextInput="NumericOnly" Text="10" VerticalAlignment="Top" Width="38">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="cooldown:" FontFamily="Segoe UI" FontSize="14" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="0,-5,0,0" Name="label3" VerticalAlignment="Top" />
+                            <CheckBox Content="Base = Stand" Height="16" HorizontalAlignment="Left" Margin="130,4,0,0" Name="checkStand" VerticalAlignment="Top" Foreground="White" Opacity="1" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Yellow" Header="Posture Detector" Height="72" HorizontalAlignment="Left" Margin="6,273,0,0" Name="groupBox2" VerticalAlignment="Top" Width="235">
+                        <Grid>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="78,0,0,0" Name="txtFrameAgree" PreviewTextInput="NumericOnly" Text="15" VerticalAlignment="Top" Width="34">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="consensus:" FontFamily="Segoe UI" FontSize="14" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="0,-2,0,0" Name="label5" VerticalAlignment="Top" />
+                            <CheckBox Content="Formula II" FontSize="12" Foreground="#FF27FF00" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="6,26,0,0" Name="checkAlgo2" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden" Opacity="1" />
+                        </Grid>
+                    </GroupBox>
+                    <CheckBox Content="alwaysOnTop" Height="16" HorizontalAlignment="Left" Margin="257,7,0,0" Name="checkOnTop" VerticalAlignment="Top" IsChecked="False" Foreground="#FF9EDEFC" FontSize="12" Checked="checkBox1_Checked" Unchecked="checkBox1_Checked" Width="96" IsEnabled="True" />
+                    <CheckBox Content="POS-Monitor" FontSize="12" Foreground="#FF9EDEFC" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="257,26,0,0" Name="checkPOSmonitor" VerticalAlignment="Top" Width="96" Checked="checkPOSmonitor_Checked" Unchecked="checkPOSmonitor_Checked" />
+                    <GroupBox Foreground="Yellow" Header="HR History Data" Height="54" HorizontalAlignment="Left" Margin="5,0,0,0" Name="groupBox8" VerticalAlignment="Top" Width="112">
+                        <Grid>
+                            <Button Click="button7_Click" Content="Browse" Height="21" HorizontalAlignment="Left" Margin="6,5,0,0" Name="button7" VerticalAlignment="Top" Width="50" />
+                        </Grid>
+                    </GroupBox>
+                    <CheckBox Content="AlarmSound" FontSize="12" Foreground="#FF9EDEFC" Height="18" HorizontalAlignment="Left" IsChecked="True" Margin="257,44,0,0" Name="checkSound" VerticalAlignment="Top" Width="96" />
+                    <CheckBox Content="Speech" FontSize="12" Foreground="#FF9EDEFC" Height="18" HorizontalAlignment="Left" IsChecked="True" Margin="257,62,0,0" Name="checkSpeech" VerticalAlignment="Top" Width="76" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="PSD Set." Name="tabItem2">
+                <Grid Background="#FF005479">
+                    <CheckBox Content="Prolonged Sitting Detection" FontSize="12" Foreground="Yellow" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="6,6,0,0" Name="checkPSD" VerticalAlignment="Top" Width="176" IsEnabled="True" Checked="checkPSD_Checked" Unchecked="checkPSD_Checked" />
+                    <GroupBox Foreground="Yellow" Header="by Classifier" Height="72" HorizontalAlignment="Left" Margin="6,29,0,0" Name="groupBox4" VerticalAlignment="Top" Width="192">
+                        <Grid>
+                            <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="55,0,0,0" Name="comboClassifier" VerticalAlignment="Top" Width="72" />
+                            <Label Content="Classifier" Height="28" HorizontalAlignment="Left" Margin="-3,0,0,0" Name="label7" VerticalAlignment="Top" Foreground="White" />
+                            <Label Content="Normaliz." Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-3,21,0,0" Name="label13" VerticalAlignment="Top" />
+                            <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="55,25,0,0" Name="comboNormaliz" VerticalAlignment="Top" Width="72" />
+                            <Button Content="apply" Height="23" HorizontalAlignment="Left" Margin="133,0,0,0" Name="butClassifyChange" VerticalAlignment="Top" Width="42" Click="butClassifyChange_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Yellow" Header="Normalization" Height="99" HorizontalAlignment="Left" Margin="6,203,0,0" Name="groupBox5" VerticalAlignment="Top" Width="290">
+                        <Grid>
+                            <CheckBox Content="MinMax" Foreground="Lime" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="12,5,0,0" Name="checkNormaliz" VerticalAlignment="Top" />
+                            <Label Content="R-Elbow" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="211,-1,0,0" Name="label11" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="213,24,0,0" Name="txtNormalMin2" Text=".0" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="L-Elbow" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="143,-1,0,0" Name="label12" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="147,24,0,0" Name="txtNormalMin1" Text=".0" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Button Content="apply" Height="23" HorizontalAlignment="Left" Margin="6,47,0,0" Name="butNormaliz" VerticalAlignment="Top" Width="66" Click="butNormaliz_Click" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="147,51,0,0" Name="txtNormalMax1" Text="1.296434" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="213,51,0,0" Name="txtNormalMax2" Text="1.426036" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="Head" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="76,-1,0,0" Name="label8" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="80,24,0,0" Name="txtNormalMin0" Text=".0" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="80,51,0,0" Name="txtNormalMax0" Text="1.506979" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <CheckBox Content="auto" Foreground="#FFBDFFFF" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="12,24,0,0" Name="checkAutoMM" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                    <RadioButton Content="Classify by Classifier" Height="16" HorizontalAlignment="Left" Margin="188,1,0,0" Name="psdByClassifier" VerticalAlignment="Top" Width="140" Foreground="Cyan" IsChecked="False" />
+                    <RadioButton Content="Classify by Threshold" Foreground="Cyan" Height="16" HorizontalAlignment="Left" Margin="188,19,0,0" Name="psdByThreshold" VerticalAlignment="Top" Width="140" IsChecked="True" />
+                    <GroupBox Foreground="Yellow" Header="by Threshold" Height="100" HorizontalAlignment="Left" Margin="6,102,0,0" Name="groupBox6" VerticalAlignment="Top" Width="268">
+                        <Grid>
+                            <Label Content="R-Elbow" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="141,-6,0,0" Name="label20" VerticalAlignment="Top" />
+                            <Label Content="L-Elbow" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="68,-6,0,0" Name="label21" VerticalAlignment="Top" />
+                            <Label Content="Head" FontFamily="Segoe UI" FontSize="12" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-1,-6,0,0" Name="label22" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="3,16,0,0" Name="txtThreshold0" Text="0.1" VerticalAlignment="Top" Width="61" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" HorizontalAlignment="Left" Margin="72,16,0,0" Name="txtThreshold1" Text="0.1" Width="61" PreviewTextInput="NumericOnly" Height="21" VerticalAlignment="Top">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="145,16,0,0" Name="txtThreshold2" Text="0.1" VerticalAlignment="Top" Width="61">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Button Content="apply" Height="23" HorizontalAlignment="Left" Margin="210,14,0,0" Name="butClassifySet" VerticalAlignment="Top" Width="42" Click="butClassifySet_Click" />
+                            <Label Content="R: 0" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="144,35,0,0" Name="txtElbowR" VerticalAlignment="Top" />
+                            <Label Content="L: 0" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="72,35,0,0" Name="txtElbowL" VerticalAlignment="Top" />
+                            <Label Content="H: 0" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="0,35,0,0" Name="txtHead" VerticalAlignment="Top" />
+                            <CheckBox Content="auto" Height="16" HorizontalAlignment="Left" Margin="209,43,0,0" Name="checkAutoThreshold" VerticalAlignment="Top" Foreground="#FFBDFFFF" IsChecked="True" />
+                            <Label Content="0" FontFamily="Segoe UI" FontSize="14" Foreground="#FF9D9D9D" Height="28" HorizontalAlignment="Left" Margin="159,50,0,0" Name="txtElbowR0" VerticalAlignment="Top" />
+                            <Label Content="0" FontFamily="Segoe UI" FontSize="14" Foreground="#FF9D9D9D" Height="28" HorizontalAlignment="Left" Margin="85,50,0,0" Name="txtElbowL0" VerticalAlignment="Top" />
+                            <Label Content="0" FontFamily="Segoe UI" FontSize="14" Foreground="#FF9D9D9D" Height="28" HorizontalAlignment="Left" Margin="17,50,0,0" Name="txtHead0" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="HR Set." Name="tabItem6">
+                <Grid Background="#FF005479">
+                    <GroupBox Header="Threshold" Height="140" HorizontalAlignment="Left" Margin="9,4,0,0" Name="groupBox3" VerticalAlignment="Top" Width="195" Foreground="Yellow">
+                        <Grid>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="108,19,0,0" Name="txtHRL_still_lv2" Text="60" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="Prolonged" FontFamily="Segoe UI" FontSize="14" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="0,17,0,0" Name="label15" VerticalAlignment="Top" />
+                            <Button Content="apply" Height="23" HorizontalAlignment="Left" Margin="138,91,0,0" VerticalAlignment="Top" Width="42" Click="butHRL_apply_Click" Name="butHRL_applyLv" />
+                            <Label Content="Lv1" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="72,-7,0,0" Name="label14" VerticalAlignment="Top" />
+                            <Label Content="Lv2" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="110,-7,0,0" Name="label16" VerticalAlignment="Top" />
+                            <Label Content="Pitch" FontFamily="Segoe UI" FontSize="14" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="34,39,0,0" Name="label17" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="72,19,0,0" Name="txtHRL_still_lv1" Text="40" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="108,42,0,0" Name="txtHRL_pitch_lv2" Text="18" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="72,42,0,0" Name="txtHRL_pitch_lv1" Text="6" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="Twist" FontFamily="Segoe UI" FontSize="14" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="34,61,0,0" Name="label18" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="108,64,0,0" Name="txtHRL_face_lv2" Text="18" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="72,64,0,0" Name="txtHRL_face_lv1" Text="6" VerticalAlignment="Top" Width="34" PreviewTextInput="NumericOnly">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Button Content="default" Height="23" HorizontalAlignment="Left" Margin="94,91,0,0" Name="butHRL_default" VerticalAlignment="Top" Width="42" Click="butHRL_default_Click" />
+                            <Button Content="test" Height="23" HorizontalAlignment="Left" Margin="50,91,0,0" Name="butHRL_test" VerticalAlignment="Top" Width="42" Click="butHRL_test_Click" Foreground="#C7000000" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="143,19,0,0" Name="txtHRL_still_max" Text="240" VerticalAlignment="Top" Width="38">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Label Content="Max" FontFamily="Segoe UI" FontSize="14" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="145,-7,0,0" Name="label10" VerticalAlignment="Top" />
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="147,42,0,0" Name="txtHRL_pitch_max" Text="60" VerticalAlignment="Top" Width="34">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <TextBox Background="White" FontSize="14" Height="21" HorizontalAlignment="Left" Margin="147,64,0,0" Name="txtHRL_face_max" Text="60" VerticalAlignment="Top" Width="34">
+                                <TextBox.BorderBrush>
+                                    <SolidColorBrush />
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Height="32" Width="32" HorizontalAlignment="Left" Margin="9,32,0,0" Name="butReset" VerticalAlignment="Top" Click="butReset_Click" Background="#00000000" BorderBrush="#00000000" Padding="0" BorderThickness="0">
+            <Image Source="/P_Tracker2;component/img/reset.png" />
+        </Button>
+        <Label Content="State:" FontSize="16" Foreground="White" Height="38" HorizontalAlignment="Left" Name="label26" VerticalAlignment="Top" Width="49" Margin="1,1,0,0" />
+        <Label Content="0 | 0" Height="24" HorizontalAlignment="Right" Margin="0,0,0,0" Name="txtPSDcheck" VerticalAlignment="Top" Foreground="#FFC4C4C4" Width="53" FlowDirection="RightToLeft" FontFamily="Times New Roman" />
+        <CheckBox Content="Freeze" FontSize="12" Foreground="#FF9EDEFC" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="321,77,0,0" Name="checkFreeze" VerticalAlignment="Top" Width="65" Checked="checkFreeze_Checked" Unchecked="checkFreeze_Checked" />
+        <Slider Height="23" HorizontalAlignment="Stretch" Margin="0,93,59,0" Name="slideTime" VerticalAlignment="Top" Maximum="0" ValueChanged="slideTime_ValueChanged" Interval="1" Minimum="0" SmallChange="1" LargeChange="0" TickPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" />
+        <Label Content="00:00:00" Height="28" HorizontalAlignment="Right" Margin="0,91,1,0" Name="txtSlideTime" VerticalAlignment="Top" Foreground="Yellow" FlowDirection="RightToLeft" />
+        <Label Foreground="#FF898989" Height="28" Margin="0,105,0,0" Name="txtSlideNum" VerticalAlignment="Top" Content="(0)" FlowDirection="RightToLeft" HorizontalAlignment="Right" />
+        <Button Content="save" Height="24" HorizontalAlignment="Left" Margin="259,62,0,0" Name="butSave" VerticalAlignment="Top" Width="48" Click="butSave_Click" />
+        <Button Margin="226,62,0,0" Name="openFolder" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="28" Click="openFolder_Click">
+            <Image Source="/P_Tracker2;component/img/folder.gif" />
+        </Button>
+        <Button Content="Graph" Height="24" HorizontalAlignment="Left" Margin="173,62,0,0" Name="buGraph" VerticalAlignment="Top" Width="48" Click="buGraph_Click" />
+    </Grid>
+</Window>

@@ -1,0 +1,283 @@
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.exe.config
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.csprojResolveAssemblyReference.cache
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\OtherMenu.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\FaceDetector\FaceDetector.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Detection.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Icon.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Database.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\Editor.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\GraphVisualizer.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Head.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Unused\DetectorReport.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\TheClass\Debugger.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Report.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\Detector.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\FaceTrackingViewer.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\SubViewer.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\TotalViewer.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Weka.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\OtherMenu.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\FaceDetector\FaceDetector.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Detection.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Icon.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Database.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\Editor.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\GraphVisualizer.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Head.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Unused\DetectorReport.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\TheClass\Debugger.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Report.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\Detector.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\FaceTrackingViewer.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\SubViewer.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\TexturedFaceMeshViewer.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\UserTracker.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\TotalViewer.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Weka.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\App.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_Content.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_MarkupCompile.cache
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_MarkupCompile.lref
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.exe
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.pdb
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\3DTools.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\InputManager.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\libsvm.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\LIBSVM.NET.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.CSharp.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.DirectX.DirectInput.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\PresentationCore.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\PresentationFramework.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Data.DataSetExtensions.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Data.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Drawing.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Windows.Forms.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Xaml.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Xml.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\System.Xml.Linq.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\weka.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\WindowsBase.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\WindowsFormsIntegration.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.pdb
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.FaceTracking.pdb
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\TexturedFaceMeshViewer.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\UserTracker.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.g.resources
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.Properties.Resources.resources
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.csproj.GenerateResource.Cache
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.exe
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.pdb
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\MainWindow.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\MainWindow.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_OWS.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_OWS.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_UKI.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_UKI.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.AWT.WinForms.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Beans.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Charsets.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Core.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Management.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Media.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Misc.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Naming.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Remoting.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Security.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Text.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Tools.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Util.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.API.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Reflection.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Runtime.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Runtime.JNI.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.FaceTracking.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIFullEx.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\EntropyAnalyser.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIAnalyser.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIFullEx.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\EntropyAnalyser.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIAnalyser.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\FaceTrackData.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\bin\Debug\FaceTrackLib.dll
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_1Relative.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_2Atomic.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_1Relative.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_2Atomic.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_5FlexionAngle.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_4SphereAngle.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_3Change.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_9Variable.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_5FlexionAngle.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_4SphereAngle.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_3Change.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_9Variable.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_2Mouse.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_9Variable.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Variable.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_-1Time.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_8ReplaceKey.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_-1Time.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_1Key.baml
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_2Mouse.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_9Variable.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Variable.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_-1Time.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_8ReplaceKey.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_-1Time.g.cs
+D:\Programming new\00 S\P-Tracker2 set\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_1Key.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.exe.config
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.exe
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.pdb
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\FaceTrackData.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\FaceTrackLib.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.exe
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.pdb
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\3DTools.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.AWT.WinForms.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Beans.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Charsets.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Core.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Management.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Media.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Misc.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Naming.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Remoting.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Security.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Text.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Tools.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.Util.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.API.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Reflection.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Runtime.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\IKVM.Runtime.JNI.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\InputManager.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\libsvm.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\LIBSVM.NET.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.CSharp.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.DirectX.DirectInput.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.FaceTracking.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\PresentationCore.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\PresentationFramework.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Data.DataSetExtensions.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Data.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Drawing.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Windows.Forms.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Xaml.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Xml.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\System.Xml.Linq.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\weka.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\WindowsBase.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\WindowsFormsIntegration.dll
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.FaceTracking.pdb
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\bin\Debug\Microsoft.Kinect.Toolkit.pdb
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.csprojResolveAssemblyReference.cache
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\OtherMenu.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\FaceDetector\FaceDetector.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIFullEx.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\EntropyAnalyser.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIAnalyser.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_5FlexionAngle.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_4SphereAngle.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_2Mouse.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_3Change.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_9Variable.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_9Variable.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Detection.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Variable.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_1Relative.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_2Atomic.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_-1Time.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Icon.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_8ReplaceKey.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Database.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_-1Time.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_1Key.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\Editor.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\GraphVisualizer.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Head.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Unused\DetectorReport.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\TheClass\Debugger.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_UKI.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Report.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\Detector.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\FaceTrackingViewer.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\SubViewer.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\MainWindow.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\TotalViewer.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_OWS.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Weka.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\OtherMenu.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\FaceDetector\FaceDetector.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIFullEx.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\EntropyAnalyser.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI-Analysis\UKIAnalyser.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_5FlexionAngle.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_4SphereAngle.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_2Mouse.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_3Change.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_9Variable.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_9Variable.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Detection.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Variable.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_1Relative.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_2Atomic.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addIf_-1Time.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Icon.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_8ReplaceKey.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Database.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_-1Time.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_addThen_1Key.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\Editor.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\GraphVisualizer.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\UKI\UKI_add_Head.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Unused\DetectorReport.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\TheClass\Debugger.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_UKI.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Report.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\Detector.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\FaceTrackingViewer.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\SubViewer.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\TexturedFaceMeshViewer.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\MainWindow.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\UserTracker.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\TotalViewer.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Viewer\Viewer_OWS.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Weka\Weka.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\App.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_Content.g.cs
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_MarkupCompile.cache
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2_MarkupCompile.lref
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\TexturedFaceMeshViewer.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\Tracker\UserTracker.baml
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.g.resources
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.Properties.Resources.resources
+D:\Programming new\00 S\UKI\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.csproj.GenerateResource.Cache
+D:\Programming new\00 S\UKI v1.0\P-Tracker2\P-Tracker2\bin\Debug\P_Tracker2.exe.config
+D:\Programming new\00 S\UKI v1.0\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.exe
+D:\Programming new\00 S\UKI v1.0\P-Tracker2\P-Tracker2\obj\x86\Debug\P_Tracker2.pdb

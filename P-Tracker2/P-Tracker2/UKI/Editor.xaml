@@ -1,0 +1,206 @@
+﻿<Window x:Class="P_Tracker2.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Editor" Height="387" Width="508" Icon="/P_Tracker2;component/img/iconP.png">
+        
+    <Grid Background="DarkGray">
+        <TabControl Name="tabControl1" SelectionChanged="OnSelectionChanged">
+            <TabItem Header="MAP" Name="tabMap">
+                <Grid Background="SteelBlue">
+                    <Button Height="25" Width="29" HorizontalAlignment="Right" Margin="0,0,8,65" Name="openFolder" VerticalAlignment="Bottom" Click="openFolder_Click">
+                        <Image Source="/P_Tracker2;component/img/folder2.gif" />
+                    </Button>
+                    <TreeView Name="treeViewer" AllowDrop="True" Margin="0,0,92,0" FontSize="15" 
+                              TreeViewItem.Expanded="map_TreeViewItem_Expanded" TreeViewItem.Collapsed="map_TreeViewItem_Expanded"
+                              SelectedItemChanged="map_SelectionChanged">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#FF3399FF"/>
+                                </Style.Resources>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                    <Button Content="Add" Height="25" HorizontalAlignment="Right" Margin="0,8,4,0" Name="butAdd" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="butAdd_Click"/>
+                    <Button Content="Add" Height="25" HorizontalAlignment="Right" Margin="0,8,4,0" Name="butAdd_if" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="butAdd_if_Click" Visibility="Hidden">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Relative Joints Condition" Click="addMotion_Position"/>
+                                <MenuItem Header="Atomic Posture Condition" Click="addMotion_Basic" />
+                                <MenuItem Header="Motion from Database Condition" Click="addMotion_Database"/>
+                                <MenuItem Header="Change-from-Initial Condition" Click="addMotion_ChangeBasePose"/>
+                                <MenuItem Header="Spherical Angle Condition" Click="addMotion_AngleSpherical"/>
+                                <MenuItem Header="Flexion Angle Condition" Click="addMotion_AngleFlexion"/>
+                                <MenuItem Header="Change Icon Condition" Click="addMotion_Icon"/>
+                                <MenuItem Header="Time Within Condition" Click="addMotion_Time"/>
+                                <MenuItem Header="Variable Condition" Click="addMotion_Variable" Name="but_if_v" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Add" Height="25" HorizontalAlignment="Right" Margin="0,8,4,0" Name="butAdd_then" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="butAdd_then_Click" Visibility="Hidden">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Key Event" Click="addEvent_Keyboard" />
+                                <MenuItem Header="Mouse Move Event" Click="addEvent_MouseMove" />
+                                <MenuItem Header="Event from Database Event" Click="addEvent_Database"/>
+                                <MenuItem Header="Key Replacement Event" Click="addEvent_Replacement"/>
+                                <MenuItem Header="Change Icon Event" Click="addEvent_Icon"/>
+                                <MenuItem Header="Time Wait Event" Click="addEvent_Time"/>
+                                <MenuItem Header="Variable Event" Click="addEvent_Variable" Name="but_then_v" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Edit" Height="25" HorizontalAlignment="Right" Margin="0,38,4,0" Name="butEdit" VerticalAlignment="Top" Width="82" Click="butEdit_Click" FontSize="14" IsEnabled="True" />
+                    <Button Content="Delete" Height="25" HorizontalAlignment="Right" Margin="0,68,4,0" Name="butDel" VerticalAlignment="Top" Width="82" Click="butDel_Click" FontSize="14" IsEnabled="True" />
+                    <Button Content="Other" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,98,4,0" Name="butOther" VerticalAlignment="Top" Width="82" Click="butOther_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Expand All" Click="butExAll_Click" />
+                                <MenuItem Header="Collapse All" Click="butColAll_Click" />
+                                <MenuItem Header="Localize MAP File" Click="butLocalize_Click" />
+                                <MenuItem Header="Decode Base Posture" Click="butDecodeBP_Click" />
+                                <MenuItem Header="Print Text" Click="butShowText_Click" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Save" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,2,6,34" Name="butSave" VerticalAlignment="Bottom" Width="82" Click="butSave_Click" />
+                    <Button Content="Load" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,6,6" Name="butReload" VerticalAlignment="Bottom" Width="82" Click="butReload_Click" />
+                    <GroupBox Header="Tree Item" Height="84" HorizontalAlignment="Right" Margin="0,128,6,0" Name="groupItem" VerticalAlignment="Top" Width="80" Foreground="#FF00F4FF">
+                        <Grid>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,3,36,0" Name="butCopy" VerticalAlignment="Top" Width="29" Click="butCopy_Click">
+                                <Image Source="/P_Tracker2;component/img/copy.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,36,0" Name="butUp" VerticalAlignment="Top" Width="29" Click="butUp_Click">
+                                <Image Source="/P_Tracker2;component/img/up.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="False" Margin="0,3,4,0" Name="butPaste" VerticalAlignment="Top" Width="29" Click="butPaste_Click">
+                                <Image Source="/P_Tracker2;component/img/paste.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,4,0" Name="butDown" VerticalAlignment="Top" Width="29" Click="butDown_Click">
+                                <Image Source="/P_Tracker2;component/img/down.gif" />
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Motions" Name="tabMotion">
+                <Grid Background="DarkRed">
+                    <Button Content="View" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,21,65" Name="butViewMotionFile" VerticalAlignment="Bottom" Width="50" Click="butViewMotionFile_Click" />
+                    <TreeView Name="m_treeViewer" AllowDrop="True" Margin="0,0,92,0" FontSize="15" 
+                              TreeViewItem.Expanded="m_TreeViewItem_Expanded" TreeViewItem.Collapsed="m_TreeViewItem_Expanded"
+                              SelectedItemChanged="m_SelectionChanged">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#FF3399FF"/>
+                                </Style.Resources>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                    <Button Content="Add" Height="25" HorizontalAlignment="Right" Margin="0,8,4,0" Name="m_butAdd" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="m_butAdd_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Relative Joints Condition" Click="addMotion_Position"/>
+                                <MenuItem Header="Atomic Posture Condition" Click="addMotion_Basic" />
+                                <MenuItem Header="Motion from Database Condition" Click="addMotion_Database"/>
+                                <MenuItem Header="Change-from-Initial Condition" Click="addMotion_ChangeBasePose"/>
+                                <MenuItem Header="Spherical Angle Condition" Click="addMotion_AngleSpherical"/>
+                                <MenuItem Header="Flexion Angle Condition" Click="addMotion_AngleFlexion"/>
+                                <MenuItem Header="Change Icon Condition" Click="addMotion_Icon"/>
+                                <MenuItem Header="Time Within Condition" Click="addMotion_Time"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Edit" Height="25" HorizontalAlignment="Right" Margin="0,38,4,0" Name="m_butEdit" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="m_butEdit_Click" />
+                    <Button Content="Delete" Height="25" HorizontalAlignment="Right" Margin="0,68,4,0" Name="m_butDel" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="m_butDel_Click" />
+                    <Button Content="Other" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,98,4,0" Name="m_butOther" VerticalAlignment="Top" Width="82" Click="m_butOther_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Expand All" Click="m_butExAll_Click" />
+                                <MenuItem Header="Collapse All" Click="m_butColAll_Click" />
+                                <MenuItem Header="Sort" Click="m_butSort_Click" />
+                                <MenuItem Header="Print Text" Click="m_butShowText_Click" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Update" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,6,34" Name="m_butSave" VerticalAlignment="Bottom" Width="82" Click="m_butSave_Click" />
+                    <Button Content="Reload" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,6,6" Name="m_butReload" VerticalAlignment="Bottom" Width="82" Click="m_butReload_Click" />
+                    <GroupBox Header="Tree Item" Height="84" HorizontalAlignment="Right" Margin="0,128,6,0" Name="m_groupItem" VerticalAlignment="Top" Width="80" Foreground="#FFFFD400">
+                        <Grid>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,3,36,0" Name="m_butCopy" VerticalAlignment="Top" Width="29" Click="m_butCopy_Click">
+                                <Image Source="/P_Tracker2;component/img/copy.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,36,0" Name="m_butUp" VerticalAlignment="Top" Width="29" Click="m_butUp_Click">
+                                <Image Source="/P_Tracker2;component/img/up.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="False" Margin="0,3,4,0" Name="m_butPaste" VerticalAlignment="Top" Width="29" Click="m_butPaste_Click">
+                                <Image Source="/P_Tracker2;component/img/paste.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,4,0" Name="m_butDown" VerticalAlignment="Top" Width="29" Click="m_butDown_Click">
+                                <Image Source="/P_Tracker2;component/img/down.gif" />
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Events" Name="tabEvent">
+                <Grid Background="DarkSlateGray">
+                    <TreeView Name="e_treeViewer" AllowDrop="True" Margin="0,0,92,0" FontSize="15" 
+                              TreeViewItem.Expanded="e_TreeViewItem_Expanded" TreeViewItem.Collapsed="e_TreeViewItem_Expanded"
+                              SelectedItemChanged="e_SelectionChanged"
+                              >
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#FF3399FF"/>
+                                </Style.Resources>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                    <Button Content="Edit" Height="25" HorizontalAlignment="Right" Margin="0,38,4,0" Name="e_butEdit" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="e_butEdit_Click" />
+                    <Button Content="Delete" Height="25" HorizontalAlignment="Right" Margin="0,68,4,0" Name="e_butDel" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="e_butDel_Click" />
+                    <Button Content="Add" Height="25" HorizontalAlignment="Right" Margin="0,8,4,0" Name="e_butAdd" VerticalAlignment="Top" Width="82" FontSize="14" IsEnabled="True" Click="e_butAdd_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Key Event" Click="addEvent_Keyboard" />
+                                <MenuItem Header="Mouse Move Event" Click="addEvent_MouseMove" />
+                                <MenuItem Header="Event from Database Event" Click="addEvent_Database"/>
+                                <MenuItem Header="Key Replacement Event" Click="addEvent_Replacement"/>
+                                <MenuItem Header="Change Icon Event" Click="addEvent_Icon"/>
+                                <MenuItem Header="Time Wait Event" Click="addEvent_Time"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Content="Update" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,6,34" Name="e_butSave" VerticalAlignment="Bottom" Width="82" Click="e_butSave_Click" />
+                    <Button Content="Reload" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0,6,6" Name="e_butReload" VerticalAlignment="Bottom" Width="82" Click="e_butReload_Click" />
+                    <Button Content="Other" FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,98,4,0" Name="e_butOther" VerticalAlignment="Top" Width="82" Click="e_butOther_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Expand All" Click="e_butExAll_Click" />
+                                <MenuItem Header="Collapse All" Click="e_butColAll_Click" />
+                                <MenuItem Header="Sort" Click="e_butSort_Click" />
+                                <MenuItem Header="Print Text" Click="e_butShowText_Click" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <GroupBox Header="Tree Item" Height="84" HorizontalAlignment="Right" Margin="0,128,6,0" Name="e_groupItem" VerticalAlignment="Top" Width="80" Foreground="#FF00FF98">
+                        <Grid>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,3,36,0" Name="e_butCopy" VerticalAlignment="Top" Width="29" Click="e_butCopy_Click">
+                                <Image Source="/P_Tracker2;component/img/copy.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,36,0" Name="e_butUp" VerticalAlignment="Top" Width="29" Click="e_butUp_Click">
+                                <Image Source="/P_Tracker2;component/img/up.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="False" Margin="0,3,4,0" Name="e_butPaste" VerticalAlignment="Top" Width="29" Click="e_butPaste_Click">
+                                <Image Source="/P_Tracker2;component/img/paste.gif" />
+                            </Button>
+                            <Button FontSize="14" Height="25" HorizontalAlignment="Right" IsEnabled="True" Margin="0,34,4,0" Name="e_butDown" VerticalAlignment="Top" Width="29" Click="e_butDown_Click">
+                                <Image Source="/P_Tracker2;component/img/down.gif" />
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

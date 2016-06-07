@@ -1,0 +1,55 @@
+﻿<Window x:Class="P_Tracker2.OtherMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="P-Tracker" Height="192" Width="171" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Button Name="butPredictor" Grid.Row="0" Content="Predictor (Weka)" FontSize="16" Foreground="#FFFFFF20" Click="butPredictor_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF00CA8B" Offset="0" />
+                    <GradientStop Color="#FF00628B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="butDataView" Grid.Row="1" Content="Data Viewer (OWS)" FontSize="16" Foreground="#FFFFFF20" Click="butDataView_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF00CA8B" Offset="0" />
+                    <GradientStop Color="#FF00628B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="butDataView2" Grid.Row="2" Content="Data Viewer (UKI)" FontSize="16" Foreground="#FFFFFF20" Click="butDataView2_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF00CA8B" Offset="0" />
+                    <GradientStop Color="#FF00628B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="button3" Grid.Row="3" Content="Batch Viewer" FontSize="16" Foreground="#FFFFFF20" Click="button3_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF00CA8B" Offset="0" />
+                    <GradientStop Color="#FF00628B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="butMapEditor" Grid.Row="4" Content="MAP Editor" FontSize="16" Foreground="#FFFFFF20" Click="butMapEditor_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF00CA8B" Offset="0" />
+                    <GradientStop Color="#FF00628B" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        
+    </Grid>
+</Window>

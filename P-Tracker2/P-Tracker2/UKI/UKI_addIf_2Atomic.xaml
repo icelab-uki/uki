@@ -1,0 +1,14 @@
+﻿<Window x:Class="P_Tracker2.UKI_addIf_Atomic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Atomic Posture Condition" Height="122" Width="290" WindowStyle="ToolWindow" Icon="/P_Tracker2;component/img/iconP.png" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Background="Black">
+        <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="223,57,0,0" Name="butAdd" VerticalAlignment="Top" Width="42" Click="butAdd_Click" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="4,3,0,0" Name="combo1" VerticalAlignment="Top" Width="261" SelectionChanged="combo1_SelectionChanged" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="4,30,0,0" Name="combo2" VerticalAlignment="Top" Width="261" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="4,57,0,0" Name="comboOpt" VerticalAlignment="Top" Width="200">
+            <ComboBoxItem Content="is detected" />
+            <ComboBoxItem Content="is NOT detected" />
+        </ComboBox>
+    </Grid>
+</Window>

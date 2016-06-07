@@ -1,0 +1,7 @@
+@relation 'test'
+@attribute class2 {M,S}
+@attribute Head_Dist_Avg numeric
+@attribute ElbowLeft_Dist_Avg numeric
+@attribute ElbowRight_Dist_Avg numeric
+@data
+S,0.00144415824433446,0.00542720044883965,0.00243670498758333

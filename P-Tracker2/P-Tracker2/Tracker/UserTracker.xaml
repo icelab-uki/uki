@@ -1,0 +1,325 @@
+﻿<Window x:Class="P_Tracker2.UserTracker"
+        xmlns:local="clr-namespace:P_Tracker2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Posture Tracker" Height="420" Width="620" Closed="Window_Closed" Icon="/P_Tracker2;component/img/iconP.png" Loaded="Window_Loaded">
+
+    <Grid Name="grid_Main">
+        <Menu Height="20"  Background="Teal" Foreground="White" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top"  Width="{Binding ElementName=grid_Main,Path=ActualWidth}">
+            <MenuItem Header="_Mode" >
+                <MenuItem Header="_Universal Middleware" Name="UKI" Foreground="Blue" Click="but_menu_UKI" FontWeight="Bold"/>
+                <MenuItem Header="_My Configuration" Name="OfficeSyn2" Foreground="Black" Click="but_menu_mySetting"  />
+                <MenuItem Header="_Full Screen Data Collection" Name="FullScrn" Foreground="Black" Click="menu_full"/>
+                <MenuItem Header="_Office Syndrome Monitoring" Name="OfficeSyn" Foreground="Black" Click="but_menu_officeSyn"/>
+                <MenuItem Header="_Emotion Detection" Name="butFaceDetector" Foreground="Black" Click="butFaceDetector_Click" />
+            </MenuItem>
+            <MenuItem Header="_Tool " >
+                <MenuItem Header="_OWS Posture Detector" Name="butDetector" Foreground="Black" Click="butDetector_Click" />
+                <MenuItem Header="_OWS Graph Visualizer" Name="butGraph" Foreground="Black" Click="butGraph_Click" />
+                <MenuItem Header="_UKI Universal Middleware Panels" Name="butUKI" Foreground="Black" Click="butUKI_Click" />
+                <MenuItem Header="_UKI MAP Editor" Name="butMAPEditor" Foreground="Black" Click="butMAPEditor_Click" />
+                <MenuItem Header="_Emotion Detector" Name="butFaceDetector2" Foreground="Black" Click="butFaceDetector2_Click" />
+            </MenuItem>
+            <MenuItem Header="_Run " >
+                <MenuItem Header="_Intruder Alert (CCTV)" Name="butIntruderAlert" Foreground="Black" Click="butAlert" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="_oth" >
+                <MenuItem Header="_OWS Files" Foreground="Black" >
+                    <MenuItem Header="_Handbook (User)" Name="butHandbook" Foreground="Black" Click="click_butHandbook"/>
+                    <MenuItem Header="_Handbook (Technical)" Name="butHandbookTech" Foreground="Black" Click="click_butHandbookTech"/>
+                    <MenuItem Header="_Thesis" Name="butThesis" Foreground="Black" Click="click_butThesis"/>
+                    <MenuItem Header="_ECTI2014" Name="butECTI" Foreground="Black" Click="click_butECTI"/>
+                    <MenuItem Header="_APCC2014" Name="butAPCC" Foreground="Black" Click="click_butAPCC"/>
+                </MenuItem>
+                <MenuItem Header="_UKI Files" Foreground="Black" >
+                    <MenuItem Header="_Handbook" Name="uki_butHandbook" Foreground="Black" Click="uki_butHandbook_Click" />
+                    <MenuItem Header="_CIG2015" Name="uki_butCIG2015" Foreground="Black" Click="uki_butCIG2015_Click" />
+                    <MenuItem Header="_GCCE2015-1" Name="uki_butGCCE2015_1" Foreground="Black" Click="uki_butGCCE2015_1_Click" />
+                    <MenuItem Header="_GCCE2015-2" Name="uki_butGCCE2015_2" Foreground="Black" Click="uki_butGCCE2015_2_Click" />
+                </MenuItem>
+                <MenuItem Header="_Exit" Name="butExit" Foreground="Black" Click="click_butExit"/>
+            </MenuItem>
+        </Menu>
+        
+        <Grid Margin="0,20,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" MinHeight="2"/>
+                <RowDefinition Height="105"/>
+            </Grid.RowDefinitions>
+
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Background="Black" Height="2"/>
+
+            <Grid Grid.Row="0" Name="gui_Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="276"/>
+                    <ColumnDefinition Width="Auto" MinWidth="2"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+
+                <Grid Grid.Column="0" Background ="Black">
+                    <DataGrid Margin="3,20,3,3"    Name="grid" />
+                    <Label Content="Row: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="3,-3,0,0" Name="txtRow" VerticalAlignment="Top" />
+                    <Label Content="Time: 0" Height="28" HorizontalAlignment="Left" Margin="99,-3,0,0" Name="txtTime" VerticalAlignment="Top" Foreground="White" />
+                    <Label Content="fps: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="181,-3,0,0" Name="txtfps" VerticalAlignment="Top" />
+                    <CheckBox Content="Hide" Height="16" HorizontalAlignment="Left" Margin="229,2,0,0" Name="checkHide" VerticalAlignment="Top" Foreground="White" Checked="checkHide_Checked_Unchecked" Unchecked="checkHide_Checked_Unchecked" IsChecked="True" />
+                </Grid>
+
+                <Grid Grid.Column="2" Background ="Gray" Name="gui_TopRow" >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" MinHeight="2"/>
+                        <RowDefinition Height="130"/>
+                    </Grid.RowDefinitions>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Background="Black" Height="1"/>
+
+                    <Grid Grid.Row="0" Name="gui_TopCol">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" MinWidth="2"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+
+                        <Grid Grid.Column="0">
+                            <Image Margin="0" Name="GreenScrn_bg" HorizontalAlignment="Right" Visibility="Hidden" />
+                            <Image Margin="0" Name="GreenScrn_object" HorizontalAlignment="Right" Visibility="Hidden" />
+                            <Image Margin="0" Name="ImageKinect1_bg" HorizontalAlignment="Right" />
+                            <Image Margin="0" Name="ImageKinect1_Edge" HorizontalAlignment="Right" />
+                            <Image Margin="0" Name="ImageKinect1_Skel_Bone" HorizontalAlignment="Right"  />
+                            <Image Margin="0" Name="ImageKinect1_Skel_Joint" HorizontalAlignment="Right"  />
+                            <Viewbox Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Right" >
+                                <Grid Width="640" Height="480" HorizontalAlignment="Stretch">
+                                 <!--<local:FaceTrackingViewer x:Name="faceTrackingViewer" />  -->
+                                </Grid>
+                            </Viewbox>
+                            <!--<<local:TexturedFaceMeshViewer x:Name="faceTrackingVisualizer" /> -->
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Image Name="ImageKinect2_bg" HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect2_Edge" HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect2_Skel_Bone"  HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect2_Skel_Joint" HorizontalAlignment="Right" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" MinWidth="2"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+
+                        <Grid Grid.Column="0">
+                            <Image Name="ImageKinect3_bg" HorizontalAlignment="Right"  />
+                            <Image Name="ImageKinect3_Edge"  HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect3_Skel_Bone" HorizontalAlignment="Right"  />
+                            <Image Name="ImageKinect3_Skel_Joint" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Image Name="ImageKinect4_bg" HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect4_Edge" HorizontalAlignment="Right" />
+                            <Image Name="ImageKinect4_Skel_Bone" HorizontalAlignment="Right"  />
+                            <Image Name="ImageKinect4_Skel_Joint" HorizontalAlignment="Right" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Label Foreground="Yellow" Name="txtSnap" Margin="0,0,4,3" FontSize="56" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" Grid.Column="2" />
+            </Grid>
+
+            <Grid Grid.Row="2" Background ="#FF044848"  Name="gui_Buttom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" MinWidth="2"/>
+                    <ColumnDefinition Width="4"/>
+                </Grid.ColumnDefinitions>
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+
+                <Grid Grid.Column="0">
+                    <Button Content="Start" Height="29" HorizontalAlignment="Left" Margin="6,7,0,0" Name="bTrack" VerticalAlignment="Top" Width="91" Click="bTrack_Click" Background="#FF34B134" Foreground="#FFFFFF4E" />
+                    <TabControl HorizontalAlignment="Left" Margin="99,-2,0,0" Name="tabControl1" VerticalAlignment="Stretch" Width="499">
+                        <TabControl.Foreground>
+                            <SolidColorBrush />
+                        </TabControl.Foreground>
+                        <TabItem Header="Main" Name="tabItem1" Foreground="Black" BorderBrush="#FF8C8E94">
+                            <Grid Background="Teal" Width="488">
+                                <Label Content="Start: 00:00:00" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="143,2,0,0" Name="txtStart" VerticalAlignment="Top" />
+                                <Label Content="End: 00:00:00" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="148,25,0,0" Name="txtEnd" VerticalAlignment="Top" />
+                                <Label Content="Avg. fps: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="157,48,0,0" Name="txtAvgFps" VerticalAlignment="Top" />
+                                <GroupBox Header="Snap" Height="78" HorizontalAlignment="Left" Margin="332,-3,0,0" Name="groupSnap" VerticalAlignment="Top" Width="50" Foreground="#FF7CFF86">
+                                    <Grid>
+                                        <ComboBox Height="23" Name="comboSnap" Width="38" Margin="1,1,-1,31" />
+                                        <Button Name="snap" Click="butSnapClick" Margin="2,26,1,0">
+                                            <Image Name="snapImg" Source="/P_Tracker2;component/img/Snap1.png" Height="22" Width="24"></Image>
+                                        </Button>
+                                        <CheckBox Content="Mute All" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="-95,-7,0,0" Name="checkMute" VerticalAlignment="Top" Width="70" IsChecked="False" IsEnabled="True" />
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Export" Height="78" HorizontalAlignment="Left" Margin="387,-3,0,0" Name="groupBox5" VerticalAlignment="Top" Width="99" Foreground="#FF7CFF86">
+                                    <Grid>
+                                        <Button Content="Export" Height="25" Margin="3,29,0,0" Name="butExcel" VerticalAlignment="Top" Click="butExport_Click" HorizontalAlignment="Left" Width="54" />
+                                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="3,2,0,0" Name="comboExport" VerticalAlignment="Top" Width="81" />
+                                        <Button Name="openFolder" Click="butOpenFolderClick" Margin="59,29,0,2">
+                                            <Image Source="/P_Tracker2;component/img/folder.gif"></Image>
+                                        </Button>
+                                    </Grid>
+                                </GroupBox>
+                                <Label Content="0" Foreground="Yellow" Height="28" HorizontalAlignment="Left" Margin="119,4,0,0" Name="txtAngle" VerticalAlignment="Top" />
+                                <Button Content="tilt" Height="20" HorizontalAlignment="Left" Margin="110,29,0,0" Name="butAngle" VerticalAlignment="Top" Width="25" Click="butAngle_Click" />
+                                <Button Content="0" FontSize="12" Height="20" HorizontalAlignment="Left" Margin="110,51,0,0" Name="butAngle2" VerticalAlignment="Top" Width="25" Click="butAngle2_Click" />
+                                <Slider Height="73" HorizontalAlignment="Left" IsEnabled="False" Margin="86,3,0,0" Maximum="27" Minimum="-27" Name="slideAngle" Orientation="Vertical" SmallChange="1" VerticalAlignment="Top" Width="27" ValueChanged="slideAngle_ValueChanged" />
+                                <Image Height="24" HorizontalAlignment="Left" Margin="3,42,0,0" Name="image1" Source="/P_Tracker2;component/img/KinectSensor.png" Stretch="Uniform" VerticalAlignment="Top" Width="85" />
+                                <ComboBox Height="20" HorizontalAlignment="Left" IsEnabled="False" ItemsSource="{Binding}" Margin="47,10,0,0" Name="comboKinect" VerticalAlignment="Top" Width="35" SelectionChanged="comboKinect_SelectionChanged" />
+                                <Label Content="Kinect#" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="1,7,0,0" Name="label3" VerticalAlignment="Top" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Kinect" Name="tabItem2">
+                            <Grid Background="Teal">
+                                <Label Content="Smoothing: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="170,0,0,0" Name="txtSmooth" VerticalAlignment="Top" />
+                                <Label Content="Correction: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="169,23,0,0" Name="txtCorrect" VerticalAlignment="Top" />
+                                <Label Content="Prediction: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="320,0,0,0" Name="txtPredict" VerticalAlignment="Top" />
+                                <Label Content="JitterRadius: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="320,23,0,0" Name="txtJitter" VerticalAlignment="Top" />
+                                <Label Content="MaxDeviationRadius: 0" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="169,45,0,0" Name="txtDavia" VerticalAlignment="Top" />
+                                <Slider Height="36" HorizontalAlignment="Left" IsEnabled="True" Margin="265,1,0,0" Maximum="0.99" Minimum="0" Name="slide_Smooth" Orientation="Horizontal" VerticalAlignment="Top" Width="43" ValueChanged="slide_Smooth_ValueChanged" LargeChange="0.05" Value="0.5" />
+                                <Slider Height="36" HorizontalAlignment="Left" IsEnabled="True" Margin="265,26,0,0" Maximum="1" Minimum="0" Name="slide_Correct" Orientation="Horizontal" VerticalAlignment="Top" Width="43" ValueChanged="slide_Correct_ValueChanged" Value="0.5" LargeChange="0.05" />
+                                <Slider Height="36" HorizontalAlignment="Left" IsEnabled="True" Margin="423,1,0,0" Maximum="1" Minimum="0" Name="slide_Predict" Orientation="Horizontal" VerticalAlignment="Top" Width="42" ValueChanged="slide_Predict_ValueChanged" LargeChange="0.05" Value="0.5" />
+                                <Slider Height="36" HorizontalAlignment="Left" IsEnabled="True" Margin="423,26,0,0" Maximum="1" Minimum="0" Name="slide_Jitter" Orientation="Horizontal" VerticalAlignment="Top" Width="42" ValueChanged="slide_Jitter_ValueChanged" LargeChange="0.01" Value="0.05" />
+                                <Slider Height="36" HorizontalAlignment="Left" IsEnabled="True" Margin="317,47,0,0" Maximum="1" Minimum="0" Name="slide_Davia" Orientation="Horizontal" VerticalAlignment="Top" Width="43" ValueChanged="slide_Davia_ValueChanged" LargeChange="0.01" Value="0.04" />
+                                <Button Content="Apply" Height="21" HorizontalAlignment="Left" Margin="370,50,0,0" Name="butSmooth" VerticalAlignment="Top" Width="43" Click="butSmooth_Click" />
+                                <CheckBox Content="Enable" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="419,53,0,0" Name="checkSmooth" VerticalAlignment="Top" Checked="checkSmooth_Checked_UnChecked" Unchecked="checkSmooth_Checked_UnChecked" IsEnabled="False" />
+                                <Image Height="36" HorizontalAlignment="Left" Margin="40,26,0,0" Name="image2" Source="/P_Tracker2;component/img/KinectSensor.png" Stretch="Uniform" VerticalAlignment="Top" Width="100" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="View" Name="tabItem3">
+                            <Grid Background="Teal">
+                                <Image Height="55" Width="55" HorizontalAlignment="Left" Margin="6,4,0,0" Name="image3" Source="/P_Tracker2;component/img/View.png" Stretch="Uniform" VerticalAlignment="Top" />
+                                <GroupBox Header="View I" Height="78" HorizontalAlignment="Left" Margin="76,-2,0,0" Name="groupBox1" VerticalAlignment="Top" Width="98" Foreground="Yellow">
+                                    <Grid>
+                                        <ComboBox Height="20" HorizontalAlignment="Left" Margin="23,1,0,0" Name="comboV1" VerticalAlignment="Top" Width="59"  />
+                                        <Label Content="BG:" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-2,-2,0,0" Name="label5" VerticalAlignment="Top" />
+                                        <CheckBox Content="Joint" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="-2,23,0,0" Name="checkVJoint1" VerticalAlignment="Top" IsChecked="True" />
+                                        <CheckBox Content="Bone" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="41,23,0,0" Name="checkVBone1" VerticalAlignment="Top" IsChecked="True" />
+                                        <CheckBox Content="Edge" Height="16" HorizontalAlignment="Left" Margin="41,39,0,0" Name="checkVEdge1" VerticalAlignment="Top" Foreground="White" IsChecked="False" />
+
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Foreground="Yellow" Header="View II" Height="78" HorizontalAlignment="Left" Margin="178,-2,0,0" Name="groupBox2" VerticalAlignment="Top" Width="98">
+                                    <Grid>
+                                        <ComboBox Height="20" HorizontalAlignment="Left" Margin="23,1,0,0" Name="comboV2" VerticalAlignment="Top" Width="59" />
+                                        <Label Content="BG:" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-2,-2,0,0" Name="label4" VerticalAlignment="Top" />
+                                        <CheckBox Content="Joint" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="-2,23,0,0" Name="checkVJoint2" VerticalAlignment="Top" IsChecked="False" />
+                                        <CheckBox Content="Bone" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="41,23,0,0" Name="checkVBone2" VerticalAlignment="Top" IsChecked="False" />
+                                        <CheckBox Content="Edge" Height="16" HorizontalAlignment="Left" Margin="41,39,0,0" Name="checkVEdge2" VerticalAlignment="Top" Foreground="White" IsChecked="False" />
+
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Foreground="Yellow" Header="View III" Height="78" HorizontalAlignment="Left" Margin="281,-2,0,0" Name="groupBox3" VerticalAlignment="Top" Width="98">
+                                    <Grid>
+                                        <ComboBox Height="20" HorizontalAlignment="Left" Margin="23,1,0,0" Name="comboV3" VerticalAlignment="Top" Width="59" />
+                                        <Label Content="BG:" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-2,-2,0,0" Name="label6" VerticalAlignment="Top" />
+                                        <CheckBox Content="Joint" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="-2,23,0,0" Name="checkVJoint3" VerticalAlignment="Top" IsChecked="True" />
+                                        <CheckBox Content="Bone" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="41,23,0,0" Name="checkVBone3" VerticalAlignment="Top" IsChecked="True" />
+                                        <CheckBox Content="Edge" Height="16" HorizontalAlignment="Left" Margin="41,39,0,0" Name="checkVEdge3" VerticalAlignment="Top" Foreground="White" IsChecked="True" />
+
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Foreground="Yellow" Header="View IV" Height="78" HorizontalAlignment="Left" Margin="384,-2,0,0" Name="groupBox4" VerticalAlignment="Top" Width="98">
+                                    <Grid>
+                                        <ComboBox Height="20" HorizontalAlignment="Left" Margin="23,1,0,0" Name="comboV4" VerticalAlignment="Top" Width="59" />
+                                        <Label Content="BG:" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-2,-2,0,0" Name="label7" VerticalAlignment="Top" />
+                                        <CheckBox Content="Joint" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="-2,23,0,0" Name="checkVJoint4" VerticalAlignment="Top" IsChecked="False" />
+                                        <CheckBox Content="Bone" Foreground="White" Height="16" HorizontalAlignment="Left" Margin="41,23,0,0" Name="checkVBone4" VerticalAlignment="Top" />
+                                        <CheckBox Content="Edge" Height="16" HorizontalAlignment="Left" Margin="41,39,0,0" Name="checkVEdge4" VerticalAlignment="Top" Foreground="White" />
+
+                                    </Grid>
+                                </GroupBox>
+                                <CheckBox Content="B.Center" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,60,0,0" Name="checkBCenter" VerticalAlignment="Top" IsChecked="False" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="View2" Name="tabItem4">
+                            <Grid Background="Teal">
+                                <GroupBox Foreground="#FF7CFF86" Header="Frame Stream" Height="51" HorizontalAlignment="Left" Margin="10,-3,0,0" Name="groupBox8" VerticalAlignment="Top" Width="105">
+                                    <Grid>
+                                        <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,2,0,0" Name="comboStream" Width="93" SelectionChanged="comboStream_SelectionChanged" VerticalAlignment="Top" />
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Foreground="#FF7CFF86" Header="Chroma key" Height="75" HorizontalAlignment="Left" Margin="119,-3,0,0" Name="groupBox10" VerticalAlignment="Top" Width="151">
+                                    <Grid>
+                                        <CheckBox Content="On" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,5,0,0" Name="checkGreenScrn" VerticalAlignment="Top" Checked="checkGreenScrn_Checked" Unchecked="checkGreenScrn_Checked" />
+                                        <CheckBox Content="Skeleton" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,24,0,0" Name="checkGScrnSkel" VerticalAlignment="Top" IsEnabled="True" IsChecked="True" Checked="checkBox1_Checked" Unchecked="checkBox1_Checked" />
+                                        <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="84,1,0,0" Name="butGScren_Browse" VerticalAlignment="Top" Width="46" Click="butGScren_Reset_Click" />
+                                        <Button Margin="102,27,9,2" Name="button2" Click="button2_Click">
+                                            <Image Source="/P_Tracker2;component/img/folder.gif" />
+                                        </Button>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Data" Name="tabItem5">
+                            <Grid Background="Teal">
+                                <GroupBox Foreground="#FF7CFF86" Header="Follow Skel." Height="78" HorizontalAlignment="Left" Margin="129,-5,0,0" Name="groupBox6" VerticalAlignment="Top" Width="177">
+                                    <Grid>
+                                        <Label Content="Skel: 0" FontSize="16" Foreground="Aquamarine" Height="28" HorizontalAlignment="Left" Margin="-3,24,0,0" Name="txtSkel" VerticalAlignment="Top" />
+                                        <Label Content="fellow" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-3,0,0,0" Name="label8" VerticalAlignment="Top" />
+                                        <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,1,88,0" Name="comboFollow" Width="17" VerticalAlignment="Top" />
+                                        <CheckBox Content="Hide oth Skel" Height="16" HorizontalAlignment="Left" Margin="71,33,0,0" Name="checkHideOthSkel" VerticalAlignment="Top" Foreground="White" IsChecked="True" />
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Foreground="#FF7CFF86" Header="Tracking Data" Height="76" HorizontalAlignment="Left" Margin="4,-4,0,0" Name="groupBox7" VerticalAlignment="Top" Width="124">
+                                    <Grid>
+                                        <Label Content="Decimal" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="0,18,0,0" Name="label1" VerticalAlignment="Top" />
+                                        <ComboBox Height="20" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="66,20,0,0" Name="comboDecimal" VerticalAlignment="Top" Width="42" SelectionChanged="comboDecimal_SelectionChanged" />
+                                        <Label Content="Camera ID" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="0,-5,0,0" Name="label2" VerticalAlignment="Top" />
+                                        <TextBox Height="20" HorizontalAlignment="Left" Margin="67,-2,0,0" Name="txtCamera" Text="A" VerticalAlignment="Top" Width="34" />
+                                        <CheckBox Content="Lossy" Foreground="White" Height="16" HorizontalAlignment="Right" Margin="0,38,58,0" Name="checkLossy" VerticalAlignment="Top" Visibility="Hidden" />
+                                        <CheckBox Content="cls" Foreground="Yellow" Height="16" HorizontalAlignment="Right" Margin="0,39,16,0" Name="checkClass" VerticalAlignment="Top" />
+                                    </Grid>
+                                </GroupBox>
+                                
+                                <GroupBox Foreground="#FF7CFF86" Header="Back up" Height="45" HorizontalAlignment="Left" Margin="373,30,0,0" Name="groupBox9" VerticalAlignment="Top" Width="115">
+                                    <Grid>
+                                        <Label Content="every" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-3,0,0,0" Name="label10" VerticalAlignment="Top" />
+                                        <TextBox Height="20" HorizontalAlignment="Left" Margin="34,1,0,0" Name="txtBackup" Text="300" VerticalAlignment="Top" Width="34" TextInput="NumericOnly" />
+                                        <Button Content="ok" Height="23" HorizontalAlignment="Left" Margin="73,-1,0,0" Name="button1" VerticalAlignment="Top" Width="26" Click="button1_Click" />
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Setting" Name="tabItem6">
+                            <Grid Background="Teal">
+                                <GroupBox Foreground="#FF7CFF86" Header="My Setting" Height="76" HorizontalAlignment="Left" Margin="6,-4,0,0" Name="groupBox11" VerticalAlignment="Top" Width="78">
+                                    <Grid>
+                                        <Button Content="Save" Height="21" HorizontalAlignment="Left" Margin="5,3,0,0" Name="butMySet_save" VerticalAlignment="Top" Width="54" Click="butMySet_save_Click" />
+                                        <Button Content="View" Height="22" HorizontalAlignment="Left" Margin="5,27,0,0" Name="butMySet_view" VerticalAlignment="Top" Width="54" Click="butMySet_view_Click" />
+                                    </Grid>
+                                </GroupBox>
+                                <CheckBox Content="Hide Debugger" Height="16" HorizontalAlignment="Left" Margin="384,56,0,0" Name="checkHideDebug" VerticalAlignment="Top" Checked="checkBox1_Checked_1" Unchecked="checkBox1_Checked_1" IsChecked="False" Foreground="White" />
+
+                            </Grid>
+                        </TabItem>
+                        <TabControl.Background>
+                            <SolidColorBrush />
+                        </TabControl.Background>
+                        <TabControl.BorderBrush>
+                            <SolidColorBrush />
+                        </TabControl.BorderBrush>
+                    </TabControl>
+                    <CheckBox Content="Seated Mode" Height="16" HorizontalAlignment="Left" Margin="6,39,0,0" Name="checkSeat" VerticalAlignment="Top" Checked="checkSeat_Checked_Unchecked" Unchecked="checkSeat_Checked_Unchecked" Foreground="#FFFFFFC4" />
+                    <CheckBox Content="Closed Focus" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,55,0,0" Name="checkClose" VerticalAlignment="Top" Checked="checkClose_Checked_Unchecked" Unchecked="checkClose_Checked_Unchecked" />
+                    <CheckBox Content="Face Track" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,71,0,0" Name="checkFace" VerticalAlignment="Top" Checked="checkFace_Checked_Unchecked" Unchecked="checkFace_Checked_Unchecked" />
+                    <CheckBox Content="Flip" Foreground="#FFFFFFC4" Height="16" HorizontalAlignment="Left" Margin="6,87,0,0" Name="checkFlip" VerticalAlignment="Top" Checked="checkFlip_check_uncheck" Unchecked="checkFlip_check_uncheck" />
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Label Content="00000000 (0,0)" Height="93" HorizontalAlignment="Left" Margin="5,-2,0,0" Name="txtTimeBig" VerticalAlignment="Top" FontSize="72" Foreground="#FF7CFF86" FontWeight="Normal" />
+                </Grid>
+                <Label Content="Status: Off" Height="28" HorizontalAlignment="Left" Margin="441,0,0,0" Name="txtStatus" VerticalAlignment="Top" Foreground="Yellow" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,67 @@
+﻿<Window x:Class="P_Tracker2.Weka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Predictor - Weka" Height="366" Width="562" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="2"/>
+            <RowDefinition Height="105"/>
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+        <Grid Grid.Row="0" Name="gui_Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="Auto" MinWidth="2"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Black" Width="2"/>
+
+            <Grid Grid.Column="0">
+                <TextBox Name="txt1" Margin="1,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <DataGrid Name="dataGrid" />
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2" Name="gui_Buttom">
+            <TabControl Height="105" HorizontalAlignment="Left" Margin="1,0,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
+                <TabItem Header="Classification" Name="tabItem1">
+                    <Grid Background="#FF259A9A">
+                        <Button Content="Classify" Height="23" HorizontalAlignment="Left" Margin="442,3,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" IsEnabled="False" />
+                        <Label Content="Class col#" Height="28" HorizontalAlignment="Left" Margin="321,2,0,0" Name="label1" VerticalAlignment="Top" Foreground="White" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="383,2,0,0" Name="txtColClass" VerticalAlignment="Top" Width="30" PreviewTextInput="textBox1_PreviewTextInput" Text="0" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtPath" Text="file\[Train]\sample.arff" VerticalAlignment="Top" Width="128" />
+                        <Button Margin="139,5,0,39" Name="openFolder" Click="openFolder_Click" HorizontalAlignment="Left" Width="29">
+                            <Image Source="/P_Tracker2;component/img/folder.gif" Height="18" Width="21" />
+                        </Button>
+                        <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="6,36,0,0" Name="button2" VerticalAlignment="Top" Width="52" Click="button2_Click" />
+                        <GroupBox Header="Test Mode" Height="74" HorizontalAlignment="Left" Margin="174,-3,0,0" Name="groupBox1" VerticalAlignment="Top" Width="142" Foreground="Yellow">
+                            <Grid>
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="50,0,0,0" Name="txtTrain" Text="80" VerticalAlignment="Top" Width="25" PreviewTextInput="textBox1_PreviewTextInput" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="105,0,0,0" Name="txtTest" Text="20" VerticalAlignment="Top" Width="25" PreviewTextInput="textBox1_PreviewTextInput" />
+                                <Label Content="train" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="17,-2,0,0" Name="txtt1" VerticalAlignment="Top" />
+                                <Label Content="test" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="72,-2,0,0" Name="txtt2" VerticalAlignment="Top" />
+                                <RadioButton Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="radio1" VerticalAlignment="Top" />
+                                <RadioButton Height="16" HorizontalAlignment="Left" Margin="6,32,0,0" Name="radio2" VerticalAlignment="Top" IsChecked="True" Width="96" Content="Cross-V folds" Foreground="White" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="99,28,0,0" Name="txtFold" Text="10" VerticalAlignment="Top" Width="25" PreviewTextInput="textBox1_PreviewTextInput" />
+                            </Grid>
+                        </GroupBox>
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="441,30,0,0" Name="comboAlgo" VerticalAlignment="Top" Width="77" />
+                        <Button Content="Load Ins" Height="23" HorizontalAlignment="Left" Margin="61,36,0,0" Name="butLoad" VerticalAlignment="Top" Width="61" Click="butLoad_Click" Foreground="#FF0027FF" />
+                        <CheckBox Content="Report" Height="16" HorizontalAlignment="Left" Margin="327,35,0,0" Name="checkReport" VerticalAlignment="Top" Foreground="#FF6FFF6F" IsChecked="True" />
+                        <CheckBox Content="ResultTable" Foreground="#FF6FFF6F" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="327,51,0,0" Name="checkRTable" VerticalAlignment="Top" />
+                        <CheckBox Content="Random Sort" Foreground="Yellow" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="432,54,0,0" Name="checkRSort" VerticalAlignment="Top" Width="91" />
+                        <Button Content="Help" FontSize="10" Height="18" HorizontalAlignment="Left" Margin="125,42,0,0" Name="butHelp" VerticalAlignment="Top" Width="31" Click="butHelp_Click" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="+" Name="tabItem2" >
+                    <Grid Background="#FF259A9A">
+                        <Button Content="Clear Table" Height="23" HorizontalAlignment="Left" Margin="443,6,0,0" Name="button3" VerticalAlignment="Top" Width="74" Click="button3_Click" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

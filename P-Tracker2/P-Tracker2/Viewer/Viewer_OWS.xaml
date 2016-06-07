@@ -1,0 +1,61 @@
+﻿<Window x:Class="P_Tracker2.Viewer_OWS"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Data Viewer by Pujana P" Height="390" Width="553" Background="#FF0D0D0D" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed">
+    <Grid>
+        <TabControl Height="96" Margin="1,0,3,0" Name="tabControl1" VerticalAlignment="Bottom" Background="#FF007E7E">
+            <TabItem Header="Splitter" Name="tabItem1">
+                <Grid Background="#FF0BB0B0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="336*" />
+                        <ColumnDefinition Width="181*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Browse" Height="26" HorizontalAlignment="Left" Margin="6,32,0,0" Name="button1" VerticalAlignment="Top" Width="61" Click="buttonBrowse_Click" />
+                    <TextBox Height="20" HorizontalAlignment="Left" Margin="6,6,0,0" Name="FileNameTextBox" VerticalAlignment="Top" Width="146" Text="" />
+                    <Label Content="Row: 0" Height="28" HorizontalAlignment="Left" Margin="256,-26,0,0" Name="txtRow" VerticalAlignment="Top" Foreground="White" HorizontalContentAlignment="Right" Width="261" Grid.ColumnSpan="2" />
+                    <GroupBox Header="Split and Export" Height="70" HorizontalAlignment="Left" Margin="158,-6,0,0" Name="groupBox1" VerticalAlignment="Top" Width="357" Grid.ColumnSpan="2" Foreground="Yellow">
+                        <Grid>
+                            <Button Content="Export" Height="23" HorizontalAlignment="Left" Margin="44,25,0,0" Name="butExport" VerticalAlignment="Top" Width="52" Click="butExport_Click" />
+                            <Label Content="split (sec): " Height="28" HorizontalAlignment="Left" Margin="126,-1,0,0" Name="label1" VerticalAlignment="Top" Foreground="White" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="184,0,0,0" Name="txtSplit" VerticalAlignment="Top" Width="38" PreviewTextInput="txtSpli_PreviewTextInput" Text="10"/>
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="44,0,0,0" Name="txtTag" VerticalAlignment="Top" Width="80" Text="A01_S_0811_" />
+                            <Label Content="prefix: " Height="28" HorizontalAlignment="Left" Margin="2,-2,0,0" Name="labelTag" VerticalAlignment="Top" Foreground="White" />
+                            <Button Name="openFolder" Click="butOpenFolderClick" Margin="100,26,0,0" HorizontalAlignment="Left" Width="27">
+                                <Image Source="/P_Tracker2;component/img/folder.gif"></Image>
+                            </Button>
+                            <Label Content="remain (sec): 0" Foreground="#FF9BFF7C" Height="28" HorizontalAlignment="Left" Margin="237,21,0,0" Name="txtSplitRemain" VerticalAlignment="Top" />
+                            <Label Content="split files: 0" Foreground="#FF9BFF7C" Height="28" HorizontalAlignment="Left" Margin="237,0,0,0" Name="txtSplitCount" VerticalAlignment="Top" />
+                            <Button Content="?" Height="20" HorizontalAlignment="Left" Margin="-37,24,0,0" Name="butFileSample" VerticalAlignment="Top" Width="19" Click="butFileSample_Click" />
+                            <Button Content="Help" FontSize="10" Height="19" HorizontalAlignment="Left" Margin="131,27,0,0" Name="butHelp" VerticalAlignment="Top" Width="41" Click="butHelp_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="201,-27,0,0" Name="txtErr" VerticalAlignment="Top" Foreground="Red" />
+                    <Button Content="Open" Height="25" HorizontalAlignment="Left" Margin="70,32,0,0" Name="butOpen" VerticalAlignment="Top" Width="52" Click="butOpen_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="AVG" Name="tabItem2">
+                <Grid>
+                    <Button Content="Export" Height="23" HorizontalAlignment="Left" Margin="118,36,0,0" Name="butFTG_export" VerticalAlignment="Top" Width="52" Click="butFTG_export_Click" />
+                    <Label Content="Range (sec): " Foreground="White" Height="28" HorizontalAlignment="Left" Margin="183,4,0,0" Name="label2" VerticalAlignment="Top" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="258,4,0,0" Name="txtFTG_range" Text="3" VerticalAlignment="Top" Width="38" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="34,6,0,0" Name="txtFTG_start" Text="0" VerticalAlignment="Top" Width="80" KeyDown="ftg_OnKeyDownHandler"/>
+                    <Label Content="Start:" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="-1,4,0,0" Name="label3" VerticalAlignment="Top" />
+                    <Button Margin="230,36,0,5" Name="button3" Click="butOpenFolderClick" HorizontalAlignment="Left" Width="28">
+                        <Image Source="/P_Tracker2;component/img/folder.gif" />
+                    </Button>
+                    <Label Content="data: 0" Foreground="#FFFFFF7C" Height="28" HorizontalAlignment="Left" Margin="0,36,0,0" Name="txtFTG_count" VerticalAlignment="Top" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="174,36,0,0" Name="butFTG_clear" VerticalAlignment="Top" Width="52" Click="butFTG_clear_Click" />
+                    <Button Content="Cap" Height="23" HorizontalAlignment="Left" Margin="77,36,0,0" Name="butFTG_cap" VerticalAlignment="Top" Width="37" Click="butFTG_cap_Click" />
+                    <Label Content="..." Height="44" HorizontalAlignment="Left" Name="txtFTG_info" VerticalAlignment="Top" Width="215" Margin="299,0,0,0" Foreground="#FF9BFF7C" />
+                    <CheckBox Content="preview after save" Height="16" HorizontalAlignment="Left" Margin="266,42,0,0" Name="checkPreview" VerticalAlignment="Top" IsChecked="True" Foreground="Black" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="117,6,0,0" Name="comboFTG_start" VerticalAlignment="Top" Width="64" SelectedIndex="0">
+                        <ComboBoxItem Content="RowID" />
+                        <ComboBoxItem Content="Time" />
+                    </ComboBox>
+                    <Button Content="Help" FontSize="10" Height="19" HorizontalAlignment="Left" Margin="476,43,0,0" Name="butHelp2" VerticalAlignment="Top" Width="41" Click="butHelp2_Click" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <DataGrid AutoGenerateColumns="False" Margin="1,1,5,90" Name="dataGrid" />
+    </Grid>
+</Window>

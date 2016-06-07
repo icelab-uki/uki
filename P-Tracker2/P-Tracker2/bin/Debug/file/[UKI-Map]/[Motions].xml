@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<motions>
+  <motion name="1 Body: Jump" enabled="1" expand="1">
+    <if type="3" v="Spine" axis="Y" opt="me" value_d="0.07" />
+  </motion>
+  <motion name="2 Body: Crouch" enabled="1" expand="1">
+    <if type="3" v="Spine" axis="Y" opt="le" value_d="-0.15" />
+  </motion>
+  <motion name="3 Lean: Forward" enabled="1" expand="1">
+    <if type="2" axis="Z" v="ShoulderC" v2="HipC" opt="le" value_d="-0.04" />
+  </motion>
+  <motion name="4 Lean: Backward" enabled="1" expand="1">
+    <if type="2" axis="Z" v="ShoulderC" v2="HipC" opt="me" value_d="0.14" />
+  </motion>
+  <motion name="5 Step: Forward" enabled="1" expand="1">
+    <if type="2" axis="Z" v="FootR" v2="FootL" opt="le" value_d="-0.28" />
+  </motion>
+  <motion name="6 Step: Back" enabled="1" expand="1">
+    <if type="2" axis="Z" v="FootL" v2="FootR" opt="le" value_d="-0.28" />
+  </motion>
+  <motion name="7 Right Hand [X]: Extend to the Right" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandR" v2="ShoulderC" opt="me" value_d="0.37" />
+  </motion>
+  <motion name="8 Right Hand [X]: Extend to the Left" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandR" v2="ShoulderC" opt="le" value_d="-0.14" />
+  </motion>
+  <motion name="9 Left Hand [X]: Extend to the Left" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="le" value_d="-0.37" />
+  </motion>
+  <motion name="10 Left Hand [X]: Extend to the Right" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="me" value_d="0.14" />
+  </motion>
+  <motion name="11 Right Hand [Y]: Raise Up" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="me" value_d="0.18" />
+  </motion>
+  <motion name="12 Right Hand [Y]: Down" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="-0.37" />
+  </motion>
+  <motion name="13 Left Hand [Y]: Raise Up" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="me" value_d="0.18" />
+  </motion>
+  <motion name="14 Left Hand [Y]: Down" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="le" value_d="-0.37" />
+  </motion>
+  <motion name="15 Right Hand [Z]: In Front of the Body" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="16 Right Hand [Z]: Behind the Body" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="me" value_d="0.09" />
+  </motion>
+  <motion name="17 Left Hand [Z]: In Front of the Body" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="18 Left Hand [Z]: Behind the Body" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="me" value_d="0.09" />
+  </motion>
+  <motion name="19 Right Leg: Knee Strike" enabled="1" expand="1">
+    <if type="3" v="KneeR" axis="Y" opt="me" value_d="0.15" />
+    <if type="2" axis="Z" v="KneeR" v2="HipC" opt="le" value_d="-0.18" />
+  </motion>
+  <motion name="20 Right Leg: Kick" enabled="1" expand="1">
+    <if type="3" v="KneeR" axis="Y" opt="me" value_d="0.04" />
+    <if type="2" axis="Z" v="FootR" v2="HipC" opt="le" value_d="-0.32" />
+  </motion>
+  <motion name="21 Left Leg: Knee Strike" enabled="1" expand="1">
+    <if type="3" v="KneeL" axis="Y" opt="me" value_d="0.15" />
+    <if type="2" axis="Z" v="KneeL" v2="HipC" opt="le" value_d="-0.18" />
+  </motion>
+  <motion name="22 Left Leg: Kick" enabled="1" expand="1">
+    <if type="3" v="KneeL" axis="Y" opt="me" value_d="0.04" />
+    <if type="2" axis="Z" v="FootL" v2="HipC" opt="le" value_d="-0.32" />
+  </motion>
+  <motion name="23 Knifehand Strike" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="me" value_d="0.15" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="l" value_d="0.15" />
+  </motion>
+  <motion name="24 Hadouken" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="me" value_d="0.07" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="-0.15" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="25 Hadouken to the Air" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="me" value_d="0.07" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="-0.15" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="me" value_d="0.07" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="me" value_d="0.07" />
+  </motion>
+  <motion name="26 Shakunetsu Hadouken" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="le" value_d="-0.05" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.2" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="me" value_d="0.07" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="m" value_d="-0.2" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="-0.15" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="27 Two-Handed Punch" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="28 Triple Punch Combo" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="le" value_d="-0.35" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="29 Right Swing" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandR" v2="ShoulderC" opt="me" value_d="0.37" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="le" value_d="-0.35" />
+  </motion>
+  <motion name="30 Right Uppercut" enabled="1" expand="1">
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="-0.37" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="me" value_d="0.18" />
+  </motion>
+  <motion name="Back Step (Better)" enabled="1" expand="0">
+    <if type="0" v="step" opt="e" value="-1" />
+    <if type="0" v="jump" opt="ne" value="-1" />
+  </motion>
+  <motion name="MaBu" enabled="1" expand="0">
+    <if type="0" v="jump" opt="e" value="-1" />
+    <if type="0" v="handL_Z" opt="e" value="0" />
+    <if type="0" v="handR_Z" opt="e" value="0" />
+    <if type="2" axis="Y" v="HandL" v2="Spine" opt="le" value_d="-0.01" />
+    <if type="2" axis="Y" v="HandR" v2="Spine" opt="le" value_d="-0.01" />
+  </motion>
+  <motion name="Knifehand Strike (no icon)" enabled="1" expand="0">
+    <if type="0" v="handR_Y" opt="e" value="1" />
+    <if type="-1" value_d="0.8" />
+    <if type="0" v="handR_Z" opt="e" value="1" />
+  </motion>
+  <motion name="Lean Backward (Better)" enabled="1" expand="0">
+    <if type="0" v="lean" opt="e" value="-1" />
+    <if type="0" v="jump" opt="e" value="0" />
+    <if type="0" v="legR" opt="e" value="0" />
+    <if type="0" v="legL" opt="e" value="0" />
+  </motion>
+  <motion name="Lean Forward (Better)" enabled="1" expand="0">
+    <if type="0" v="lean" opt="e" value="1" />
+    <if type="0" v="jump" opt="e" value="0" />
+    <if type="0" v="legR" opt="e" value="0" />
+    <if type="0" v="legL" opt="e" value="0" />
+  </motion>
+  <motion name="Left Swing" enabled="1" expand="0">
+    <if type="0" v="handL_X" opt="e" value="1" />
+    <if type="-1" value_d="0.5" />
+    <if type="0" v="handL_Z" opt="e" value="1" />
+  </motion>
+  <motion name="Left Spin Kick" enabled="1" expand="0">
+    <if type="0" v="spin" opt="e" value="-1" />
+    <if type="10" v="[" brush="" value_d="1.5" />
+    <if type="0" v="legL" opt="e" value="2" />
+  </motion>
+  <motion name="Circle Charge" enabled="1" expand="0">
+    <if type="2" axis="Y" v="HandL" v2="HandR" opt="m" value_d="0.3" />
+    <if type="2" axis="Y" v="HandL" v2="Head" opt="me" value_d="0" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Y" v="HandR" v2="HandL" opt="m" value_d="0.3" />
+    <if type="2" axis="Y" v="HandR" v2="Head" opt="me" value_d="0" />
+  </motion>
+  <motion name="Circle Charge 2" enabled="1" expand="0">
+    <if type="2" axis="Y" v="HandR" v2="HandL" opt="m" value_d="0.3" />
+    <if type="2" axis="Y" v="HandR" v2="Head" opt="me" value_d="0" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Y" v="HandL" v2="HandR" opt="m" value_d="0.3" />
+    <if type="2" axis="Y" v="HandL" v2="Head" opt="me" value_d="0" />
+  </motion>
+  <motion name="Left Uppercut" enabled="1" expand="0">
+    <if type="2" axis="Y" v="HandL" v2="Spine" opt="l" value_d="-0.01" />
+    <if type="-1" value_d="2" />
+    <if type="0" v="handL_Y" opt="e" value="1" />
+  </motion>
+  <motion name="Stand" enabled="1" expand="0">
+    <if type="0" v="legR" opt="e" value="0" />
+    <if type="0" v="legL" opt="e" value="0" />
+    <if type="0" v="jump" opt="ne" value="1" />
+  </motion>
+  <motion name="Step Up (Better)" enabled="1" expand="0">
+    <if type="0" v="step" opt="e" value="1" />
+    <if type="0" v="jump" opt="ne" value="-1" />
+  </motion>
+  <motion name="Cross" enabled="1" expand="0">
+    <if type="0" v="legR" opt="e" value="0" />
+    <if type="0" v="legL" opt="e" value="0" />
+    <if type="0" v="jump" opt="e" value="0" />
+    <if type="0" v="handR_X" opt="e" value="1" />
+    <if type="0" v="handL_X" opt="e" value="1" />
+  </motion>
+  <motion name="Right Uppercut" enabled="1" expand="0">
+    <if type="2" axis="Y" v="HandR" v2="Spine" opt="l" value_d="-0.01" />
+    <if type="-1" value_d="2" />
+    <if type="0" v="handR_Y" opt="e" value="1" />
+  </motion>
+  <motion name="Right Swing" enabled="1" expand="0">
+    <if type="0" v="handR_X" opt="e" value="1" />
+    <if type="0" v="handR_Z" opt="ne" value="1" />
+    <if type="-1" value_d="0.5" />
+    <if type="0" v="handR_Z" opt="e" value="1" />
+  </motion>
+  <motion name="Right Spin Kick" enabled="1" expand="0">
+    <if type="0" v="spin" opt="e" value="1" />
+    <if type="10" v="[" brush="" value_d="1.5" />
+    <if type="0" v="legR" opt="e" value="2" />
+  </motion>
+  <motion name="Knifehand Strike" enabled="1" expand="0">
+    <if type="0" v="handR_Y" opt="e" value="1" />
+    <if type="-1" value_d="0.8" />
+    <if type="10" v="]" brush="Gold" value_d="0.2" />
+    <if type="0" v="handR_Z" opt="e" value="1" />
+    <if type="10" v="]" brush="White" value_d="0.2" />
+  </motion>
+  <motion name="Triple Punch Combo" enabled="1" expand="0">
+    <if type="0" v="handR_Z" opt="e" value="1" />
+    <if type="0" v="handL_Z" opt="ne" value="1" />
+    <if type="-1" value_d="0.5" />
+    <if type="0" v="handL_Z" opt="e" value="1" />
+    <if type="0" v="handR_Z" opt="ne" value="1" />
+    <if type="-1" value_d="0.5" />
+    <if type="0" v="handR_Z" opt="e" value="1" />
+    <if type="0" v="handL_Z" opt="ne" value="1" />
+  </motion>
+  <motion name="Two-Handed Punch" enabled="1" expand="1">
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="l" value_d="-0.35" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+  </motion>
+  <motion name="Hadouken" enabled="1" expand="1">
+    <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="l" value_d="0.07" />
+    <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="l" value_d="-0.15" />
+    <if type="-1" value_d="1" />
+    <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="l" value_d="-0.35" />
+    <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+  </motion>
+</motions>

@@ -1,0 +1,13 @@
+diff a/P-Tracker2/P-Tracker2/P_Tracker2.csproj b/P-Tracker2/P-Tracker2/P_Tracker2.csproj	(rejected hunks)
+@@ -207,7 +207,11 @@
+       <Generator>MSBuild:Compile</Generator>
+       <SubType>Designer</SubType>
+     </ApplicationDefinition>
++<<<<<<< HEAD
+     <Compile Include="UKI\TheData.cs" />
++=======
++    <Compile Include="Class1.cs" />
++>>>>>>> 955b59c697c7d60adce44f0ccbed99e469601a70
+     <Compile Include="UKI-Analysis\UKI_Preprocessor.cs" />
+     <Compile Include="UKI-Analysis\InstanceContainer.cs" />
+     <Compile Include="UKI-Analysis\UKI_ModelGenerator.cs" />
