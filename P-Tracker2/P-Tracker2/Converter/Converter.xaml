@@ -1,0 +1,44 @@
+﻿<Window x:Class="P_Tracker2.Converter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Batch Viewer" Height="390" Width="574" Background="#FF0D0D0D" Icon="/P_Tracker2;component/img/iconP.png" Closed="Window_Closed">
+    <Grid>
+        <TabControl Height="96" HorizontalAlignment="Left" Margin="1,0,0,0" Name="tabControl1" VerticalAlignment="Bottom" Width="546" Background="#FF27007E">
+            <TabItem Header="Col. MGT" Name="tabItem1">
+                <Grid Background="Teal">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="336*" />
+                        <ColumnDefinition Width="181*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Browse" Height="26" HorizontalAlignment="Left" Name="button1" VerticalAlignment="Top" Width="50" Click="buttonBrowse_Click" Margin="5,6,0,0" />
+                    <Button Name="openFolder" Click="butOpenFolderClick" Margin="6,37,0,6" HorizontalAlignment="Left" Width="27">
+                        <Image Source="/P_Tracker2;component/img/folder.gif"></Image>
+                    </Button>
+                    <GroupBox Header="MSR3D" Height="56" HorizontalAlignment="Left" Margin="81,-1,0,0" Name="groupBox1" VerticalAlignment="Top" Width="101" Foreground="Yellow" Grid.Column="1">
+                        <Grid>
+                            <Button Content="Convert" Height="26" HorizontalAlignment="Left" Name="butMsrConv" VerticalAlignment="Top" Width="55" Margin="1,0,0,0" Click="butMsrConv_Click" />
+                            <Button Content="?" Height="25" HorizontalAlignment="Left" Margin="58,1,0,0" Name="msr_sample" VerticalAlignment="Top" Width="30" Click="msr_sample_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Yellow" Header="Verlab (Taekwondo)" Height="56" HorizontalAlignment="Left" Margin="82,-1,0,0" Name="groupBox2" VerticalAlignment="Top" Width="128">
+                        <Grid>
+                            <Button Content="Convert" Height="26" HorizontalAlignment="Left" Margin="1,0,0,0" Name="butConvertVerLab" VerticalAlignment="Top" Width="55" Click="butConvertVerLab_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Yellow" Header="BVH" Height="56" HorizontalAlignment="Left" Margin="216,-1,0,0" Name="groupBox3" VerticalAlignment="Top" Width="87">
+                        <Grid>
+                            <Button Content="Convert" Height="26" HorizontalAlignment="Left" Margin="1,0,0,0" Name="butBVH_Convert" VerticalAlignment="Top" Width="55" Click="butBVH_Convert_Click" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Foreground="Yellow" Header="MSR Action" Height="56" HorizontalAlignment="Left" Margin="309,-1,0,0" Name="groupBox4" VerticalAlignment="Top" Width="87" Grid.ColumnSpan="2">
+                        <Grid>
+                            <Button Content="Convert" Height="26" HorizontalAlignment="Left" Margin="1,0,0,0" Name="butConvertMSRAction" VerticalAlignment="Top" Width="55" Click="butConvertMSRAction_Click" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <DataGrid Margin="1,1,5,102" Name="dataGrid" />
+        <Label Content="Row: 0" Height="28" HorizontalAlignment="Left" Margin="414,251,0,0" Name="txtRow" VerticalAlignment="Top" Foreground="White" HorizontalContentAlignment="Right" Width="132" />
+    </Grid>
+</Window>

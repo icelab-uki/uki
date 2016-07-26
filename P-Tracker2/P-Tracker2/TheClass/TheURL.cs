@@ -35,6 +35,7 @@ namespace P_Tracker2
         public static string url_9_Train = "[Train]";
         public static string url_9_UKIMap = "[UKI-Map]";
         public static string url_9_Convert = "[Convert]";
+        public static string url_9_DB = "[DB]";
         //----------
         public static string url_ows_GraphHB = "GraphHB.jpg";
         public static string url_ows_Handbook = "Handbook.docx";
@@ -63,6 +64,7 @@ namespace P_Tracker2
         public static string url_libsvm_model = @"facemodel\";
 
         public static string url_FTGautoSide = @"C:\side.txt";
+
 
         public static void initializeURL()
         {

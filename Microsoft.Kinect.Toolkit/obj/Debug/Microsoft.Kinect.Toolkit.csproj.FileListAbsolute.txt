@@ -34,22 +34,3 @@ C:\Programming new\00 S\P-Tracker2 set\Microsoft.Kinect.Toolkit\obj\Debug\Micros
 C:\Programming new\00 S\P-Tracker2 set\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.csproj.GenerateResource.Cache
 C:\Programming new\00 S\P-Tracker2 set\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.dll
 C:\Programming new\00 S\P-Tracker2 set\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.pdb
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\Microsoft.Kinect.Toolkit.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\Microsoft.Kinect.Toolkit.pdb
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\Microsoft.Kinect.Toolkit.dll.CodeAnalysisLog.xml
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\Microsoft.Kinect.Toolkit.dll.lastcodeanalysissucceeded
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\PresentationCore.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\PresentationFramework.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\System.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\System.Xaml.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\System.Xml.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\bin\Debug\WindowsBase.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.csprojResolveAssemblyReference.cache
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\KinectSensorChooserUI.baml
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\KinectSensorChooserUI.g.cs
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit_MarkupCompile.cache
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.g.resources
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.Properties.Resources.resources
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.csproj.GenerateResource.Cache
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.dll
-D:\Programming new\00 S\UKI\Microsoft.Kinect.Toolkit\obj\Debug\Microsoft.Kinect.Toolkit.pdb

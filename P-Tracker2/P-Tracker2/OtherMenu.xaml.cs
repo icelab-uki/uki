@@ -59,6 +59,11 @@ namespace P_Tracker2
             new Editor("").Show();
         }
 
+        private void butConverter_Click(object sender, RoutedEventArgs e)
+        {
+            new Converter().Show();
+        }
+
 
     }
 }

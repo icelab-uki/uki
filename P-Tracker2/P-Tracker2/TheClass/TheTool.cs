@@ -20,6 +20,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Collections;
+using System.Windows.Media.Media3D;
 
 
 namespace P_Tracker2
@@ -170,10 +171,21 @@ namespace P_Tracker2
         {
             return Path.GetFileNameWithoutExtension(path);
         }
+        
+        static public string getExtension_byPath(string path)
+        {
+            return Path.GetExtension(path);
+        }
 
         static public string getDirectory_byPath(string path)
         {
             return Path.GetDirectoryName(path);
+        }
+
+        //______.exe >> ______
+        static public string getFilePathExcludeExtension_byPath(string path)
+        {
+            return TheTool.getDirectory_byPath(path) + @"\" + TheTool.getFileName_byPath(path);
         }
 
         //0 : 1 >> 01
@@ -901,7 +913,7 @@ namespace P_Tracker2
                     {
                         if (!Convert.IsDBNull(r[i]))
                         {
-                            sw.Write(r[i].ToString());
+                            sw.Write(TheTool.string_replaceChar(r[i].ToString(),","," "));
                         }
                         if (i < colCount - 1)
                         {
@@ -1122,6 +1134,10 @@ namespace P_Tracker2
             else if (type == ".txt")
             {
                 dialog.Filter = "Text files (*.txt) |*.txt";
+            }
+            else if (type == ".*")
+            {
+                dialog.Filter = "All files (*.*) |*.*";
             }
             else
             {
@@ -1492,6 +1508,20 @@ namespace P_Tracker2
             //    TheSys.showError(ex);
             //    return 0;
             //}
+        }
+
+        public static double calNorm(double[] d)
+        {
+            double norm = 0;
+            try
+            {
+                for(int i = 0; i < d.Count();i++){
+                    norm += Math.Pow(d[i],2);
+                }
+                norm = Math.Sqrt(norm);
+            }
+            catch (Exception e) { TheSys.showError("Err: [calNorm()] " + e.ToString(), true); }
+            return norm;
         }
 
         public static double calEuclidian(double[] d1, double[] d2)
@@ -2297,6 +2327,10 @@ namespace P_Tracker2
         {
             DataTable dt2 = dt.Clone();
             int i = 0;
+            if (end < start) { 
+                int s = end; int e = start; 
+                start = s; end = e; 
+            }
             foreach (DataRow dr in dt.Rows)
             {
                 if (i >= start && i <= end) { dt2.Rows.Add(dr.ItemArray); }
@@ -2479,17 +2513,15 @@ namespace P_Tracker2
 
         //Select By Id, not index
         //key pose must start from 0
-        public static List<DataTable> dataTable_split(DataTable dt, List<int> keypose_id)
+        public static List<DataTable> dataTable_split(DataTable dt, List<int[]> keypose_list)
         {
             List<DataTable> dt_list = new List<DataTable>();
-            int start = -1;
-            foreach (int end in keypose_id)
+            foreach (int[] keypose in keypose_list)
             {
-                if (end > start && start > 0)
+                if (keypose.Count() > 1 && keypose[1] > keypose[0] && keypose[0] > 0)
                 {
-                    dt_list.Add(TheTool.dataTable_selectRow_byId(dt, start, end));
+                    dt_list.Add(TheTool.dataTable_selectRow_byId(dt, keypose[0], keypose[1]));
                 }
-                start = end;
             }
             return dt_list;
         }
@@ -2827,5 +2859,165 @@ namespace P_Tracker2
             return output;
         }
 
+        //---------------------------------------
+
+        //0 = rotate, 1 = tilt
+        static public UKI_DataRaw rotateSkel(UKI_DataRaw skel, int angle, Boolean rotate_or_tilt)
+        {
+            UKI_DataRaw new_skel = new UKI_DataRaw();
+            new_skel.Head = RotatePoint(skel.Head, skel.Spine, angle, rotate_or_tilt);
+            new_skel.ShoulderCenter = RotatePoint(skel.ShoulderCenter, skel.Spine, angle, rotate_or_tilt);
+            new_skel.ShoulderLeft = RotatePoint(skel.ShoulderLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.ElbowLeft = RotatePoint(skel.ElbowLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.WristLeft = RotatePoint(skel.WristLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.HandLeft = RotatePoint(skel.HandLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.ShoulderRight = RotatePoint(skel.ShoulderRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.ElbowRight = RotatePoint(skel.ElbowRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.WristRight = RotatePoint(skel.WristRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.HandRight = RotatePoint(skel.HandRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.Spine = RotatePoint(skel.Spine, skel.Spine, angle, rotate_or_tilt);
+            new_skel.HipCenter = RotatePoint(skel.HipCenter, skel.Spine, angle, rotate_or_tilt);
+            new_skel.HipLeft = RotatePoint(skel.HipLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.KneeLeft = RotatePoint(skel.KneeLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.AnkleLeft = RotatePoint(skel.AnkleLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.FootLeft = RotatePoint(skel.FootLeft, skel.Spine, angle, rotate_or_tilt);
+            new_skel.HipRight = RotatePoint(skel.HipRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.KneeRight = RotatePoint(skel.KneeRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.AnkleRight = RotatePoint(skel.AnkleRight, skel.Spine, angle, rotate_or_tilt);
+            new_skel.FootRight = RotatePoint(skel.FootRight, skel.Spine, angle, rotate_or_tilt);
+            return new_skel;
+        }
+
+        //http://stackoverflow.com/questions/14607640/rotating-a-vector-in-3d-space
+        //true = rotate_or_tilt
+        static public double[] RotatePoint(double[] data_3d, double[] data_origin, int angle, Boolean isTilt_notRotate)
+        {
+            double radian = angle * Math.PI / 180;
+            double[] p = new double[3];
+            if (data_3d == data_origin)
+            {
+                p[0] = data_3d[0]; p[1] = data_3d[1]; p[2] = data_3d[2];
+            }
+            else if (isTilt_notRotate)//tilt
+            {
+                double x_delta = data_3d[0] - data_origin[0];
+                double y_delta = data_3d[1] - data_origin[1];
+                double z_delta = data_3d[2] - data_origin[2];
+                p[0] = data_3d[0];
+                p[1] = data_origin[1] + y_delta * Math.Cos(radian) - z_delta * Math.Sin(radian);
+                p[2] = data_origin[2] + y_delta * Math.Sin(radian) + z_delta * Math.Cos(radian);
+            }
+            else //rotate
+            {
+                double x_delta = data_3d[0] - data_origin[0];
+                double y_delta = data_3d[1] - data_origin[1];
+                double z_delta = data_3d[2] - data_origin[2];
+                p[0] = data_origin[0] + x_delta * Math.Cos(radian) + z_delta * Math.Sin(radian);
+                p[1] = data_3d[1];
+                p[2] = data_origin[2] - x_delta * Math.Sin(radian) + z_delta * Math.Cos(radian);
+            }
+            return p;
+        }
+
+        public static double getRatio(double v, double min, double max){
+            return (v - min) / (max - min);
+        }
+
+        public static string printTxt(List<double> list_data, string txt_join)
+        {
+            string output = "";int i = 0;
+            foreach(double d in list_data){
+                if (i > 0) { output += txt_join; }
+                output += d;
+                i++;
+            }
+            return output;
+        }
+
+        public static void list_initialize(List<double> list, int size)
+        {
+            for (int i = 0; i < size; i++) { list.Add(0); }
+        }
+
+        public static List<int[]> listArray_sort(List<int[]> list, int col_id)
+        {
+            return list.OrderBy(x => x[col_id]).ToList();
+        }
+
+        public static double divide(double dividend,double divisor){
+            if (divisor == 0) { return 0; }
+            else { return dividend / divisor; }
+        }
+
+        //http://stackoverflow.com/questions/4642687/given-start-point-angles-in-each-rotational-axis-and-a-direction-calculate-end
+        public static double[] getPosition_originAngleDistance(double[] origin, double distance, double angleZ, double angleY)
+        {
+            angleZ = angleZ * Math.PI / 180;//deg to Radian
+            angleY = angleY * Math.PI / 180;//deg to Radian
+            double[] output = new double[3];
+            output[0] = origin[0] + distance * Math.Cos(angleY) * Math.Sin(angleZ);
+            output[1] = origin[1] + distance * Math.Sin(angleY);
+            output[2] = origin[2] + distance * Math.Cos(angleY) * Math.Sin(angleZ);
+            return output;
+        }
+
+        public static double getNorm(double a, double b)
+        {
+            return Math.Sqrt(Math.Pow(a,2) + Math.Pow(b,2));
+        }
+
+        ////Row x Col
+        //public static double[][] matrix_multiplication_NxN(double[][] M1, double[][] M2, int n)
+        //{
+        //    double[][] output = new double[n][];
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        output[i][] = new double[]{ M1[0][0] *  M2[0][0], M1[0][0] *  M2[0][0]};
+
+        //    }
+        //    return output;
+        //}
+        public static void Matrix_print(double[,] M, int round)
+        {
+            for(int i = 0; i < M.GetLength(0);i++){
+                for(int j = 0; j < M.GetLength(1);j++){
+                    TheSys.showError(Math.Round(M[i,j],round) + "_",false);
+                }
+                TheSys.showError("");
+            }
+            TheSys.showError("");
+        }
+
+        public static double[,] Matrix_Multiply(double[,] A, double[,] B)
+        {
+            int rA = A.GetLength(0);
+            int cA = A.GetLength(1);
+            int rB = B.GetLength(0);
+            int cB = B.GetLength(1);
+            double temp = 0;
+            double[,] kHasil = new double[rA, cB];
+            if (cA != rB)
+            {
+                Console.WriteLine("matrik can't be multiplied !!");
+            }
+            else
+            {
+                for (int i = 0; i < rA; i++)
+                {
+                    for (int j = 0; j < cB; j++)
+                    {
+                        temp = 0;
+                        for (int k = 0; k < cA; k++)
+                        {
+                            temp += A[i, k] * B[k, j];
+                        }
+                        kHasil[i, j] = temp;
+                    }
+                }
+            }
+            return kHasil;
+        }
+
     }
+
 }

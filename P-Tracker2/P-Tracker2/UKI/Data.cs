@@ -41,7 +41,9 @@ namespace P_Tracker2
         public double RKnee_Y = 0;//r_kR_Y
 
         //BE CAREFUL with raw_centerBodyJoint()
+
     }
+
 
     public class UKI_DataRaw_String
     {
@@ -118,7 +120,9 @@ namespace P_Tracker2
 
     public class UKI_DataMovement
     {
-        public double type = 0;// -1 Min , 1 Max , 0.5 Mid
+        public double type_algo = 0;// -1 Min , 1 Max , 0.5 Jump
+        public double type_gt = 0;
+
         public int id = 0;
         public String time = "";
         //
@@ -133,6 +137,11 @@ namespace P_Tracker2
         public double ms_hand = 0;
         public double ms_leg = 0;
         public double ms_core = 0;
+
+        //---------------------------------------
+        public double myalgo_bound_lowest = 0;
+        public double myalgo_bound_predictedMax = 0;//point that next MAX can be
+        public double myalgo_bound_predictedMin = 0;//point that next MIN can be
     }
 
     //e.g. Keep Column & Entropy
@@ -159,6 +168,13 @@ namespace P_Tracker2
     {
         public List<string> str_list = new List<string>();
         public int v = 0;
+    }
+
+    //e.g. Keep Column & Entropy
+    class int_double
+    {
+        public int i = 0;
+        public double v = 0;
     }
 
     //for generate rule

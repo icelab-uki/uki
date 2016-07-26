@@ -432,7 +432,7 @@ namespace P_Tracker2
                     data_log_final.AddRange(data_log);
                     TheTool.exportCSV_orTXT(path_log, data_log_final, false);
                     //----- Movement Data ---------------------------
-                    List<UKI_DataMovement> data_movement_adjusted = TheUKI.adjustMovementData(data_movement, 5);
+                    List<UKI_DataMovement> data_movement_adjusted = TheUKI.adjustMovementData(data_movement);
                     if (!posture_extraction) { TheUKI.exportData_Movement(data_movement_adjusted, path_movement, false); }
                     //--- Additional Data For Analysis -----------------------
                     List<string> data_addition_full = TheUKI.createData_Additional(data_raw, data_raw_centered, data_add_01, center_techq);
@@ -475,21 +475,22 @@ namespace P_Tracker2
                         List<UKI_DataAngular> data_ang = TheUKI.calAngle_fromRaw(data_raw, ang_techq);
                         TheUKI.saveData_Ang(path_ang, data_ang);//save original
                         //----- (Prepare Key List) ----------------------
-                        List<int> list_keyId = new List<int>();
-                        list_keyId.Add(0);
-                        list_keyId.AddRange(ThePosExtract.calMinimaMaxima(data_movement_adjusted));
+                        List<int[]> list_keyPose_Range = new List<int[]>();
+                        list_keyPose_Range.AddRange(ThePosExtract.extractKeyPose_MyAlgo(data_movement_adjusted));
+                        List<int> list_keyPose_ID = new List<int>();
+                        list_keyPose_ID.AddRange(ThePosExtract.getKeyPose_ID_StartEnd(list_keyPose_Range));
                         //----- Movement Data ---------------------------
                         TheUKI.exportData_Movement(data_movement_adjusted, path_movement, true);//must be after "calMinimaMaxima"
                         //----- Basic Posture Analysis ------------------
-                        List<UKI_Data_BasicPose> data_bp_selected = TheTool.list_SelectRow(data_bp, list_keyId);
+                        List<UKI_Data_BasicPose> data_bp_selected = TheTool.list_SelectRow(data_bp, list_keyPose_ID);
                         ThePosExtract.BasicPostureAnalysis(data_bp_selected, true);
                         TheTool.exportFile(ThePosExtract.log_BasicPostureAnalysis, path_note, false);
                         TheSys.showError(ThePosExtract.log_BasicPostureAnalysis);
                         //----- Raw Extracted Data ----------------------------
-                        List<UKI_DataRaw> data_raw_selected = TheTool.list_SelectRow(data_raw_centered, list_keyId);
+                        List<UKI_DataRaw> data_raw_selected = TheTool.list_SelectRow(data_raw_centered, list_keyPose_ID);
                         TheUKI.saveData_Raw_centered(path_PE_raw_centered_extract, data_raw_selected, center_techq);
                         //----- Addition Extracted Data ----------------------------
-                        List<String> data_addition_selected = TheTool.list_SelectRow(data_addition_full, list_keyId);
+                        List<String> data_addition_selected = TheTool.list_SelectRow(data_addition_full, list_keyPose_ID);
                         temp = new List<string>();//data_addition_full with header
                         temp.Add(TheUKI.data_addition_full_header);
                         temp.AddRange(data_addition_selected);
@@ -499,12 +500,12 @@ namespace P_Tracker2
                         //======= Feature Selecting Using MI ======================================
 
                         //======= Entropy =========================================================
-                        ThePosExtract.UKI_CalEntropy_Angle(path_ang_en, path_ang, list_keyId);
-                        ThePosExtract.UKI_CalEntropy_Eu(path_dist_en, path_raw, list_keyId);
-                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw, list_keyId);
-                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_centered_en, path_raw_centered, list_keyId);
-                        ThePosExtract.UKI_CalEntropy_1By1(path_plus_normal_en, path_plus_normal, list_keyId);
-                        ThePosExtract.UKI_CalEntropy_1By1(path_plus_discrete_en, path_plus_discrete, list_keyId);
+                        ThePosExtract.UKI_CalEntropy_Angle(path_ang_en, path_ang, list_keyPose_Range);
+                        ThePosExtract.UKI_CalEntropy_Eu(path_dist_en, path_raw, list_keyPose_Range);
+                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw, list_keyPose_Range);
+                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_centered_en, path_raw_centered, list_keyPose_Range);
+                        ThePosExtract.UKI_CalEntropy_1By1(path_plus_normal_en, path_plus_normal, list_keyPose_Range);
+                        ThePosExtract.UKI_CalEntropy_1By1(path_plus_discrete_en, path_plus_discrete, list_keyPose_Range);
                         //======= Oth =========================================================
                         //---- Paper : Sparse ---------------------
                         CalSparse_XYZ.calSparse(data_raw_selected, folderPath_Sparse + @"\", fileName);//cal & export

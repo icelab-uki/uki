@@ -245,7 +245,7 @@ namespace P_Tracker2
 
         //****************************************************************************************
 
-        public static List<string> calEntropy_MotionData(String path_loadFrom, List<int> keyPostureId
+        public static List<string> calEntropy_MotionData(String path_loadFrom, List<int[]> keyPostureRange
             , int degit, int col_combine_range)
         {
             List<string> final_output = new List<string>();//Data
@@ -255,19 +255,10 @@ namespace P_Tracker2
                 dt = TheTool.dataTable_cropCol(dt, 2, 0);//del first 2 Col
                 TheTool.dataTable_roundValue(dt, degit);// eliminate decimal
                 int start = -1; int end = 0;
-                foreach (int i in keyPostureId)
+                foreach (int[] keyPose in keyPostureRange)
                 {
-                    end = i;
-                    if (start > -1)
-                    {
-                        if (end == start) { end = dt.Rows.Count - 1; }
-                        if (end > start)
-                        {
-                            DataTable dt_sub = TheTool.dataTable_selectRow_byIndex(dt, start, end);
-                            final_output.Add(start + " to " + end + "," + calEntrophy_1Action(dt_sub, col_combine_range));
-                        }
-                    }
-                    start = i;
+                    DataTable dt_sub = TheTool.dataTable_selectRow_byIndex(dt, start, end);
+                    final_output.Add(start + " to " + end + "," + calEntrophy_1Action(dt_sub, col_combine_range));
                 }
             }
             catch (Exception ex) { TheSys.showError(ex); }

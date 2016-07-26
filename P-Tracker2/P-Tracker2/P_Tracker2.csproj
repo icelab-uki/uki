@@ -202,6 +202,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="keyPoseGT.cs" />
+    <Compile Include="Converter\MocapNode.cs" />
+    <Compile Include="SkelViewer.xaml.cs">
+      <DependentUpon>SkelViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\TheBVH.cs" />
+    <Compile Include="Converter\TheConverter.cs" />
+    <Compile Include="ThePosExtract2.cs" />
     <Compile Include="UKI\TheInitialPosture.cs" />
     <Compile Include="UKI\UKI_addIf_5FlexionAngle.xaml.cs">
       <DependentUpon>UKI_addIf_5FlexionAngle.xaml</DependentUpon>
@@ -232,7 +240,6 @@
     </Compile>
     <Compile Include="UKI\UKI_Offline.cs" />
     <Compile Include="UKI-Analysis\TheRuleTester.cs" />
-    <Compile Include="TheClass\TheExternalDataConverter.cs" />
     <Compile Include="TheClass\TheTest.cs" />
     <Compile Include="UKI\UKI_Data.cs" />
     <Compile Include="UKI-Analysis\UKIFullEx.xaml.cs">
@@ -311,6 +318,9 @@
     <Compile Include="Unused\DetectorReport.xaml.cs">
       <DependentUpon>DetectorReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\Converter.xaml.cs">
+      <DependentUpon>Converter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Viewer\Viewer_UKI.xaml.cs">
       <DependentUpon>Viewer_UKI.xaml</DependentUpon>
     </Compile>
@@ -369,6 +379,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="FaceDetector\FaceDetector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkelViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -471,6 +485,10 @@
     <Page Include="TheClass\Debugger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Converter\Converter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Viewer\Viewer_UKI.xaml">
       <Generator>MSBuild:Compile</Generator>

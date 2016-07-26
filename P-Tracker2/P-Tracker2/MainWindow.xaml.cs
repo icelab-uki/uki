@@ -17,58 +17,8 @@ namespace P_Tracker2
             initialize();
             TheStore.mainWindow = this;
             TheTool_micro.reset(false);
-            //test();
-            //TheInstanceContainer.loadInstanceList();
-        }
 
-        //void test()
-        //{
-        //    DateTime end;
-        //    DateTime start;
-        //    int looptime = 100000;
-        //    double dividend = 10.1233466753;
-        //    double divisor = 3.123452313136;
-        //    TheSys.showError("Testing " + dividend + "/" + divisor + " on " + looptime + " loop");
-        //    string a = "";
-        //    //-----------------------------------
-        //    start = DateTime.Now;
-        //    for (int i = 0; i < looptime; i++)
-        //    {
-        //        a = Math.Round( (dividend / divisor)) + "";
-        //    }
-        //    end = DateTime.Now;
-        //    TheSys.showError("Basic = " + a);
-        //    TheSys.showError((end - start).TotalMilliseconds);
-        //    //-----------------------------------
-        //    start = DateTime.Now;
-        //    for (int i = 0; i < looptime; i++)
-        //    {
-        //        a = double.Parse((dividend / divisor).ToString("0")) + "";
-        //    }
-        //    end = DateTime.Now;
-        //    TheSys.showError("Format = " + a);
-        //    TheSys.showError((end - start).TotalMilliseconds);
-        //    //-----------------------------------
-        //    start = DateTime.Now;
-        //    for (int i = 0; i < looptime; i++)
-        //    {
-        //        //a = (int) dividend / (int)divisor + "";
-        //        a = manualDivision(dividend, divisor, 2) + "";
-        //    }
-        //    end = DateTime.Now;
-        //    TheSys.showError("Manual Division = " + a);
-        //    TheSys.showError((end - start).TotalMilliseconds);
-        //}
-
-        int manualDivision(double dividend, double divisor, int digit)
-        {
-            int i = 0;
-            //------------
-            //int d = (int)dividend; int s = (int)divisor;
-            //while (d > s) { i++; d -= s; }
-            //------------
-            while (dividend > divisor) { i++; dividend -= divisor; }
-            return i;
+            TheBVH.createRotationMatrix(10,20,30,"zyx");
         }
 
         void initialize()
@@ -111,6 +61,13 @@ namespace P_Tracker2
             //this.Hide();
         }
 
+
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            new UKIAnalyser().Show();
+            //this.Hide();
+        }
+
         public OtherMenu form_othMenu = null;
         private void button4_Click(object sender, RoutedEventArgs e)
         {
@@ -132,6 +89,11 @@ namespace P_Tracker2
         {
             new UKIFullEx().Show();
             //this.Hide();
+        }
+
+        private void butSkel_Click(object sender, RoutedEventArgs e)
+        {
+            new SkelViewer().Show();
         }
 
 

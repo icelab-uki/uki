@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Globalization;
 
 namespace P_Tracker2
 {
@@ -98,6 +99,19 @@ namespace P_Tracker2
             TheSys.showError("");
         }
 
+
+        public static void showError(List<double> i_list, string txt_join)
+        {
+            double a = 0;
+            foreach (double i in i_list)
+            {
+                if (a > 0) { TheSys.showError(txt_join, false); }
+                showError(i + "", false);
+                a++;
+            }
+            TheSys.showError("");
+        }
+
         public static void showError(int[] i_arr)
         {
             for(int a = 0; a < i_arr.Count(); a++){
@@ -154,5 +168,9 @@ namespace P_Tracker2
             for (int i = 0; i < arr.Count(); i++) { TheSys.showError("_" + arr[i].ToString(), false); }
         }
 
+        public static void showTime()
+        {
+            TheSys.showError(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",CultureInfo.InvariantCulture));
+        }
     }
 }

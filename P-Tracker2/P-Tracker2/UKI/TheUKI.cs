@@ -45,14 +45,7 @@ namespace P_Tracker2
             new List<String>{"KneeRight_HC_x","AnkleRight_HC_x","FootRight_HC_x"},
             new List<String>{"KneeRight_HC_y","AnkleRight_HC_y","FootRight_HC_y"},
             new List<String>{"KneeRight_HC_z","AnkleRight_HC_z","FootRight_HC_z"}
-
             };
-
-        //public static List<String> list_exclude = new List<String>{
-        //    "ShoulderLeft","ShoulderRight",
-        //    "Spine",
-        //    "HipCenter","HipLeft","HipRight"
-        //};
 
         public static string data_raw_Header = "id,time," + TheUKI.getHeader_20Joint(new List<String> { "_x", "_y", "_z" });
         public static string data_ang_Header = "id,time," + TheUKI.getHeader_20Joint(new List<String> { "_Ap", "_Aa" });
@@ -476,18 +469,21 @@ namespace P_Tracker2
             return data_list;
         }
 
-        public static List<UKI_DataRaw> csv_loadFileTo_DataRaw(String path)
+        //Faster ver
+        public static List<UKI_DataRaw> csv_loadFileTo_DataRaw(String path, int skip)
         {
+            //TheSys.showTime();
             List<UKI_DataRaw> data_list = new List<UKI_DataRaw>();
             try
             {
-                DataTable dt = CSVReader.ReadCSVFile(path, true);
-                if (dt.Columns.Count > 61)
+                List<string> data_origin = TheTool.read_File_getListString(path);
+                int i_row = 0;
+                foreach (string row in data_origin)
                 {
-                    UKI_DataRaw data;
-                    foreach (DataRow dr in dt.Rows)
+                    if (i_row >= skip + 1)
                     {
-                        data = new UKI_DataRaw();
+                        string[] dr = TheTool.splitText(row, ",");
+                        UKI_DataRaw data = new UKI_DataRaw();
                         data.id = TheTool.getInt(dr[0].ToString());
                         data.time = dr[1].ToString();
                         data.Head = new double[3] { TheTool.getDouble(dr[2].ToString()), TheTool.getDouble(dr[3].ToString()), TheTool.getDouble(dr[4].ToString()) };
@@ -512,12 +508,62 @@ namespace P_Tracker2
                         data.FootRight = new double[3] { TheTool.getDouble(dr[59].ToString()), TheTool.getDouble(dr[60].ToString()), TheTool.getDouble(dr[61].ToString()) };
                         data_list.Add(data);
                     }
+                    i_row++;
                 }
-                else { TheSys.showError(path + " (Wrong Format) : "); }
             }
             catch (Exception ex) { TheSys.showError(path + ": " + ex); }
+            //TheSys.showTime();
             return data_list;
         }
+
+        //Slower Ver
+        //public static List<UKI_DataRaw> csv_loadFileTo_DataRaw(String path, int skip)
+        //{
+        //    List<UKI_DataRaw> data_list = new List<UKI_DataRaw>();
+        //    try
+        //    {
+        //        DataTable dt = CSVReader.ReadCSVFile(path, true);
+        //        if (dt.Columns.Count > 61)
+        //        {
+        //            UKI_DataRaw data;
+        //            int i_r = 0;
+        //            foreach (DataRow dr in dt.Rows)
+        //            {
+        //                if (i_r >= skip)
+        //                {
+        //                    data = new UKI_DataRaw();
+        //                    data.id = TheTool.getInt(dr[0].ToString());
+        //                    data.time = dr[1].ToString();
+        //                    data.Head = new double[3] { TheTool.getDouble(dr[2].ToString()), TheTool.getDouble(dr[3].ToString()), TheTool.getDouble(dr[4].ToString()) };
+        //                    data.ShoulderCenter = new double[3] { TheTool.getDouble(dr[5].ToString()), TheTool.getDouble(dr[6].ToString()), TheTool.getDouble(dr[7].ToString()) };
+        //                    data.ShoulderLeft = new double[3] { TheTool.getDouble(dr[8].ToString()), TheTool.getDouble(dr[9].ToString()), TheTool.getDouble(dr[10].ToString()) };
+        //                    data.ShoulderRight = new double[3] { TheTool.getDouble(dr[11].ToString()), TheTool.getDouble(dr[12].ToString()), TheTool.getDouble(dr[13].ToString()) };
+        //                    data.ElbowLeft = new double[3] { TheTool.getDouble(dr[14].ToString()), TheTool.getDouble(dr[15].ToString()), TheTool.getDouble(dr[16].ToString()) };
+        //                    data.ElbowRight = new double[3] { TheTool.getDouble(dr[17].ToString()), TheTool.getDouble(dr[18].ToString()), TheTool.getDouble(dr[19].ToString()) };
+        //                    data.WristLeft = new double[3] { TheTool.getDouble(dr[20].ToString()), TheTool.getDouble(dr[21].ToString()), TheTool.getDouble(dr[22].ToString()) };
+        //                    data.WristRight = new double[3] { TheTool.getDouble(dr[23].ToString()), TheTool.getDouble(dr[24].ToString()), TheTool.getDouble(dr[25].ToString()) };
+        //                    data.HandLeft = new double[3] { TheTool.getDouble(dr[26].ToString()), TheTool.getDouble(dr[27].ToString()), TheTool.getDouble(dr[28].ToString()) };
+        //                    data.HandRight = new double[3] { TheTool.getDouble(dr[29].ToString()), TheTool.getDouble(dr[30].ToString()), TheTool.getDouble(dr[31].ToString()) };
+        //                    data.Spine = new double[3] { TheTool.getDouble(dr[32].ToString()), TheTool.getDouble(dr[33].ToString()), TheTool.getDouble(dr[34].ToString()) };
+        //                    data.HipCenter = new double[3] { TheTool.getDouble(dr[35].ToString()), TheTool.getDouble(dr[36].ToString()), TheTool.getDouble(dr[37].ToString()) };
+        //                    data.HipLeft = new double[3] { TheTool.getDouble(dr[38].ToString()), TheTool.getDouble(dr[39].ToString()), TheTool.getDouble(dr[40].ToString()) };
+        //                    data.HipRight = new double[3] { TheTool.getDouble(dr[41].ToString()), TheTool.getDouble(dr[42].ToString()), TheTool.getDouble(dr[43].ToString()) };
+        //                    data.KneeLeft = new double[3] { TheTool.getDouble(dr[44].ToString()), TheTool.getDouble(dr[45].ToString()), TheTool.getDouble(dr[46].ToString()) };
+        //                    data.KneeRight = new double[3] { TheTool.getDouble(dr[47].ToString()), TheTool.getDouble(dr[48].ToString()), TheTool.getDouble(dr[49].ToString()) };
+        //                    data.AnkleLeft = new double[3] { TheTool.getDouble(dr[50].ToString()), TheTool.getDouble(dr[51].ToString()), TheTool.getDouble(dr[52].ToString()) };
+        //                    data.AnkleRight = new double[3] { TheTool.getDouble(dr[53].ToString()), TheTool.getDouble(dr[54].ToString()), TheTool.getDouble(dr[55].ToString()) };
+        //                    data.FootLeft = new double[3] { TheTool.getDouble(dr[56].ToString()), TheTool.getDouble(dr[57].ToString()), TheTool.getDouble(dr[58].ToString()) };
+        //                    data.FootRight = new double[3] { TheTool.getDouble(dr[59].ToString()), TheTool.getDouble(dr[60].ToString()), TheTool.getDouble(dr[61].ToString()) };
+        //                    data_list.Add(data);
+        //                }
+        //                i_r++;
+        //            }
+        //        }
+        //        else { TheSys.showError(path + " (Wrong Format) : "); }
+        //    }
+        //    catch (Exception ex) { TheSys.showError(path + ": " + ex); }
+        //    return data_list;
+        //}
 
         public static int angTechq_Spine = 0;
         public static int angTechq_HC = 1;
@@ -585,6 +631,12 @@ namespace P_Tracker2
         {
             if (position == origin) { return new double[] { 0, 0, 0 }; }
             else { return new double[] { position[0] - origin[0], position[1] - origin[1], position[2] - origin[2] }; }
+        }
+
+        public static double[] centerPosition(double[] position, double[] origin, double range)
+        {
+            if (position == origin) { return new double[] { 0, 0, 0 + range }; }
+            else { return new double[] { position[0] - origin[0], position[1] - origin[1], position[2] - origin[2] + range }; }
         }
 
         //******************************************************************************************************
@@ -661,7 +713,7 @@ namespace P_Tracker2
                     m.ms_leg_avg + "," + m.ms_core_avg + "," +
                     m.ms_all + "," + m.ms_hand + "," +
                     m.ms_leg + "," + m.ms_core;
-                if (showMinMax) { s = m.type + "," + s; }
+                if (showMinMax) { s = m.type_algo + "," + m.type_gt + "," + s; }
                 output.Add(s);
             }
             return output;
@@ -725,8 +777,16 @@ namespace P_Tracker2
 
         //-------------------------------------------------------
 
+        public static List<UKI_DataMovement> adjustMovementData(List<UKI_DataMovement> list_origin)
+        {
+            //Input t+10 then AVG(t,t+10)
+            //Output t-5,t+5 then AVG(t-5,t+5)
+            int move = (PosExtract.move_size / 2) + ((PosExtract.mva_size_minus1 - 1) / 2);
+            return adjustMovementDataAVG(list_origin, move);
+        }
+
         //move = 5 >> move up 5
-        public static List<UKI_DataMovement> adjustMovementData(List<UKI_DataMovement> list_origin, int move)
+        public static List<UKI_DataMovement> adjustMovementDataAVG(List<UKI_DataMovement> list_origin, int move)
         {
             List<UKI_DataMovement> list_new = new List<UKI_DataMovement>();
             UKI_DataMovement[] arr_origin = list_origin.ToArray();
@@ -790,31 +850,91 @@ namespace P_Tracker2
             return data_addition_full;
         }
 
-        public static List<int> loadKeyPoseture(string key_path)
+        public static List<int[]> loadKeyPose(string key_path)
         {
-            List<int> list_keyPose = new List<int>();
+            List<int[]> list_keyPose = new List<int[]>();
             if (File.Exists(key_path))
             {
                 foreach (string s in TheTool.read_File_getListString(key_path))
                 {
-                    list_keyPose.Add(TheTool.getInt(s));
+                    if (s != "") {
+                        string[] a = TheTool.splitText(s,",");
+                        int start = TheTool.getInt(a[0]);
+                        int end = start;
+                        if (a.Count() > 1) { end = TheTool.getInt(a[1]); }
+                        list_keyPose.Add(new int[] { start, end });
+                    }
                 }
             }
             return list_keyPose;
         }
 
-        public static List<string> list_keyPose_Jump = new List<string>();
-
-        public static List<int> getKeyPosture(List<UKI_DataRaw> list_raw, Boolean includeFirstRecord)
+        public static List<int_double> loadKeyJump(string key_path)
         {
-            list_keyPose_Jump = new List<string>();
-            List<int> list_keyPose = new List<int>();
-            UKI_Offline uki = new UKI_Offline();
-            uki.UKI_OfflineProcessing(list_raw, -1);//previously use -1
-            List<UKI_DataMovement> data_movement_adjusted = TheUKI.adjustMovementData(uki.data.data_movement, 5);
-            if (includeFirstRecord) { list_keyPose.Add(list_raw.First().id);}
-            list_keyPose.AddRange(ThePosExtract.calMinimaMaxima(data_movement_adjusted));
-            list_keyPose_Jump.AddRange(ThePosExtract.temp_list_jump);
+            List<int_double> list_keyPose = new List<int_double>();
+            if (File.Exists(key_path))
+            {
+                foreach (string s in TheTool.read_File_getListString(key_path))
+                {
+                    if (s != "")
+                    {
+                        string[] a = TheTool.splitText(s, ":");
+                        if (a.Count() == 2) {
+                            list_keyPose.Add(new int_double{ i = TheTool.getInt(a[0]), v = TheTool.getDouble(a[1]) });
+                        }
+                    }
+                }
+            }
+            return list_keyPose;
+        }
+
+        public static Boolean captureJump = false;//capture at highest (Specially for MID = 1)
+
+        public static List<keyPoseGT> loadKeyPoseGT(string key_path)
+        {
+            List<keyPoseGT> list_keyPose = new List<keyPoseGT>();
+            if (File.Exists(key_path))
+            {
+                foreach (string s in TheTool.read_File_getListString(key_path))
+                {
+                    int v = 0;
+                    keyPoseGT keyGT = new keyPoseGT();
+                    if (s != "")
+                    {
+                        string[] a = TheTool.splitText(s, ",");
+                        if (a.Count() > 0)
+                        {
+                            string[] b = TheTool.splitText(a[0], "-");
+                            if (b.Count() > 0) { 
+                                v = TheTool.getInt(b[0]); 
+                                keyGT.start[0] = v; keyGT.start[1] = v;
+                                keyGT.end[0] = v; keyGT.end[1] = v;
+                            }
+                            if (b.Count() > 1)
+                            {
+                                v = TheTool.getInt(b[1]); 
+                                keyGT.start[1] = v;
+                                keyGT.end[0] = v; keyGT.end[1] = v;
+                            }
+                        }
+                        if (a.Count() > 1)
+                        {
+                            string[] b = TheTool.splitText(a[1], "-");
+                            if (b.Count() > 0)
+                            {
+                                v = TheTool.getInt(b[0]); 
+                                keyGT.end[0] = v; keyGT.end[1] = v;
+                            }
+                            if (b.Count() > 1)
+                            {
+                                v = TheTool.getInt(b[1]); 
+                                keyGT.end[1] = v;
+                            }
+                        }
+                        list_keyPose.Add(keyGT);
+                    }
+                }
+            }
             return list_keyPose;
         }
 
@@ -829,5 +949,264 @@ namespace P_Tracker2
             return selected;
         }
 
+        public static void exportKey(string path_key, List<int[]> keyList)
+        {
+            List<string> list_data = new List<string>();
+            foreach (int[] k in keyList)
+            {
+                string d = "";
+                for (int i = 0; i < k.Count(); i++)
+                {
+                    if (i > 0) { d += ","; }
+                    d += k[i];
+                }
+                list_data.Add(d);
+            }
+            TheTool.exportCSV_orTXT(path_key, list_data, false);
+        }
+
+        //exportKeyJ
+        public static void exportKeyJ(string path_key, List<int_double> keyList)
+        {
+            List<string> list_data = new List<string>();
+            foreach (int_double k in keyList)
+            {
+                string d = k.i + ":" + k.v;
+                list_data.Add(d);
+            }
+            TheTool.exportCSV_orTXT(path_key, list_data, false);
+        }
+
+        public static List<string> UKI_DataDouble_convertToListString(List<UKI_DataDouble> list_data)
+        {
+            List<string> output = new List<string>();
+            foreach (UKI_DataDouble d in list_data) { output.Add(d.id + "," + TheTool.printTxt(d.data, ",")); }
+            return output;
+        }
+
+        ////absolute change over x frame
+        //public static List<UKI_DataDouble> UKI_DataDouble_AbsChangeXFrame(List<UKI_DataDouble> list_data, int x)
+        //{
+        //    List<UKI_DataDouble> output = new List<UKI_DataDouble>();
+            //if (list_data.Count > 0)
+            //{
+            //    int i_last = 0;
+            //    for (int i = 1; i < list_data.Count(); i++)
+            //    {
+            //        if (i_last >= x) { i_last++; }
+            //        UKI_DataDouble o = new UKI_DataDouble();
+            //        o.id = list_data[i].id;
+            //        for (int j = 0; j < list_data[i].data.Count(); j++)
+            //        {
+            //            o.data.Add(Math.Abs(list_data[i].data[j] - list_data[i_last].data[j]));
+            //        }
+            //        output.Add(o);
+            //    }
+            //}
+        //    return output;
+        //}
+
+        //moving average
+        public static List<UKI_DataDouble> UKI_DataDouble_MVA(List<UKI_DataDouble> list_data, int range)
+        {
+            List<UKI_DataDouble> output = new List<UKI_DataDouble>();
+            if(list_data.Count > 0){
+                List<double> avg = new List<double>(); 
+                TheTool.list_initialize(avg, list_data.First().data.Count());
+                int range0 = 0;
+                for (int i = 0; i < list_data.Count(); i++)
+                {
+                    if(range0 < range){range0++;}
+                    UKI_DataDouble o = new UKI_DataDouble();
+                    o.id = list_data[i].id;
+                    for (int j = 0; j < list_data[i].data.Count(); j++)
+                    {
+                        if (i > 0 && i - 1 < range0) { avg[j] = avg[j] * i / range0; }
+                        avg[j] += list_data[i].data[j] / range0;
+                        if (range0 == range) { avg[j] -= list_data[i-(range-1)].data[j] / range0; }
+                        o.data.Add(avg[j]);
+                    }
+                    output.Add(o);
+                }
+            }
+            return output;
+        }
+
+        //change between consecutive frames
+        public static List<UKI_DataDouble> UKI_DataDouble_ChangeBwFrame(List<UKI_DataDouble> list_data)
+        {
+            List<UKI_DataDouble> output = new List<UKI_DataDouble>();
+            if (list_data.Count > 0) 
+            {
+                UKI_DataDouble o = new UKI_DataDouble();
+                o.id = list_data.First().id;
+                TheTool.list_initialize(o.data, list_data.First().data.Count());
+                output.Add(o);
+                for (int i = 1; i < list_data.Count(); i++)
+                {
+                    o = new UKI_DataDouble();
+                    o.id = list_data[i].id;
+                    for (int j = 0; j < list_data[i].data.Count(); j++)
+                    {
+                        o.data.Add(Math.Abs(list_data[i].data[j] - list_data[i-1].data[j]));
+                    }
+                    output.Add(o);
+                }
+            }
+            return output;
+        }
+
+        //Sum Keyframe from all feature
+        public static List<int[]> UKI_DataDouble_getKeyPose_CrossThreshold(List<UKI_DataDouble> list_data, double threshold)
+        {
+            List<int[]> list_keyPose_sum = new List<int[]>();
+            if (list_data.Count > 0)
+            {
+                for (int j = 0; j < list_data.First().data.Count(); j++)
+                {
+                    int[] keyPose = new int[]{-1,-1};
+                    for (int i = 1; i < list_data.Count(); i++)
+                    {
+                        if(keyPose[0] <0 
+                            && list_data[i - 1].data[j] <= threshold && list_data[i].data[j] > threshold ){
+                            keyPose[0] = list_data[i].id;
+                        }
+                        else if (keyPose[0] >= 0 && keyPose[1] < 0 
+                            && list_data[i - 1].data[j] >= threshold && list_data[i].data[j] < threshold)
+                        {
+                            keyPose[1] = list_data[i].id;
+                            list_keyPose_sum.Add(keyPose);
+                            keyPose = new int[] { -1, -1 };
+                        }
+                    }
+                }
+            }
+            return list_keyPose_sum;
+        }
+
+        //int[2]
+        public static List<int[]> keyPose_Combine_longestPath(List<int[]> list_key)
+        {
+            List<int[]> list_key_combine = new List<int[]>();
+            if(list_key.Count > 0){
+                int[] c = new int[]{ -1,-1};
+                foreach (int[] k in list_key)
+                {
+                    if (c[0] > 0 && c[1] < k[0]) { list_key_combine.Add(c); c = new int[] { -1, -1 }; }
+                    if (c[0] < 0) { c[0] = k[0];}
+                    if (c[1] < k[1]) { c[1] = k[1]; }
+                }
+                list_key_combine.Add(c);
+            }
+            return list_key_combine;
+        }
+
+        public static void UKI_DataRaw_scaling(ref List<UKI_DataRaw> list_raw, double scale_ratio, double moveBack){
+            foreach (UKI_DataRaw raw in list_raw)
+            {
+                UKI_DataRaw_scaling_sub(ref raw.Head, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.ShoulderCenter, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.ShoulderLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.ShoulderRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.ElbowLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.ElbowRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.WristLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.WristRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.HandLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.HandRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.Spine, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.HipCenter, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.HipLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.HipRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.KneeLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.KneeRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.AnkleLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.AnkleRight, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.FootLeft, scale_ratio, moveBack);
+                UKI_DataRaw_scaling_sub(ref raw.FootRight, scale_ratio, moveBack);
+            }
+        }
+
+        public static void UKI_DataRaw_scaling_sub(ref double[] j, double scale_ratio, double moveBack)
+        {
+            j[0] = j[0] * scale_ratio;
+            j[1] = j[1] * scale_ratio;
+            j[2] = j[2] * scale_ratio + moveBack;
+        }
+
+        public static List<UKI_DataRaw> UKI_DataRaw_centerize(List<UKI_DataRaw> list_raw, double range)
+        {
+            List<UKI_DataRaw> centered_list = new List<UKI_DataRaw>();
+            if(list_raw.Count > 0)
+            {
+                double[] c = list_raw.First().Spine;
+                foreach (UKI_DataRaw raw in list_raw)
+                {
+                    UKI_DataRaw centered = new UKI_DataRaw();
+                    centered.id = raw.id;
+                    centered.time = raw.time;
+                    centered.Head = centerPosition(raw.Head, c, range);
+                    centered.ShoulderCenter = centerPosition(raw.ShoulderCenter, c, range);
+                    centered.ShoulderLeft = centerPosition(raw.ShoulderLeft, c, range);
+                    centered.ShoulderRight = centerPosition(raw.ShoulderRight, c, range);
+                    centered.ElbowLeft = centerPosition(raw.ElbowLeft, c, range);
+                    centered.ElbowRight = centerPosition(raw.ElbowRight, c, range);
+                    centered.WristLeft = centerPosition(raw.WristLeft, c, range);
+                    centered.WristRight = centerPosition(raw.WristRight, c, range);
+                    centered.HandLeft = centerPosition(raw.HandLeft, c, range);
+                    centered.HandRight = centerPosition(raw.HandRight, c, range);
+                    centered.Spine = centerPosition(raw.Spine, c, range);
+                    centered.HipCenter = centerPosition(raw.HipCenter, c, range);
+                    centered.HipLeft = centerPosition(raw.HipLeft, c, range);
+                    centered.HipRight = centerPosition(raw.HipRight, c, range);
+                    centered.KneeLeft = centerPosition(raw.KneeLeft, c, range);
+                    centered.KneeRight = centerPosition(raw.KneeRight, c, range);
+                    centered.AnkleLeft = centerPosition(raw.AnkleLeft, c, range);
+                    centered.AnkleRight = centerPosition(raw.AnkleRight, c, range);
+                    centered.FootLeft = centerPosition(raw.FootLeft, c, range);
+                    centered.FootRight = centerPosition(raw.FootRight, c, range);
+                    centered_list.Add(centered);
+                }
+            }
+            return centered_list;
+        }
+
+        public static UKI_DataRaw UKI_DataRaw_centerize(UKI_DataRaw raw, double range)
+        {
+            UKI_DataRaw centered = new UKI_DataRaw();
+            centered.id = raw.id;
+            centered.time = raw.time;
+            centered.Head = centerPosition(raw.Head, raw.Spine, range);
+            centered.ShoulderCenter = centerPosition(raw.ShoulderCenter, raw.Spine, range);
+            centered.ShoulderLeft = centerPosition(raw.ShoulderLeft, raw.Spine, range);
+            centered.ShoulderRight = centerPosition(raw.ShoulderRight, raw.Spine, range);
+            centered.ElbowLeft = centerPosition(raw.ElbowLeft, raw.Spine, range);
+            centered.ElbowRight = centerPosition(raw.ElbowRight, raw.Spine, range);
+            centered.WristLeft = centerPosition(raw.WristLeft, raw.Spine, range);
+            centered.WristRight = centerPosition(raw.WristRight, raw.Spine, range);
+            centered.HandLeft = centerPosition(raw.HandLeft, raw.Spine, range);
+            centered.HandRight = centerPosition(raw.HandRight, raw.Spine, range);
+            centered.Spine = centerPosition(raw.Spine, raw.Spine, range);
+            centered.HipCenter = centerPosition(raw.HipCenter, raw.Spine, range);
+            centered.HipLeft = centerPosition(raw.HipLeft, raw.Spine, range);
+            centered.HipRight = centerPosition(raw.HipRight, raw.Spine, range);
+            centered.KneeLeft = centerPosition(raw.KneeLeft, raw.Spine, range);
+            centered.KneeRight = centerPosition(raw.KneeRight, raw.Spine, range);
+            centered.AnkleLeft = centerPosition(raw.AnkleLeft, raw.Spine, range);
+            centered.AnkleRight = centerPosition(raw.AnkleRight, raw.Spine, range);
+            centered.FootLeft = centerPosition(raw.FootLeft, raw.Spine, range);
+            centered.FootRight = centerPosition(raw.FootRight, raw.Spine, range);
+            return centered;
+        }
+
     }
+
+
+    class UKI_DataDouble
+    {
+        public int id = 0;
+        public List<double> data = new List<double>();
+    }
+
+
 }

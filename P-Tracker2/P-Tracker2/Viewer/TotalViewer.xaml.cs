@@ -440,31 +440,12 @@ namespace P_Tracker2
 
         private void butMsrConv_Click(object sender, RoutedEventArgs e)
         {
-            String path_origin;
-            String path_save_raw;
-            foreach (DataRow r in dataTable.Rows)
-            {
-                try
-                {
-                    path_origin = r[col_path].ToString();
-                    path_save_raw = path_folder_convert + TheTool.getFileName_byPath(path_origin) + ".csv";
-                    TheTool.Folder_CreateIfMissing(path_folder_convert);
-                    TheExternalDataConverter.MSR_convertFile(path_origin, path_save_raw);
-                }
-                catch (Exception ex) { TheSys.showError(r[col_path].ToString() + " : " + ex.ToString()); }
-            }
-            System.Windows.MessageBox.Show(@"Save to file\[Convert]\");
+            TheConverter.MSR_convertFile(dataTable, col_path, path_folder_convert);
         }
 
         private void msr_sample_Click(object sender, RoutedEventArgs e)
         {
-            TheSys.showError("Link: http://research.microsoft.tcom/en-us/um/people/zliu/ActionRecoRsrc/default.htm");
-            TheSys.showError("Below is an example of data"); 
-            TheSys.showError("");
-            foreach (String s in TheTool.read_File_getListString(TheURL.url_tv_sample_msr))
-            {
-                TheSys.showError(s);
-            }
+            TheConverter.MSR_showSample();
         }
 
         //===========================================================================
@@ -501,45 +482,46 @@ namespace P_Tracker2
                         " (center" + TheUKI.getCenterTechqName(center_techq) + ") RAW_Entropy.csv"; 
                 }
                 //----- Raw -----
-                List<UKI_DataRaw> list_raw = TheUKI.csv_loadFileTo_DataRaw(path_raw);
+                List<UKI_DataRaw> list_raw = TheUKI.csv_loadFileTo_DataRaw(path_raw, 0);
                 //----- Angle ---------
                 List<UKI_DataAngular> list_ang = TheUKI.calAngle_fromRaw(list_raw, ang_techq);
                 if (checkUKI_Angle.IsChecked.Value || checkUKI_E_Angle.IsChecked.Value) { TheUKI.saveData_Ang(path_ang, list_ang); }
                 //---------------------
-                List<int> keyPostureId = UKI_getKeyPostureId();
+                //List<int> keyPostureId = UKI_getKeyPostureId();
+                List<int[]> keyPostureRange = ThePosExtract.getKetPose_Range_from1String(txtUKI_keyID.Text);
                 //----- Angle Entropy ---------
                 if (checkUKI_E_Angle.IsChecked.Value)
                 {
-                    ThePosExtract.UKI_CalEntropy_Angle(path_ang_en, path_ang, keyPostureId);
+                    ThePosExtract.UKI_CalEntropy_Angle(path_ang_en, path_ang, keyPostureRange);
                 }
                 //----- Dist ---------
                 if (checkUKI_E_Dist.IsChecked.Value)
                 {
-                    ThePosExtract.UKI_CalEntropy_Eu(path_dist_en, path_raw, keyPostureId);
+                    ThePosExtract.UKI_CalEntropy_Eu(path_dist_en, path_raw, keyPostureRange);
                 }
                 //----- XYZ Entropy ---------
                 if (checkUKI_E_XYZ.IsChecked.Value) { 
                     if(center_techq > 0){
                         List<UKI_DataRaw> list_raw_centered = TheUKI.raw_centerBodyJoint(list_raw, center_techq);
                         TheUKI.saveData_Raw_centered(path_raw_centered, list_raw_centered, center_techq);
-                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw_centered, keyPostureId);
+                        ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw_centered, keyPostureRange);
                     }
-                    else { ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw, keyPostureId); }
+                    else { ThePosExtract.UKI_CalEntropy_1By1(path_raw_en, path_raw, keyPostureRange); }
                 }
             }
             System.Windows.MessageBox.Show(@"Save to file\[Convert]");
         }
 
-        List<int> UKI_getKeyPostureId()
-        {
-            String[] keyPostureStr = TheTool.splitText(txtUKI_keyID.Text, ",");
-            List<int> keyPostureId = new List<int> { };
-            for (int i = 0; i < keyPostureStr.Count(); i++)
-            {
-                keyPostureId.Add(TheTool.getInt(keyPostureStr[i]));
-            }
-            return keyPostureId;
-        }
+        //List<int> UKI_getKeyPostureId()
+        //{
+        //    String[] keyPostureStr = TheTool.splitText(txtUKI_keyID.Text, ",");
+        //    List<int> keyPostureId = new List<int> { };
+        //    for (int i = 0; i < keyPostureStr.Count(); i++)
+        //    {
+        //        keyPostureId.Add(TheTool.getInt(keyPostureStr[i]));
+        //    }
+        //    return keyPostureId;
+        //}
 
         private void butSortIndy_Click(object sender, RoutedEventArgs e)
         {

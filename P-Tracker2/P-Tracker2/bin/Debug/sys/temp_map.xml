@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<mapping>
+  <variable expand="0">
+    <v name="charge" value="0" />
+  </variable>
+  <map expand="1">
+    <group name="MoveX" enabled="1" expand="1" expand_if="1">
+      <detection name="Walk Forward" loop="0" priority="0" expand="1" expand_if="1" expand_then="1">
+        <if type="2" axis="Z" v="FootR" v2="FootL" opt="le" value_d="-0.28" />
+        <then type="0" press="1" key="Right" />
+      </detection>
+      <detection name="Back Step" loop="0" priority="0" expand="0" expand_if="0" expand_then="0">
+        <if type="2" axis="Z" v="FootL" v2="FootR" opt="l" value_d="-0.4" />
+        <then type="0" press="1" key="Left" />
+      </detection>
+    </group>
+    <group name="MoveY" enabled="1" expand="0" expand_if="0">
+      <if type="9" v="charge" opt="e" value="0" />
+      <detection name="Jump" loop="0" priority="0" expand="0" expand_if="0" expand_then="0">
+        <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="le" value_d="0.3" />
+        <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="le" value_d="0.3" />
+        <if type="0" v="jump" opt="e" value="1" />
+        <then type="0" press="1" key="Up" />
+      </detection>
+      <detection name="Crouch" loop="0" priority="0" expand="0" expand_if="0" expand_then="0">
+        <if type="0" v="jump" opt="e" value="-1" />
+        <then type="0" press="1" key="Down" />
+      </detection>
+    </group>
+    <group name="Attack" enabled="1" expand="1" expand_if="0">
+      <detection name="Hadouken" loop="0" priority="1" expand="1" expand_if="1" expand_then="1">
+        <if type="2" axis="X" v="HandL" v2="ShoulderC" opt="m" value_d="0.07" />
+        <if type="2" axis="Y" v="HandL" v2="ShoulderC" opt="l" value_d="-0.15" />
+        <if type="-1" value_d="1" />
+        <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <then type="1" v="D_DR_R" />
+        <then type="0" press="-1" key="C" />
+      </detection>
+      <detection name="2-H Punch" loop="1" priority="0" expand="1" expand_if="1" expand_then="0">
+        <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <if type="2" axis="Z" v="HandL" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <then type="0" press="1" key="Left" />
+        <then type="0" press="-1" key="C" />
+      </detection>
+      <detection name="Knifehand Strike" loop="1" priority="0" expand="1" expand_if="1" expand_then="1">
+        <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="me" value_d="0.1" />
+        <if type="-1" value_d="1" />
+        <if type="2" axis="Y" v="HandR" v2="ShoulderC" opt="l" value_d="0.1" />
+        <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <then type="0" press="-1" key="Z" />
+      </detection>
+      <detection name="Right Punch" loop="1" priority="0" expand="1" expand_if="1" expand_then="1">
+        <if type="2" axis="Z" v="HandR" v2="ShoulderC" opt="l" value_d="-0.35" />
+        <then type="0" press="-1" key="Z" />
+      </detection>
+    </group>
+  </map>
+</mapping>

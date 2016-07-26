@@ -1286,6 +1286,76 @@ namespace P_Tracker2
 
 
 
+        //Focus on Expected Start and End
+        //static public List<Performance> export_SegmentAnalysis(InstanceContainer container, string pathSave)
+        //{
+        //    List<string> list_output = new List<string>();
+        //    List<Performance> list_performance = new List<Performance>();
+        //    try
+        //    {
+        //        list_output.Add("name,sid,mid,Found,Total,Deleted,Inserted,Corret,key,keyGT,keyJ");
+        //        if (container.list_inst.Count() > 0)
+        //        {
+        //            foreach (Instance inst in container.list_inst)
+        //            {
+        //                Performance p = new Performance();
+        //                int r_Total = inst.keyPoseGT.Count * 2;
+        //                int r_Found = inst.keyPose.Count * 2;
+        //                int r_Deleted = 0;
+        //                int r_Inserted = 0;
+        //                int r_Correct = 0;
+        //                List<int[]> list_key = new List<int[]>();
+        //                List<int[]> list_keyGT_start = new List<int[]>();
+        //                List<int[]> list_keyGT_end = new List<int[]>();
+        //                list_key.AddRange(inst.keyPose);
+        //                foreach (keyPoseGT kGT in inst.keyPoseGT)
+        //                {
+        //                    list_keyGT_start.Add(kGT.start);
+        //                    list_keyGT_end.Add(kGT.end);
+        //                }
+        //                foreach (int[] key in list_key)
+        //                {
+        //                    Boolean foundStart = false; Boolean foundEnd = false;
+        //                    foreach (int[] keyGT_start in list_keyGT_start)
+        //                    {
+        //                        if (key[0] >= keyGT_start[0] && key[0] <= keyGT_start[1])
+        //                        {
+        //                            r_Correct++; foundStart = true; 
+        //                            list_keyGT_start.Remove(keyGT_start);
+        //                            break;
+        //                        }
+        //                    }
+        //                    foreach (int[] keyGT_end in list_keyGT_end)
+        //                    {
+        //                        if (key[1] >= keyGT_end[0] && key[1] <= keyGT_end[1])
+        //                        {
+        //                            r_Correct++; foundEnd = true;
+        //                            list_keyGT_end.Remove(keyGT_end);
+        //                            break;
+        //                        }
+        //                    }
+        //                    if (foundStart == false) { r_Inserted++; foundStart = true; }
+        //                    if (foundEnd == false) { r_Inserted++; foundEnd = true; }
+        //                }
+        //                r_Deleted += list_keyGT_start.Count();
+        //                r_Deleted += list_keyGT_end.Count();
+        //                string output = inst.name + "," + inst.subject_id + "," + inst.motion_id
+        //                    + "," + r_Found + "," + r_Total + "," + r_Deleted
+        //                    + "," + r_Inserted + "," + r_Correct 
+        //                    + "," + printKeyPose(inst.keyPose, " ")
+        //                    + "," + printKeyPoseGT(inst.keyPoseGT, " ")
+        //                    + "," + printKeyJump(inst.keyPoseJump, " ");
+        //                performance_AddData(list_performance, inst.motion_id,
+        //                    r_Found, r_Total, r_Deleted, r_Inserted, r_Correct);
+        //                list_output.Add(output);
+        //            }
+        //        }
+        //        //path_segmentByMotion
+        //        TheTool.exportCSV_orTXT(pathSave, list_output, false);
+        //    }
+        //    catch (Exception ex) { TheSys.showError(ex); }
+        //    return list_performance;
+        //}
 
 
     }

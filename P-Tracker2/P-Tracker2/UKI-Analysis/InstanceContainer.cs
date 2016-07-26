@@ -10,7 +10,6 @@ namespace P_Tracker2
     class InstanceContainer
     {
         public List<Instance> list_inst = new List<Instance>();//Main Data
-        //
         public List<int> list_sid = new List<int>();
         public List<int> list_mid = new List<int>();
         public void sortBySID() { list_inst.OrderBy(x => x.subject_id); }
@@ -23,14 +22,19 @@ namespace P_Tracker2
     {
         public string path = "";//original file path
         public string path_key = "";
+        public string path_keyJ = "";
         public string name = "";//name from path, no extension
         public int subject_id = 0;
         public int motion_id = 0;
+        public int skip = 0;//skip data (row)
         // Below are loaded on request --------------
-        public List<UKI_DataRaw> raw = new List<UKI_DataRaw>();//Sequantial RAW data for the whole motion file
-        public List<int> keyPose = new List<int>();
-        public List<string> keyPoseJump = new List<string>();//KeyPose that Jump is detected (for debug PosExtract)
-        public int pose_count = 0;
+        //Head,ShoulderCenter,ShoulderLeft,ShoulderRight,ElbowLeft,ElbowRight,WristLeft,WristRight,HandLeft,HandRight,Spine,HipCenter,HipLeft,HipRight,KneeLeft,KneeRight,AnkleLeft,AnkleRight,FootLeft,FootRight
+        public List<UKI_DataRaw> data_raw = new List<UKI_DataRaw>();//Sequantial RAW data for the whole motion file
+        public List<UKI_DataMovement> data_movement_adj = new List<UKI_DataMovement>();//already adjusted
+        public List<int[]> keyPose = new List<int[]>();//e.g. 1,12
+        public List<keyPoseGT> keyPoseGT = new List<keyPoseGT>();//ground truth (correct range), e.g. 1-10,11-20
+        public List<int_double> keyPoseJump = new List<int_double>();//KeyPose that Jump is detected (for debug PosExtract)
+        public List<UKI_DataDouble> data_norm = new List<UKI_DataDouble>();//List of Norm (X,Y,Z to norm)
         //-------------
         public int motion_id_predicted = 0;//No Usage yet
         public Boolean extraFeature_isAvailable = false;
@@ -38,43 +42,120 @@ namespace P_Tracker2
         //load on request
         public List<UKI_DataRaw> getDataRaw(Boolean extraFeature)
         {
-            if (this.raw.Count == 0)
+            if (this.data_raw.Count == 0)
             {
-                this.raw = TheUKI.csv_loadFileTo_DataRaw(this.path); 
+                this.data_raw = TheUKI.csv_loadFileTo_DataRaw(path, skip); 
             }
             if(extraFeature_isAvailable == false){
-                TheUKI.DataRaw_AddExtraFeature(this.raw);
+                TheUKI.DataRaw_AddExtraFeature(this.data_raw);
                 extraFeature_isAvailable = true;
             }
-            return this.raw;
+            return this.data_raw;
         }
 
-        public List<int> getKeyPose()
+        public List<UKI_DataDouble> getDataNorm()
+        {
+            this.data_norm = new List<UKI_DataDouble>();
+            foreach (UKI_DataRaw raw in getDataRaw(false))
+            {
+                UKI_DataDouble d = new UKI_DataDouble();
+                d.id = raw.id;
+                d.data.Add(TheTool.calNorm(raw.Head));
+                d.data.Add(TheTool.calNorm(raw.ShoulderCenter));
+                d.data.Add(TheTool.calNorm(raw.ShoulderLeft));
+                d.data.Add(TheTool.calNorm(raw.ShoulderRight));
+                d.data.Add(TheTool.calNorm(raw.ElbowLeft));
+                d.data.Add(TheTool.calNorm(raw.ElbowRight));
+                d.data.Add(TheTool.calNorm(raw.WristLeft));
+                d.data.Add(TheTool.calNorm(raw.WristRight));
+                d.data.Add(TheTool.calNorm(raw.HandLeft));
+                d.data.Add(TheTool.calNorm(raw.HandRight));
+                d.data.Add(TheTool.calNorm(raw.Spine));
+                d.data.Add(TheTool.calNorm(raw.HipCenter));
+                d.data.Add(TheTool.calNorm(raw.HipLeft));
+                d.data.Add(TheTool.calNorm(raw.HipRight));
+                d.data.Add(TheTool.calNorm(raw.KneeLeft));
+                d.data.Add(TheTool.calNorm(raw.KneeRight));
+                d.data.Add(TheTool.calNorm(raw.AnkleLeft));
+                d.data.Add(TheTool.calNorm(raw.AnkleRight));
+                d.data.Add(TheTool.calNorm(raw.FootLeft));
+                d.data.Add(TheTool.calNorm(raw.FootRight));
+                this.data_norm.Add(d);
+            }
+            return this.data_norm;
+        }
+
+        public List<UKI_DataMovement> getDataMove()
+        {
+            if (this.data_movement_adj.Count == 0)
+            {
+                UKI_Offline uki = new UKI_Offline();
+                uki.UKI_OfflineProcessing(getDataRaw(true), -1);//previously use -1
+                this.data_movement_adj = TheUKI.adjustMovementData(uki.data.data_movement);
+            }
+            return this.data_movement_adj;
+        }
+
+        public List<int[]> getKeyPose()
         {
             return getKeyPose(false,false);
         }
 
-        //recompute even data is already exist
-        public List<int> getKeyPose(Boolean recompute, Boolean saveData)
+        //recompute = compute even data is already exist
+        public List<int[]> getKeyPose(Boolean recompute, Boolean saveData)
         {
-            if (recompute) { keyPose.Clear(); }
-            if (keyPose.Count == 0){
-                if (path_key == "") { path_key = TheTool.getDirectory_byPath(path) + @"\" + TheTool.getFileName_byPath(path) + ".key"; }
+            if (Path.GetExtension(path_key) != ThePosExtract.extension_key)
+            {
+                path_key = ""; this.keyPose.Clear();
+            }
+            if (recompute) { this.keyPose.Clear(); }
+            if (this.keyPose.Count == 0)
+            {
+                if (path_key == "") {
+                    path_key = TheTool.getFilePathExcludeExtension_byPath(path) + ThePosExtract.extension_key; 
+                    path_keyJ = TheTool.getFilePathExcludeExtension_byPath(path) + ".j";
+                }
                 if (recompute == false)
                 {
-                    this.keyPose = TheUKI.loadKeyPoseture(path_key);// .key is exist
+                    this.keyPose = TheUKI.loadKeyPose(path_key);// .key is exist
+                    this.keyPoseJump = TheUKI.loadKeyJump(path_keyJ);
                 }
-                if (keyPose.Count == 0)
+                if (recompute || (this.keyPose.Count == 0 && !TheTool.checkPathExist(path_key)))
                 {
-                    this.keyPose = TheUKI.getKeyPosture(getDataRaw(true), true);
-                    this.keyPoseJump = TheUKI.list_keyPose_Jump;
-                    if (saveData) { TheTool.exportCSV_orTXT(path_key, keyPose, false); }
+                    if (recompute == false && !TheTool.checkPathExist(path_key)) { TheSys.showError("Not Found: " + path_key); }
+                    this.keyPose = ThePosExtract.extractKeyPose(this);
+                    this.keyPoseJump = new List<int_double>();
+                    this.keyPoseJump.AddRange(ThePosExtract.list_jump_selected);
+                    if (saveData) { 
+                        TheUKI.exportKey(path_key, keyPose);
+                        if (ThePosExtract.capJumping) { TheUKI.exportKeyJ(path_keyJ, keyPoseJump); }
+                    }
                 }
-                this.pose_count = keyPose.Count();
             }
             return keyPose;
         }
+
+        public List<keyPoseGT> getKeyPoseGT(Boolean reload)
+        {
+            if (keyPoseGT.Count() == 0 || reload)
+            {
+                string path_gt = TheTool.getDirectory_byPath(path) + @"\" + TheTool.getFileName_byPath(path) + ".gt";
+                keyPoseGT = TheUKI.loadKeyPoseGT(path_gt);
+            }
+            if (TheUKI.captureJump && motion_id == 1)
+            {
+                foreach (keyPoseGT gt in keyPoseGT) {
+                    int end_avg = (gt.end[0] + gt.end[1]) / 2;
+                    gt.end[0] = end_avg;
+                    gt.end[1] = end_avg;
+                }
+            }
+            return this.keyPoseGT;
+        }
+        
     }
+
+
 
     class TheInstanceContainer
     {
@@ -86,7 +167,7 @@ namespace P_Tracker2
         public static string path_database = TheURL.url_saveFolder + TheURL.url_9_ukiInst;
 
         //show only indentity, load data only when perform analysis
-        public static InstanceContainer loadInstanceList_fromDatabase(Boolean loadData, List<int> sid_list, List<int> mid_list)
+        public static InstanceContainer loadInstanceList_fromDB(InstanceContainer inst_container_old, Boolean loadData, List<int> sid_list, List<int> mid_list)
         {
             InstanceContainer inst_container = new InstanceContainer();
             try
@@ -140,7 +221,24 @@ namespace P_Tracker2
                 } 
             }
             catch (Exception ex) { TheSys.showError(ex); }
+            container_reuse(inst_container, inst_container_old);
             return inst_container;
+        }
+
+        public static void container_reuse(InstanceContainer container_new, InstanceContainer container_old)
+        {
+            try
+            {
+                if (container_old != null)
+                {
+                    for (int i = 0; i < container_new.list_inst.Count; i++) 
+                    {
+                        Instance p = container_old.list_inst.Find(s => s.path == container_new.list_inst[i].path);
+                        if (p != null) { container_new.list_inst[i] = p; }
+                    }
+                }
+            }
+            catch (Exception ex) { TheSys.showError(ex.ToString()); }
         }
 
         public static void instanceDB_fileRenaming()
@@ -200,6 +298,40 @@ namespace P_Tracker2
             return list_inst.Where(i => i.motion_id.Equals(mid) == equal).ToList();
         }
 
+
+        //show only indentity, load data only when perform analysis
+        public static InstanceContainer loadInstanceList_fromDBoth_NoSubFolder(InstanceContainer inst_container_old, Boolean loadData, string path_db, string txt_filter, int skip)
+        {
+            InstanceContainer inst_container = new InstanceContainer();
+            try
+            {
+                if (!Directory.Exists(path_db))
+                {
+                    TheSys.showError("Target folder is not exist: " + path_db); return inst_container;
+                }
+                string[] inst_file = Directory.GetFiles(path_db, "*.csv");
+                Array.Sort(inst_file);
+                for (int i_i = 0; i_i < inst_file.Count(); i_i++)
+                {
+                    if (inst_file[i_i] == "" || inst_file[i_i].Contains(txt_filter))
+                    {
+                        Instance inst = new Instance();
+                        inst.subject_id = 1;
+                        inst.motion_id = 1;
+                        inst.path = inst_file[i_i];
+                        inst.name = TheTool.getFileName_byPath(inst.path);
+                        inst.skip = skip;
+                        if (loadData) { inst.getDataRaw(true); }
+                        inst_container.list_inst.Add(inst);
+                        inst_container.list_sid.Add(1);
+                        inst_container.list_mid.Add(1);
+                    }
+                }
+            }
+            catch (Exception ex) { TheSys.showError(ex); }
+            container_reuse(inst_container, inst_container_old);
+            return inst_container;
+        }
 
     }
 }

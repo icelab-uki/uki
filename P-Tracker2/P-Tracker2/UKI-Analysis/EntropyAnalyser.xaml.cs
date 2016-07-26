@@ -284,8 +284,8 @@ namespace P_Tracker2
                     }
                     else
                     {
-                        int p_key = 0;
-                        List<int> key_pose = inst.getKeyPose();
+                        int pose_number = 0;
+                        List<int[]> key_pose = inst.getKeyPose();
                         summary_total.Add((key_pose.Count - 1) + " Key Postures");
                         List<DataTable> dt_1pose_list = TheTool.dataTable_split(dt_raw_center, key_pose);
                         DataTable dt_threshold_pose1 = dt_raw_center.Clone();
@@ -294,21 +294,20 @@ namespace P_Tracker2
                         {
                             DataTable dt_threshold_pose2 = dt_raw_center.Clone();
                             dt_threshold_pose2.Rows.Add(dt_1pose.Rows[dt_1pose.Rows.Count - 1].ItemArray);
-                            int p_id = p_key + 1;
-                            int start = inst.keyPose[p_key];
-                            int end = inst.keyPose[p_key + 1];
+                            int p_id = pose_number + 1;
+                            int start = inst.keyPose[pose_number][0];
+                            int end = inst.keyPose[pose_number][1];
                             string txt1 = "Pose" + p_id + ": " + start + "-" + end;
                             summary_total.Add("");
                             summary_total.Add(txt1);
                             //
-                            string subFolder = "Pose" + p_id + 
-                                " (" + start + "-" + end + ")";
+                            string subFolder = "Pose" + p_id + " (" + start + "-" + end + ")";
                             string path_saveFolder_sub = path_saveFolder + subFolder;
                             TheTool.Folder_CreateIfMissing(path_saveFolder_sub);
                             path_saveFolder_sub = path_saveFolder_sub + @"\";
                             //TheTool.export_dataTable_to_CSV(path_saveFolder_sub + "data.csv", dt);
                             analyze_Table(dt_1pose, path_saveFolder_sub, dt_threshold_pose1, dt_threshold_pose2);
-                            p_key++;
+                            pose_number++;
                         }
                         motionModel_exportAll(path_saveFolder, " (segmented)");
                         motionModel_evaluationAll();
@@ -390,10 +389,9 @@ namespace P_Tracker2
                         {
                             if (inst.keyPose.Count() == mode[0])
                             {
-                                int start = inst.keyPose[p_key];
-                                int end = inst.keyPose[p_key + 1];
-                                string txt1 = "- " + start + "-" + end + " of " + inst.name;
-                                summary_total.Add(txt1);
+                                summary_total.Add("- " + inst.keyPose[p_key][0] 
+                                    + "-" + inst.keyPose[p_key][1]
+                                    + " of " + inst.name);
                             }
                         }
                         analyze_Table(dt_1pose, path_saveFolder_sub, dt_threshold[0], dt_threshold[p_id]);
@@ -540,51 +538,6 @@ namespace P_Tracker2
                 }
                 catch (Exception ex) { TheSys.showError(ex); }
             } 
-        }
-
-        //=============================================================
-
-        private void butTest_Click(object sender, RoutedEventArgs e)
-        {
-            sam_BtnTest();
-        }
-
-        void sam_BtnTest()
-        {
-            var tmp = new InstanceContainer();
-            tmp.list_inst = new List<Instance>();
-            // container = TheInstanceContainer.loadInstanceList_fromDatabase(false);
-            InstanceContainer container_save = TheInstanceContainer.loadInstanceList_fromDatabase(false,null,null);
-
-            int start_motion = 3;
-            int current_motion = start_motion;
-            int end_motion = 18;
-            int subject_id = 1;
-            foreach (Instance inst in container_save.list_inst)
-            {
-                Console.WriteLine("InstMotionId" + inst.motion_id);
-                if (subject_id != inst.subject_id)
-                {
-                    subject_id = inst.subject_id;
-                    current_motion = start_motion;
-                }
-
-                if (current_motion != inst.motion_id && inst.motion_id >= 3)
-                {
-                    current_motion += 1;
-                    container.list_inst = tmp.list_inst;
-                    if (container != null && tmp.list_inst.Count > 0)
-                        analyze_combined();
-                    tmp = new InstanceContainer();
-                    tmp.list_inst = new List<Instance>();
-                }
-
-                if (current_motion <= end_motion && inst.motion_id >= 3)
-                {
-                    tmp.list_inst.Add(inst);
-                    Console.WriteLine("tmp path  " + tmp.list_inst[0].path);
-                }
-            }
         }
 
     }

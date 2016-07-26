@@ -8,7 +8,7 @@ namespace P_Tracker2
 {
     public class PosExtract
     {
-        Boolean ready = false;
+        //Boolean ready = false;
         public List<Skeleton> skel_list = new List<Skeleton>();
         public Skeleton skel_last = null;
         public  Skeleton skel_current = null;
@@ -60,54 +60,57 @@ namespace P_Tracker2
         List<double> ms_leg_list = new List<double>();
         List<double> ms_core_list = new List<double>();
 
-        int eu_size = 10;//dist between 1 frame
-        int mva_size_minus1 = 11;//Moving AVG size 11: 5 previous + self + 5 after
+
+        public static int move_size = 10;//dist between 1 frame
+        public static int mva_size_minus1 = 11;//Moving AVG size 11: 5 previous + self + 5 after
 
         //Main Process
         public void process(UKI f)
         {
             skel_current = f.posture_current;
             updateSkel();
-            if (ready)
-            {
+            //if (ready)
+            //{
                 calMove();
                 calSum();
                 calSumAvg();
-            }
+            //}
         }
 
         public void offline_process(UKI_Offline mr)
         {
             offline_skel_current = mr.current_data;
             offline_updateSkel(offline_skel_current);
-            if (ready)
-            {
+            //if (ready)
+            //{
                 offline_calMove();
                 calSum();
                 calSumAvg();
-            }
+            //}
         }
 
         public void updateSkel()
         {
             skel_list.Add(skel_current);
-            if (skel_list.Count > eu_size - 1)
+            if (skel_list.Count > move_size - 1)
             {
-                ready = true;
-                skel_last = skel_list.First(); skel_list.RemoveAt(0); 
+                //ready = true;
+                skel_last = skel_list.First(); skel_list.RemoveAt(0);
             }
-            else { ready = false; }
+            else { skel_last = skel_list.First(); }
+            //else { ready = false; }
         }
 
         public void offline_updateSkel(UKI_DataRaw s)
         {
             offline_skel_list.Add(offline_skel_current);
-            if (offline_skel_list.Count > eu_size - 1)
+            if (offline_skel_list.Count > move_size - 1)
             {
-                ready = true;
+                //ready = true;
                 offline_skel_last = offline_skel_list.First(); offline_skel_list.RemoveAt(0); 
             }
-            else { ready = false; }
+            else { offline_skel_last = offline_skel_list.First(); }
+            //else { ready = false; }
         }
 
         public void calMove()
@@ -208,10 +211,14 @@ namespace P_Tracker2
             ms_hand_list.Add(ms_hand);
             ms_leg_list.Add(ms_leg);
             ms_core_list.Add(ms_core);
-            if (ms_all_list.Count >= mva_size_minus1) { ms_all_avg = TheTool.calAVG(ms_all_list); ms_all_list.RemoveAt(0); }
-            if (ms_hand_list.Count >= mva_size_minus1) { ms_hand_avg = TheTool.calAVG(ms_hand_list); ms_hand_list.RemoveAt(0); }
-            if (ms_leg_list.Count >= mva_size_minus1) { ms_leg_avg = TheTool.calAVG(ms_leg_list); ms_leg_list.RemoveAt(0); }
-            if (ms_core_list.Count >= mva_size_minus1) { ms_core_avg = TheTool.calAVG(ms_core_list); ms_core_list.RemoveAt(0); }
+            ms_all_avg = TheTool.calAVG(ms_all_list);
+            ms_hand_avg = TheTool.calAVG(ms_hand_list);
+            ms_leg_avg = TheTool.calAVG(ms_leg_list);
+            ms_core_avg = TheTool.calAVG(ms_core_list); 
+            if (ms_all_list.Count >= mva_size_minus1) { ms_all_list.RemoveAt(0); }
+            if (ms_hand_list.Count >= mva_size_minus1) { ms_hand_list.RemoveAt(0); }
+            if (ms_leg_list.Count >= mva_size_minus1) { ms_leg_list.RemoveAt(0); }
+            if (ms_core_list.Count >= mva_size_minus1) { ms_core_list.RemoveAt(0); }
         }
 
     }

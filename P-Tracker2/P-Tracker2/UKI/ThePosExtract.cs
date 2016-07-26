@@ -9,7 +9,8 @@ namespace P_Tracker2
 {
     class ThePosExtract
     {
-        public static Boolean capJumping = false;
+        public static string extension_key = @".key";
+
         public static double threshold_minmove = 0.20;//20% of range
         public static double jump_threshold = 0.10;
 
@@ -24,157 +25,321 @@ namespace P_Tracker2
             jump_threshold = jump_threshold0;
         }
 
-        public static List<string> temp_list_jump = new List<string>();//list of keypose that jump is detected e.g. 1(spine_Y)
 
-        //can Min Max, return row id at Extracted
-        //also adjust UKI_DataMovement
-        public static List<int> calMinimaMaxima(List<UKI_DataMovement> list_movement)
+        public static List<int_double> list_jump_all = new List<int_double>();//int[2]{key,spine_Y}, list of keypose that jump is detected (highest height)
+        public static List<int_double> list_jump_selected = new List<int_double>();//Only selected
+        public static List<int[]> list_MinMaxMin = new List<int[]>();//int[3] = Min-Max-Min
+        public static Boolean capJumping = false;
+        public static Boolean useFirstRecord = false;// TRUE: 0,20_20,40 FALSE: 7,20_20,40 
+        public static Boolean useLastRecord = false;
+        public static Boolean boundPass = true;
+        public static Boolean isContinous = true;// TRUE: 0,20_20,40 FALSE: 1,15_20,40
+        public static Boolean s_locate = true;//NOT USE YET
+
+        public static int extractKeyPose_algo_selected = 0;//0 = proposed algo
+        public static int extractKeyPose_algo_myAlgo = 0;
+        public static int extractKeyPose_algo_sam = 1;
+        public static int extractKeyPose_algo_angular = 2;
+
+        public static List<int[]> extractKeyPose(Instance inst)
         {
-            temp_list_jump = new List<string>();
-            List<int> list_PostureKey_ID = new List<int>();
-            try
+            List<int[]> list_keyPose = new List<int[]>();
+            if (extractKeyPose_algo_selected == extractKeyPose_algo_sam)
             {
-                //-- check Min Max value ----------------------------
-                double d = 0;//current
-                double d_min = 0;//must be > 0 after process
-                double d_max = 0;
-                //
-                foreach (UKI_DataMovement u in list_movement)
-                {
-                    d = u.ms_all_avg;
-                    if (d_min == 0) { d_min = d; }
-                    else if (d < d_min) { d_min = d; }
-                    if (d > d_max) { d_max = d; }
-                }
-                double d_range = d_max - d_min;
-                double d_minmove = d_range * threshold_minmove;
-                double d_lowerBound = d_min + d_minmove;//at Percentile 20 from Global Min
-                //-- fin Min Max location ---------------------------
-                List<int> list_minmax_id_list = new List<int>();//index of all detected (even = Maxima, odd = Minima) 
-                Boolean findMax = true;// true = find Max , false = find Min
-                Boolean goUp_current = true;//current direction
-                Boolean goUp_last = true;//last scaned direction
-                double value_current = 0;//curren scaned unit
-                double value_last = 0;//last scaned unit
-                double value_change = 0;
-                double lastAcp_MM = 0;//last accepted Minima / Maxima
-                double diff_fromLastMM = 0;//change from last accepted Minima / Maxima
-                //
-                foreach (UKI_DataMovement u in list_movement)
-                {
-                    value_current = u.ms_all_avg;
-                    value_change = value_current - value_last;
-                    //find Direction
-                    if (value_change >= 0) { goUp_current = true; }
-                    else { goUp_current = false; }
-                    //-----------
-                    if (goUp_current != goUp_last) //found change in Direction
+                list_keyPose.AddRange(ThePosExtract2.extractKeyPose_SamAlgo(inst));
+            }
+            else if (extractKeyPose_algo_selected == extractKeyPose_algo_angular)
+            {
+                list_keyPose.AddRange(ThePosExtract2.extractKeyPose_Angular(inst));
+            }
+            else
+            {
+                //My Algo
+                list_keyPose.AddRange(ThePosExtract.extractKeyPose_MyAlgo(inst.getDataMove()));
+                UKI_DataMovement_markGT(inst);
+            }
+            return list_keyPose;
+        }
+
+        public static void UKI_DataMovement_markGT(Instance inst)
+        {
+            foreach(keyPoseGT kGT in inst.getKeyPoseGT(false)){
+                UKI_DataMovement m;
+                m = inst.getDataMove().Find(s => s.id == kGT.start[1]);
+                if (m != null) { m.type_gt = -1; }
+                m = inst.getDataMove().Find(s => s.id == kGT.end[0]);
+                if (m != null) { m.type_gt = -1; }
+            }
+        }
+
+        public static void UKI_DataMovement_markAlgo(Instance inst)
+        {
+            foreach (int[] k in inst.getKeyPose())
+            {
+                UKI_DataMovement m;
+                m = inst.getDataMove().Find(s => s.id == k[0]);
+                if (m != null) { m.type_algo = -1; }
+                m = inst.getDataMove().Find(s => s.id == k[1]);
+                if (m != null) { m.type_algo = -1; }
+            }
+        }
+
+        public static Boolean UKI_DataMovement_CheckIfMarkExist(Instance inst)
+        {
+            Boolean exist = false;
+            foreach(UKI_DataMovement m in inst.getDataMove()){
+                if(m.type_algo != 0){exist = true;break;}
+            }
+            return exist;
+        }
+
+        //can Min Max, return row id at Extracted, also adjust UKI_DataMovement
+        //List<int[2]>
+        public static List<int[]> extractKeyPose_MyAlgo(List<UKI_DataMovement> list_movement)
+        {
+            List<int[]> list_PostureKey_Range = new List<int[]>();
+            int[] current_PostureKey_Range = new int[] { -1, -1 };
+            if(list_movement.Count > 0){
+                list_jump_selected = new List<int_double>();
+                list_MinMaxMin = new List<int[]>();
+                //--- Prepare --------------------------------
+                list_MinMaxMin.AddRange(calMinMaxMin(list_movement));
+                //-------------------------------------------
+                try {
+                    //-- Build List --------------------------
+                    if (useFirstRecord) { current_PostureKey_Range[0] = list_movement.First().id; }
+                    int lastEnd = -1;
+                    foreach (int[] mmm in list_MinMaxMin)
                     {
-                        diff_fromLastMM = value_last - lastAcp_MM;
-                        if (findMax && goUp_current == false && diff_fromLastMM > d_minmove && value_current > d_lowerBound)
-                        {
-                            //found Max
-                            list_minmax_id_list.Add(u.id - 1);// -1 because we collect last data before change
-                            lastAcp_MM = value_last;
-                            findMax = false;
-                        }
-                        else if (findMax == false && goUp_current && diff_fromLastMM < -d_minmove)
-                        {
-                            //found Min
-                            list_minmax_id_list.Add(u.id - 1);
-                            lastAcp_MM = value_last;
-                            findMax = true;
-                        }
-                        else if (list_minmax_id_list.Count > 0)
-                        {
-                            //finding Min but found higher Maxima
-                            if (!findMax && value_last > lastAcp_MM)
+                        if (isContinous && lastEnd >= 0) {
+                            int middle = (lastEnd + mmm[0]) / 2;
+                            current_PostureKey_Range[0] = middle;
+                            if (list_PostureKey_Range.Count > 0)
                             {
-                                list_minmax_id_list.RemoveAt(list_minmax_id_list.Count - 1);
-                                list_minmax_id_list.Add(u.id - 1);
-                                lastAcp_MM = value_last;
+                                list_PostureKey_Range.Last()[1] = middle;
                             }
-                            else if (findMax && value_last < lastAcp_MM
-                                && diff_fromLastMM < -d_minmove)// (prevent slow down)
-                            {
-                                //finding Max but found lower Minima
-                                list_minmax_id_list.RemoveAt(list_minmax_id_list.Count - 1);
-                                list_minmax_id_list.Add(u.id - 1);
-                                lastAcp_MM = value_last;
-                            }
                         }
+                        else if (current_PostureKey_Range[0] < 0) { current_PostureKey_Range[0] = mmm[0]; }
+                        if (current_PostureKey_Range[1] < 0) { current_PostureKey_Range[1] = mmm[2]; lastEnd = mmm[2]; }
+                        //--------------
+                        list_PostureKey_Range.Add(current_PostureKey_Range);
+                        current_PostureKey_Range = new int[] { -1, -1 };
                     }
-                    else if (findMax == false && value_current < d_lowerBound)
+                    //-- Adjust List --------------------------
+                    if (capJumping)
                     {
-                        //special case : when finding Minima and go below Percentile 20
-                        list_minmax_id_list.Add(u.id);
-                        lastAcp_MM = value_current;
-                        findMax = true;
-                    }
-                    goUp_last = goUp_current;
-                    value_last = value_current;
-                }
-                //-- fin Mid_M ---------------------------------------------------------------
-                List<int> mid = new List<int>();
-                double m_max = 0; double m_min = 0;
-                int m_i = 0; int m_v;
-                foreach (double m in list_minmax_id_list)
-                {
-                    if (m_i % 2 == 0) { m_max = m; }
-                    else
-                    {
-                        m_min = m;
-                        m_v = (int)(m_max + m_min) / 2;
-                        mid.Add(m_v);
-                    }
-                    m_i++;
-                }
-                list_minmax_id_list.AddRange(mid);
-                list_minmax_id_list.Sort();
-                //===========================================================================
-                //-- Adjust Movement Data & built Minama List -------------------------------
-                int[] list_minmax_id_arr = list_minmax_id_list.ToArray();
-                int mm_pointed = 0;
-                int mm_max = list_minmax_id_arr.Count();
-                Boolean skipMin = false;
-                foreach (UKI_DataMovement u in list_movement)
-                {
-                    if (mm_max > 0 && u.id == list_minmax_id_arr[mm_pointed])
-                    {
-                        if (mm_pointed % 3 == 0) { 
-                            if (u.spine_Y > jump_threshold)
+                        list_jump_all = new List<int_double>();
+                        list_jump_all.AddRange(calJump(list_movement));
+                        foreach (int[] mmm in list_PostureKey_Range)
+                        {
+                            foreach (int_double j in list_jump_all)
                             {
-                                u.type = 0;
-                                if (capJumping)
+                                if (j.i >= mmm[0] && j.i <= mmm[1])
                                 {
-                                    //TheSys.showError("Jump " + u.spine_Y);
-                                    skipMin = true;
-                                    list_PostureKey_ID.Add(u.id);
-                                    temp_list_jump.Add(u.id + ":Y" + Math.Round(u.spine_Y,2));
+                                    mmm[1] = j.i;
+                                    list_jump_selected.Add(new int_double() { i = j.i, v = j.v });
                                 }
                             }
-                            else
-                            {
-                                u.type = 1;
-                            }
                         }
-                        else if (mm_pointed % 3 == 1) { u.type = 0.5; }
-                        else 
-                        { 
-                            u.type = -1;
-                            if (skipMin) { skipMin = false; }
-                            else {
-                                list_PostureKey_ID.Add(u.id); 
-                            }
-                        }
-                        //--------
-                        if (mm_pointed < mm_max - 1) { mm_pointed++; };
+                    }
+                    if (useLastRecord && list_PostureKey_Range.Count > 0)
+                    {
+                         list_PostureKey_Range.Last()[1] = list_movement.Last().id;
                     }
                 }
+                catch (Exception ex) { TheSys.showError("calMinMax: " + ex.ToString()); }
             }
-            catch (Exception ex) { TheSys.showError("calMinMax: " + ex.ToString()); }
-            return list_PostureKey_ID;
+            return list_PostureKey_Range;
         }
+
+        public static List<int[]> calMinMaxMin(List<UKI_DataMovement> list_movement)
+        {
+            List<int[]> list_MMM = new List<int[]>();
+            int[] MMM = new int[]{-1,-1,-1};
+            if (list_movement.Count > 0)
+            {
+                try
+                {
+                    //-- check Min Max value ----------------------------
+                    double d = 0;//current
+                    double d_min = 0;//must be > 0 after process
+                    double d_max = 0;
+                    foreach (UKI_DataMovement u in list_movement)
+                    {
+                        d = u.ms_all_avg;
+                        if (d > 0)
+                        {
+                            if (d_min == 0) { d_min = d; }
+                            else if (d < d_min) { d_min = d; }
+                            if (d > d_max) { d_max = d; }
+                        }
+                    }
+                    double d_range = d_max - d_min;
+                    double d_minmove = Math.Abs(d_range * threshold_minmove);
+                    double d_lowerBound = d_min + d_minmove;//at Percentile 20 from Global Min
+                    double predictMin = d_lowerBound;//highest point that next minimum can be accepted
+                    double predictMax = d_lowerBound;//lowest point that next maximum can be accepted
+                    //-- fin Min Max location -------------- -------------
+                    Boolean goUp_current = true;//current direction
+                    Boolean goUp_last = true;//last scaned direction
+                    double value_last = 0;//last scaned unit
+                    double value_current = 0;//current scaned unit
+                    double value_change = 0;
+                    //-----------------
+                    UKI_DataMovement recentAccepted = list_movement.First();//last accepted Minima / Maxima
+                    UKI_DataMovement lastItem = list_movement.First();//last accepted Minima / Maxima
+                    recentAccepted.type_algo = -1;
+                    MMM[0] = recentAccepted.id;
+                    //Start higher than threshold, use 0 as Min1
+                    foreach (UKI_DataMovement u in list_movement.Skip(1))
+                    {
+                        u.type_algo = 0;
+                        value_current = u.ms_all_avg;
+                        value_change = value_current - value_last;
+                        //---------------------------------
+                        if (value_change >= 0) { goUp_current = true; }
+                        else { goUp_current = false; }
+                        //
+                        if (predictMin == 0 || value_current < predictMin)
+                        {
+                            predictMax = Math.Max(Math.Min(value_current + d_minmove, predictMax),d_lowerBound);
+                            predictMin = Math.Max(value_current, d_lowerBound);
+                        }
+                        if (value_current > predictMax) { 
+                            predictMax = value_current; 
+                            predictMin = Math.Max(value_current - d_minmove, d_lowerBound); 
+                        }
+                        //---------------------------------
+                        //Min0 by Bound-Pass or LastAccept-Pass
+                        if ((boundPass && value_last < d_lowerBound && value_current >= d_lowerBound)
+                            ||
+                            (!boundPass && value_last < recentAccepted.ms_all_avg && value_current >= recentAccepted.ms_all_avg))
+                        {
+                            if (list_MMM.Count == 0 || (list_MMM.Last()[2] != MMM[0]))
+                            { 
+                                recentAccepted.type_algo = 0;
+                            }
+                            recentAccepted = u;
+                            recentAccepted.type_algo = -1;
+                            MMM[0] = recentAccepted.id;
+                        }
+                        //Min2 by Bound
+                        else if (value_last >= d_lowerBound && value_current < d_lowerBound)
+                        {
+                            if (MMM[1] >= 0 && MMM[2] < 0)
+                            {
+                                //found Min2 & Complete
+                                recentAccepted = u;
+                                recentAccepted.type_algo = -1;
+                                MMM[2] = recentAccepted.id; list_MMM.Add(MMM);
+                                //
+                                MMM = new int[] { -1, -1, -1 };
+                                MMM[0] = recentAccepted.id;//First of new set
+                            }
+                            else if (MMM[1] < 0 && list_MMM.Count > 0 && list_MMM.Last()[2] > d_lowerBound)
+                            {
+                                //adjust last End
+                                recentAccepted.type_algo = 0;
+                                recentAccepted = u;
+                                recentAccepted.type_algo = -1;
+                            }
+                        }
+                        else if (goUp_current != goUp_last) //found change in Direction
+                        {
+                            //During finding Min2
+                            if (MMM[1] >= 0 && MMM[2] < 0)
+                            {
+                                if (s_locate && goUp_current && value_last <= predictMin)
+                                {
+                                    //found Min2 & Complete
+                                    if (MMM[2] >= 0) { recentAccepted.type_algo = 0; }
+                                    recentAccepted = lastItem;
+                                    lastItem.type_algo = -1;
+                                    MMM[2] = recentAccepted.id; list_MMM.Add(MMM);
+                                    //
+                                    MMM = new int[] { -1, -1, -1 };
+                                    MMM[0] = recentAccepted.id;//First of new set
+                                }
+                                else if (!goUp_current && value_last > recentAccepted.ms_all_avg)
+                                {
+                                    //found higher Max1
+                                    if (MMM[1] >= 0) { recentAccepted.type_algo = 0; }
+                                    recentAccepted = lastItem;
+                                    recentAccepted.type_algo = 1;
+                                    MMM[1] = recentAccepted.id;// -1 because we collect last data before change
+                                    //
+                                    predictMin = Math.Max(value_last - d_minmove, d_lowerBound);
+                                }
+                            }
+                            //During finding Max1
+                            else if (MMM[0] >= 0 && MMM[1] < 0)
+                            {
+                                if (!goUp_current && value_last >= predictMax)
+                                {
+                                    //found Max
+                                    if (MMM[1] >= 0) { recentAccepted.type_algo = 0; }
+                                    recentAccepted = u;
+                                    MMM[1] = recentAccepted.id;
+                                    recentAccepted.type_algo = 1;
+                                    //
+                                    predictMin = Math.Max(value_current - d_minmove, d_lowerBound);
+                                }
+                                else if (value_last < recentAccepted.ms_all_avg && value_last > d_lowerBound)
+                                {
+                                    //found lower Min0
+                                    recentAccepted.type_algo = 0;
+                                    recentAccepted = lastItem;
+                                    MMM[0] = recentAccepted.id;
+                                    recentAccepted.type_algo = -1;
+                                    //
+                                    if (list_MMM.Count > 0) { list_MMM.Last()[2] = recentAccepted.id; }
+                                }
+                            }
+                        }
+                        //-----------------------------------------
+                        u.myalgo_bound_lowest = d_lowerBound;
+                        u.myalgo_bound_predictedMin = predictMin;
+                        u.myalgo_bound_predictedMax = predictMax;
+                        //----
+                        goUp_last = goUp_current;
+                        value_last = value_current;
+                        lastItem = u;
+                    }//for each
+                    //if (MMM[2] >= 0) { list_MMM.Add(MMM); }//add last item
+                    //else if (MMM[0] >= 0 && MMM[1] < 0) { recentAccepted.type_algo = 0; }//delete last item
+                }
+                catch (Exception ex) { TheSys.showError(ex); }
+            }
+            //------------------------------------
+            return list_MMM;
+        }
+
+        //return key when Jump (highest point)
+        public static List<int_double> calJump(List<UKI_DataMovement> list_movement)
+        {
+            List<int_double> list_key = new List<int_double>();
+            Boolean duringJump = false;
+            UKI_DataMovement highest_key = new UKI_DataMovement();
+            foreach (UKI_DataMovement u in list_movement)
+            {
+                if (u.spine_Y > jump_threshold)
+                {
+                    if (u.spine_Y > highest_key.spine_Y) { highest_key = u; }
+                    duringJump = true;
+                    if (highest_key.type_algo != 0) { highest_key.type_algo = 0.33; }
+                }
+                else if (duringJump){
+                    highest_key.type_algo = 0.66; 
+                    int[] key = new int[]{};
+                    list_key.Add(new int_double() { i = highest_key.id, v = highest_key.spine_Y });
+                    duringJump = false;
+                    highest_key = new UKI_DataMovement();
+                }
+            }
+            return list_key;
+        }
+
+        //----------------------------------------------------------------------------
 
         public static List<string> log_BasicPostureAnalysis = new List<string>();//for show summary
         //canonical = useBasePose , if not use previous
@@ -349,7 +514,7 @@ namespace P_Tracker2
                 int row_i = 0;
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (row_i > 1) {result.Add("");}
+                    if(row_i > 1) {result.Add("");}
                     if(row_i > 0){
                         List<PE_Feature> list_feature = new List<PE_Feature>();
                         foreach (DataColumn col in dt.Columns)
@@ -399,7 +564,7 @@ namespace P_Tracker2
 
         //============================================================
 
-        public static void UKI_CalEntropy_1By1(String path_saveTo, String path_loadFrom, List<int> keyPostureId)
+        public static void UKI_CalEntropy_1By1(String path_saveTo, String path_loadFrom, List<int[]> keyPosture_Range)
         {
             try{
                 List<string> final_output = new List<string>();//Data
@@ -412,26 +577,323 @@ namespace P_Tracker2
                 }
                 final_output.Add(new_header);
                 //
-                final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPostureId, 2, 1)); 
+                final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPosture_Range, 2, 1)); 
                 TheTool.exportCSV_orTXT(path_saveTo, final_output, false);
             }catch(Exception ex){TheSys.showError(ex);}
         }
 
-        public static void UKI_CalEntropy_Angle(String path_saveTo, String path_loadFrom, List<int> keyPostureId)
+        public static void UKI_CalEntropy_Angle(String path_saveTo, String path_loadFrom, List<int[]> keyPostureRange)
         {
             List<string> final_output = new List<string>();//Data
             final_output.Add("id," + TheUKI.getHeader_20Joint("_H"));//Header
-            final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPostureId, 0, 2));
+            final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPostureRange, 0, 2));
             TheTool.exportCSV_orTXT(path_saveTo, final_output, false);
         }
 
-        public static void UKI_CalEntropy_Eu(String path_saveTo, String path_loadFrom, List<int> keyPostureId)
+        public static void UKI_CalEntropy_Eu(String path_saveTo, String path_loadFrom, List<int[]> keyPostureRange)
         {
             List<string> final_output = new List<string>();//Data
             final_output.Add("id," + TheUKI.getHeader_20Joint("_dist_H"));//Header
-            final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPostureId, 2, 3));
+            final_output.AddRange(TheEntropy.calEntropy_MotionData(path_loadFrom, keyPostureRange, 2, 3));
             TheTool.exportCSV_orTXT(path_saveTo, final_output, false);
         }
+
+        //INPUT 30-100, OUTPUT 100
+        public static List<int> getKeyPose_ID_StartEnd(List<int[]> keyPose_Range)
+        {
+            List<int> keyPose_ID = new List<int>();
+            foreach (int[] k in keyPose_Range) { keyPose_ID.Add(k[0]); keyPose_ID.Add(k[1]); }
+            return keyPose_ID;
+        }
+
+        //INPUT: 10,11_14,16
+        public static List<int[]> getKetPose_Range_from1String(string s)
+        {
+            List<int[]> keyPose_list = new List<int[]>();
+            string[] a = TheTool.splitText(s,"_");
+            for (int i = 0; i < a.Count(); i++)
+            {
+                if(a[i] != ""){//this line is not ""
+                    int[] d = new int[2];
+                    string[] b = TheTool.splitText(a[i], ",");
+                    if (b.Count() > 0) { d[0] = TheTool.getInt(b[0]); d[1] = TheTool.getInt(b[0]); }
+                    if (b.Count() > 1) {d[1] = TheTool.getInt(b[1]); }
+                    keyPose_list.Add(d);
+                }
+            }
+            return keyPose_list;
+        }
+
+        //joinTxt = ","
+        public static string printKeyPose(List<int[]> keyPose,string joinTxt)
+        {
+            string s = ""; int i = 0;
+            foreach (int[] k in keyPose)
+            {
+                if (i > 0) { s += "_"; }
+                for (int a = 0; a < k.Count(); a++)
+                {
+                    if (a > 0) { s += joinTxt; }
+                    s += k[a];
+                }
+                i++;
+            }
+            return s;
+        }
+
+        //joinTxt = ","
+        public static string printKeyPoseGT(List<keyPoseGT> keyPoseGT, string joinTxt)
+        {
+            string s = ""; int i = 0;
+            foreach (keyPoseGT k in keyPoseGT)
+            {
+                if (i > 0) { s += "_"; }
+                s += k.start[0] + "-" + k.start[1] + joinTxt + k.end[0] + "-" + k.end[1];
+                i++;
+            }
+            return s;
+        }
+
+        //joinTxt = ","
+        public static string printKeyJump(List<int_double> keyJump, string joinTxt)
+        {
+            string s = ""; int i = 0;
+            foreach (int_double k in keyJump)
+            {
+                if (i > 0) { s += "_"; }
+                s += k.i + ":Y" + Math.Round(k.v,2);
+                i++;
+            }
+            return s;
+        }
+
+        //Ref: (2014) Sequential max-margin event detectors
+        //Ref: ChairLearn
+        //Ref: Graph-based representation learning for automatic human motion segmentation
+        static public List<Performance> export_SegmentAnalysis(InstanceContainer container, string pathSave)
+        {
+            List<string> list_output = new List<string>();
+            List<Performance> list_performanceByMID = new List<Performance>();
+            try
+            {
+                list_output.Add("name,sid,mid," + performance_header + ",key,keyGT,keyJ");
+                if (container.list_inst.Count() > 0)
+                {
+                    foreach (Instance inst in container.list_inst)
+                    {
+                        Performance p = performance_measure(inst);
+                        performance_measure2(p);
+                        string output = inst.name + "," + inst.subject_id + "," + inst.motion_id
+                            + "," + performance_Print(p)
+                            + "," + printKeyPose(inst.keyPose, " ")
+                            + "," + printKeyPoseGT(inst.keyPoseGT, " ")
+                            + "," + printKeyJump(inst.keyPoseJump, " ");
+                        performance_AddData(list_performanceByMID, p);
+                        list_output.Add(output);
+                    }
+                }
+                //path_segmentByMotion
+                TheTool.exportCSV_orTXT(pathSave, list_output, false);
+            }
+            catch (Exception ex) { TheSys.showError(ex); }
+            return list_performanceByMID;
+        }
+
+        public static Performance performance_measure(Instance inst){
+            Performance p = new Performance{};
+            //-------------------------------------------------------
+            //(Sum) r_sumATSR,r_sumconcordance,Found,Total,Deleted,Inserted,Correct
+            p.mid = inst.motion_id;
+            p.Total = inst.keyPoseGT.Count;
+            p.Found = inst.keyPose.Count;
+            List<int[]> list_key = new List<int[]>();
+            List<int[]> list_keyGT = new List<int[]>();
+            list_key.AddRange(inst.keyPose);
+            foreach (keyPoseGT kGT in inst.keyPoseGT)
+            {
+                list_keyGT.Add(new int[]{ kGT.start[1], kGT.end[0]});
+            }
+            for (int i_g = 0; i_g < list_keyGT.Count; i_g++)
+            {
+                int[] keyGT = list_keyGT[i_g];
+                Boolean deleted = true;
+                for (int i = 0; i < list_key.Count; i++)
+                {
+                    int[] key = list_key[i];
+                    if (key[0] > keyGT[1]){ break; }
+                    int[] overlap = new int[]{ Math.Max(keyGT[0],key[0]),  Math.Min(keyGT[1],key[1])};
+                    if (overlap[0] < overlap[1])
+                    {
+                        double overlapLengthGT = (double) (overlap[1] - overlap[0]) / (keyGT[1] - keyGT[0]) ;
+                        if (overlapLengthGT >= 0.5)
+                        {
+                            p.Correct++;
+                            p.list_ATSR.Add(calATSR(keyGT, key) );
+                            p.list_concordance.Add(calConcordance(keyGT, key));
+                            deleted = false;
+                            list_key.Remove(key);
+                            i--;
+                            continue;
+                        }
+                    }
+                    p.Inserted++;
+                    list_key.Remove(key);
+                    i--;
+                }
+                if (deleted) { p.Deleted++; }
+            }
+            //------------------------------------------------------
+            //(ratio) p_ATSR,p_concordance, p_Accuracy,p_Error,p_Recall,p_Precision,p_F-Score,Perf1,Perf2
+            performance_measure2(p);
+            return p;
+        }
+
+        public static void performance_measure2(Performance p)
+        {
+            if (p.Total > 0)
+            {
+                p.p_accuracy = (double)(p.Correct - p.Inserted) / p.Total;
+                p.p_error = (double)(p.Deleted + p.Inserted) / (p.Total + p.Inserted);
+            }
+            if (p.Correct > 0)
+            {
+                p.p_recall = (double)p.Correct / (p.Correct + p.Deleted);
+                p.p_precision = (double)p.Correct / (p.Correct + p.Inserted);
+                p.p_F = 2 * (p.p_recall * p.p_precision) / (p.p_recall + p.p_precision);
+                if (p.list_ATSR.Count > 0) { p.p_ATSR = p.list_ATSR.Average(); }
+                if (p.list_concordance.Count > 0) { p.p_concordance = p.list_concordance.Average(); } 
+            }
+            double dividend = 0; double divisor = 0;
+            dividend = 5 * p.p_ATSR * p.p_F; divisor = (4 * p.p_ATSR) + p.p_F;
+            if (divisor > 0) { p.perf1 = dividend / divisor; }
+            dividend = 5 * p.p_concordance * p.p_F; divisor = (4 * p.p_concordance) + p.p_F;
+            if (divisor > 0) { p.perf2 = dividend / divisor; }
+        }
+
+        public static double calATSR(int[] keyGT, int[] key)
+        {
+            double range = keyGT[1] - keyGT[0];
+            if (range == 0) { return 0; }
+            else {
+                double atse = (Math.Abs(keyGT[0] - key[0]) + Math.Abs(keyGT[1] - key[1])) / range;
+                if (atse <= .1) { atse = 0; }
+                else if (atse > 1) { atse = 1; }
+                return 1 - atse; 
+            }
+        }
+
+        public static double calConcordance(int[] keyGT, int[] key)
+        {
+            double rc = 0;
+            double divisor = keyGT[1] - keyGT[0] + key[1] - key[0];
+            if (divisor > 0)
+            {
+                double dividend = Math.Min(keyGT[1], key[1]) - Math.Max(keyGT[0], key[0]);
+                dividend *= 2;
+                rc = dividend / divisor;
+                if (rc >= .9) { rc = 1; }
+            }
+            return rc;
+        }
+
+        public static void performance_AddData(List<Performance> list_performance, Performance p2)
+        {
+            Performance p = null;
+            if (list_performance.Count > 0) { p = list_performance.Find(s => s.mid == p2.mid); }
+            if (p != null)
+            {
+                p.Found += p2.Found;
+                p.Total += p2.Total;
+                p.Deleted += p2.Deleted;
+                p.Inserted += p2.Inserted;
+                p.Correct += p2.Correct;
+                if (p2.p_ATSR > 0){ p.list_ATSR.Add(p2.p_ATSR); }
+                if (p2.p_concordance > 0) { p.list_concordance.Add(p2.p_concordance); }
+            }
+            else {
+                p = new Performance();
+                p.mid = p2.mid;
+                p.Found = p2.Found;
+                p.Total = p2.Total;
+                p.Deleted = p2.Deleted;
+                p.Inserted = p2.Inserted;
+                p.Correct = p2.Correct;
+                if (p2.p_ATSR > 0) { p.list_ATSR.Add(p2.p_ATSR); }
+                if (p2.p_concordance > 0) { p.list_concordance.Add(p2.p_concordance); }
+                list_performance.Add(p);
+            }
+        }
+
+        ////INPUT: list of performance 1 by 1
+        ////OUTPUT: list of performance by MID
+        public static void export_SegmentMIDAnalysis(List<Performance> list_performance, string pathSave)
+        {
+            List<string> list_output = new List<string>();
+            Performance sum = new Performance();
+            foreach (Performance p in list_performance)
+            {
+                performance_measure2(p);
+                list_output.Add(p.mid + "," + performance_Print(p));
+                //-----
+                sum.Found += p.Found;
+                sum.Total += p.Total;
+                sum.Deleted += p.Deleted;
+                sum.Inserted += p.Inserted;
+                sum.Correct += p.Correct;
+                if (p.p_ATSR > 0) { sum.list_ATSR.Add(p.p_ATSR); }
+                if (p.p_concordance > 0) { sum.list_concordance.Add(p.p_concordance); }
+            }
+            performance_measure2(sum);
+            string overall_performance = "All," + performance_Print(sum);
+            temp_performance.Add(overall_performance);
+            list_output.Insert(0, overall_performance);
+            list_output.Insert(0, "MID," + performance_header);
+            TheTool.exportCSV_orTXT(pathSave, list_output, false);
+            //------
+            temp_overallPerformance =
+                " P2:" + Math.Round(sum.perf2, 2) + " P1:" + Math.Round(sum.perf1, 2)
+                + " F:" + Math.Round(sum.p_F, 2)
+                + " ATSR:" + Math.Round(sum.p_ATSR, 2) + " Rc:" + Math.Round(sum.p_concordance, 2)
+                + " Rec:" + Math.Round(sum.p_recall, 2) + " Pre:" + Math.Round(sum.p_precision, 2)
+                + " Acc:" + Math.Round(sum.p_accuracy, 2) + " Err:" + Math.Round(sum.p_error, 2);
+        }
+
+        public static List<string> temp_performance = new List<string>();
+        
+        public static string temp_overallPerformance = "";
+
+        public static string performance_header = "Perf1,Perf2,p_ATSR,p_concordance,p_F-Score,p_Recall,p_Precision,p_Accuracy,p_Error,Found,Total,Deleted,Inserted,Corret";
+        public static string performance_Print(Performance p)
+        {
+            return p.perf1 + "," + p.perf2 + "," + 
+                p.p_ATSR + "," + p.p_concordance + "," + p.p_F + "," +
+                p.p_recall + "," + p.p_precision + "," + p.p_accuracy + "," + p.p_error + "," +
+                p.Found + "," + p.Total + "," + p.Deleted + "," + p.Inserted + "," + p.Correct;
+        }
+
+    }
+
+    class Performance
+    {
+        public int mid = 0;
+        public int Found = 0;
+        public int Total = 0;
+        public int Deleted = 0;
+        public int Inserted = 0;
+        public int Correct = 0;
+        public List<double> list_ATSR = new List<double>();
+        public List<double> list_concordance = new List<double>();
+        //
+        public double p_accuracy = 0;
+        public double p_error = 0;
+        public double p_recall = 0;
+        public double p_precision = 0;
+        public double p_F = 0;
+        //
+        public double p_ATSR = 0;
+        public double p_concordance = 0;//concordance rate
+        public double perf1 = 0;
+        public double perf2 = 0;
     }
 
 }

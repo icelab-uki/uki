@@ -2207,7 +2207,6 @@ namespace P_Tracker2
         {
             MySetting.readSetting();
             callDetector();
-
             if (MySetting.loadSetting)
             {
                 try

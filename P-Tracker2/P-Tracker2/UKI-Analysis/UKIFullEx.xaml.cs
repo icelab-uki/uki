@@ -32,19 +32,21 @@ namespace P_Tracker2
                 Console.WriteLine();
             }
             resetTable();
+            TheUKI.captureJump = checkGT_CapJump.IsChecked.Value;
+            setting();
         }
 
         //=== Basic Template ===================================================================================
 
-        string col_id = "id";
-        string col_file = "file";
-        string col_sid = "subject";
-        string col_mid = "motion";
-        //string col_mid_predict = "predicted";
-        string col_pose_ex = "poses-expect";
-        string col_pose = "poses";
-        string col_key = "key";
-        string col_jump = "jump";
+        //string col_id = "id";
+        //string col_file = "file";
+        //string col_sid = "subject";
+        //string col_mid = "motion";
+        ////string col_mid_predict = "predicted";
+        //string col_pose_ex = "poses-gt";
+        //string col_pose = "poses";
+        //string col_key = "key";
+        //string col_jump = "jump";
 
         DataTable dataTable = null;//data table that become datagrid
 
@@ -54,15 +56,16 @@ namespace P_Tracker2
             else
             {
                 dataTable = new DataTable();
-                dataTable.Columns.Add(col_id);
-                dataTable.Columns.Add(col_file);
-                dataTable.Columns.Add(col_sid);
-                dataTable.Columns.Add(col_mid);
+                dataTable.Columns.Add("id");
+                dataTable.Columns.Add("file");
+                dataTable.Columns.Add("subject");
+                dataTable.Columns.Add("motion");
                 //dataTable.Columns.Add(col_mid_predict);
-                dataTable.Columns.Add(col_pose_ex);
-                dataTable.Columns.Add(col_pose);
-                dataTable.Columns.Add(col_key);
-                dataTable.Columns.Add(col_jump);
+                dataTable.Columns.Add("poses");
+                dataTable.Columns.Add("poses-gt");
+                dataTable.Columns.Add("key");
+                dataTable.Columns.Add("key-gt");
+                dataTable.Columns.Add("jump");
                 setDataGrid(dataTable);
             }
         }
@@ -147,7 +150,7 @@ namespace P_Tracker2
                 sid_list = TheTool.getSelectRange(textSID.Text);
                 mid_list = TheTool.getSelectRange(textMID.Text);
             }
-            container = TheInstanceContainer.loadInstanceList_fromDatabase(false, sid_list, mid_list);
+            container = TheInstanceContainer.loadInstanceList_fromDB(container, false, sid_list, mid_list);
         }
 
         void refreshTable()
@@ -158,16 +161,14 @@ namespace P_Tracker2
                 int id = 1;
                 foreach (Instance inst in container.list_inst)
                 {
-                    int count = inst.keyPose.Count - 1;
-                    if (count < 0) { count = 0; }
-                    //--------------
                     dataTable.Rows.Add(id, inst.name,
-                        inst.subject_id, 
-                        inst.motion_id, 
-                        count,
-                        TheTool.listArr_getValueById(list_poseCount_expect, inst.motion_id)[1].ToString(),
-                        TheTool.getString_fromList(inst.keyPose, "_"),
-                        TheTool.getString_fromList(inst.keyPoseJump, "_"));
+                        inst.subject_id,
+                        inst.motion_id,
+                        inst.keyPose.Count,
+                        inst.keyPoseGT.Count,
+                        ThePosExtract.printKeyPose(inst.keyPose, ","),
+                        ThePosExtract.printKeyPoseGT(inst.keyPoseGT, ","),
+                        ThePosExtract.printKeyJump(inst.keyPoseJump, ","));
                     id++;
                 }
                 butAnalyze.IsEnabled = true;
@@ -177,34 +178,15 @@ namespace P_Tracker2
             rowCount();
         }
 
-        List<int[]> list_poseCount_expect = new List<int[]>()
-        {
-            new int[]{1,1}, new int[]{2,1}, new int[]{3,1}, new int[]{4,1}, new int[]{5,1}, 
-            new int[]{6,1}, new int[]{7,1}, new int[]{8,1}, new int[]{9,1}, new int[]{10,1}, 
-            new int[]{11,1}, new int[]{12,1}, new int[]{13,1}, new int[]{14,1}, new int[]{15,1}, 
-            new int[]{16,1}, new int[]{17,1}, new int[]{18,1}, new int[]{19,1}, new int[]{20,1}, 
-            new int[]{21,1}, new int[]{22,1}, new int[]{23,2}, new int[]{24,2}, new int[]{25,2},
-            new int[]{26,3}, new int[]{27,1}, new int[]{28,3}, new int[]{29,2}, new int[]{30,2}, 
-        };
-
         private void butAnalyze_Click(object sender, RoutedEventArgs e)
         {
+            setting();
             doAnalysis(true);
         }
 
 
         private void butLoop_Click(object sender, RoutedEventArgs e)
         {
-            //doAnalysis(false);
-            //checkLoopMaxTrue.IsChecked = true;
-            //doAnalysis(false);
-            //checkMinF.IsChecked = true;
-            //doAnalysis(false);
-            //for (int i = 1; i <= 20; i += 1)
-            //{
-            //    doAnalysis(false);
-            //}
-
             checkLoopMaxTrue.IsChecked = true;
             checkMinF.IsChecked = true;
             for (int i = 0; i <= 100; i += 2)
@@ -212,35 +194,13 @@ namespace P_Tracker2
                 txtTradeOff.Text = i.ToString();
                 doAnalysis(false);
             }
-
-            //- Test Partition -----------------------------------
-            //for (double d = .01; d <= .20; d += .01)
-            //{
-            //    txtPartitionRange.Text = d.ToString();
-            //    doAnalysis(false);
-            //}
-            //txtPartitionRange.Text = ".25";
-            //doAnalysis(false);
-            //- Test Segment -----------------------------------
-            //checkReCal.IsChecked = true;
-            //checkPoseCapJump.IsChecked = true;
-            //for (double d = .01; d <= .5; d += .01)
-            //{
-            //    txtThreJump.Text = TheTool.getTxt_NumericDigit_FillBy0(d.ToString(),2);
-            //    countPose();
-            //    exportPoseTable(false);
-            //}
-            //txtThreStill.Text = "0.05";
-            //countPose();
-            //exportPoseTable(false);
         }
 
         void doAnalysis(Boolean showDialog)
         {
             try
             {
-                ThePosExtract.capJumping = checkPoseCapJump.IsChecked.Value;
-                countPose(false);
+                countPose(false, checkSaveKey.IsChecked.Value);
                 string folderPath = "";
                 evaluation_export_part1(out folderPath);
                 tobesaved_score_list = new List<FileToBeSaved>();
@@ -265,53 +225,14 @@ namespace P_Tracker2
         private void butCountPose_Click(object sender, RoutedEventArgs e)
         {
             countPose();
-            exportPoseTable(true);
         }
 
         void countPose()
         {
-            ThePosExtract.setThreshold(TheTool.getDouble(txtThreStill), TheTool.getDouble(txtThreJump));
-            ThePosExtract.capJumping = checkPoseCapJump.IsChecked.Value;
-            countPose(checkReCal.IsChecked.Value);
-            ThePosExtract.setThreshold_default();
-            if (checkPoseSegExport.IsChecked.Value) { export_PoseSegmentAnalysis(); }
-        }
-
-        void export_PoseSegmentAnalysis()
-        {
-            int count_correct = 0;
-            int count_total = 0;
-            int jump_T = 0;
-            int jump_T_total = 0;
-            int jump_F = 0;
-            int jump_F_total = 0;
-            foreach (DataRow r in dataTable.Rows)
-            {
-                if (r[col_pose_ex].ToString() == r[col_pose].ToString()) { count_correct++; }
-                count_total++;
-                if (r[col_mid].ToString() == "1") { 
-                    if(r[col_jump].ToString() != ""){jump_T++;}
-                    jump_T_total++;
-                }
-                else{
-                    if(r[col_jump].ToString() != ""){ jump_F++;}
-                    jump_F_total++;
-                }
-            }
-            //===========================
-            List<string> data = new List<string>();
-            data.Add("count_correct,count_correct_p,jump_T,jump_T_p,jump_F,jump_F_p");
-            data.Add(
-                count_correct + "," +
-                Math.Round((double)count_correct / count_total, 2) + "," +
-                jump_T + "," +
-                Math.Round((double)jump_T / jump_T_total, 2) + "," +
-                jump_F + "," +
-                Math.Round((double)jump_F / jump_F_total, 2)
-                );
-            //----------------
-            string filename = TheURL.url_saveFolder + "PostureSegment" + getPoseCount_fileSuffix();
-            TheTool.exportCSV_orTXT(filename, data, false);
+            setting();
+            ThePosExtract.extractKeyPose_algo_selected = ThePosExtract.extractKeyPose_algo_myAlgo;
+            countPose(checkReCal.IsChecked.Value, checkSaveKey.IsChecked.Value);
+            resetting();
         }
 
         string getPoseCount_fileSuffix()
@@ -325,19 +246,25 @@ namespace P_Tracker2
             return suffix;
         }
 
-        void countPose(Boolean Recompute)
+        //path != "" if specify
+        void countPose(Boolean Recompute, Boolean save)
         {
             try
             {
+                setting();
+                ThePosExtract.setThreshold(TheTool.getDouble(txtThreStill), TheTool.getDouble(txtThreJump));
                 foreach (Instance inst in container.list_inst)
                 {
-                    inst.getKeyPose(Recompute, checkSaveKey.IsChecked.Value);
+                    inst.getKeyPose(Recompute, save);
+                    inst.getKeyPoseGT(false);
                 }
                 refreshTable();
+                ThePosExtract.setThreshold_default();
             }
             catch (Exception ex) { TheSys.showError(ex); }
         }
 
+        //check if some each Folder has instances more than or less than 3
         private void butCountInst_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -363,7 +290,7 @@ namespace P_Tracker2
 
         void exportPoseTable(Boolean showDialog)
         {
-            string filename = TheURL.url_saveFolder + "PostureCount" + getPoseCount_fileSuffix();
+            string filename = TheURL.url_saveFolder + "FUllEx 01" + getPoseCount_fileSuffix();
             TheTool.export_dataTable_to_CSV(filename, dataTable);
             if (showDialog) { System.Windows.MessageBox.Show(@"Save to '" + TheURL.url_saveFolder + "PostureCount.csv'", "Export Files"); }
         }
@@ -1090,14 +1017,178 @@ namespace P_Tracker2
             return dt_quality_TF;
         }
 
-        private void checkReCal_Checked(object sender, RoutedEventArgs e)
+        private void butAnalysisSegment_Click(object sender, RoutedEventArgs e)
         {
-            checkPoseSegExport.IsChecked = true;
+            string savePath_1by1 = TheURL.url_saveFolder + "FUllEx 02(Segment) " + getPoseCount_fileSuffix();
+            string savePath_MID = TheURL.url_saveFolder + "FUllEx 03 (SegmentMID)" + getPoseCount_fileSuffix();
+            segmentAnalysis(savePath_1by1, savePath_MID);
+            System.Windows.MessageBox.Show(@"Save to '" + TheURL.url_saveFolder + "'", "Export Files");
         }
+
+        void segmentAnalysis(string savePath_1by1, string savePath_MID)
+        {
+            List<Performance> list_performance = ThePosExtract.export_SegmentAnalysis(container, savePath_1by1);
+            ThePosExtract.export_SegmentMIDAnalysis(list_performance, savePath_MID);
+            TheSys.showError(ThePosExtract.temp_overallPerformance);
+        }
+
+        void setting()
+        {
+            ThePosExtract.isContinous = checkContinous.IsChecked.Value;
+            ThePosExtract.capJumping = checkPoseCapJump.IsChecked.Value;
+            ThePosExtract.useFirstRecord = checkCapFirst.IsChecked.Value;
+            ThePosExtract.useLastRecord = checkCapLast.IsChecked.Value;
+            ThePosExtract.boundPass = checkBound.IsChecked.Value;
+            ThePosExtract.s_locate = checkSLocate.IsChecked.Value;
+            //
+            int i;
+            PosExtract.move_size = 10;
+            i = TheTool.getInt(txtRange_Move); if (i > 0) { PosExtract.move_size = i; }
+            PosExtract.mva_size_minus1 = 11;
+            i = TheTool.getInt(txtRange_MVA); if (i > 0) { PosExtract.mva_size_minus1 = i - 1; }
+        }
+
+        void resetting()
+        {
+            PosExtract.move_size = 10;
+            PosExtract.mva_size_minus1 = 11;
+        }
+
+        private void butExportMove_Click(object sender, RoutedEventArgs e)
+        {
+            string path_segmentFolder = TheURL.url_saveFolder + "FUllEx_Motion";
+            TheTool.Folder_CreateIfMissing(path_segmentFolder);
+            foreach (Instance inst in container.list_inst)
+            {
+                string path_segmentFile = path_segmentFolder + @"\" + inst.name + ".csv";
+                List<string> output = new List<string>();
+                string s = "id,algo,gt,ms_avg,ms";
+                if (checkExMove_showBound.IsChecked.Value) { s += ",bound,exMAX,exMIN"; }
+                output.Add(s); 
+                //------------
+                ThePosExtract.UKI_DataMovement_markGT(inst);
+                if (!ThePosExtract.UKI_DataMovement_CheckIfMarkExist(inst))
+                {
+                    ThePosExtract.UKI_DataMovement_markAlgo(inst);
+                }
+                foreach (UKI_DataMovement d in inst.getDataMove())
+                {
+                    s = d.id + "," + d.type_algo + "," + d.type_gt + "," + d.ms_all_avg + "," + d.ms_all;
+                    if (checkExMove_showBound.IsChecked.Value) {
+                        s += "," + d.myalgo_bound_lowest + "," + d.myalgo_bound_predictedMax + "," + d.myalgo_bound_predictedMin;
+                    }
+                    output.Add(s);
+                }
+                TheTool.exportCSV_orTXT(path_segmentFile,output,false);
+            }
+            System.Windows.MessageBox.Show(@"Save to '" + path_segmentFolder + "'", "Export Files");
+        }
+
+        void KE(int algo, string savePath)
+        {
+            ThePosExtract.extractKeyPose_algo_selected = algo;
+            if (checkKE_ExportDetail.IsChecked.Value) { 
+                ThePosExtract2.path_saveFolder = savePath;
+                TheTool.Folder_CreateIfMissing(savePath);
+            }
+            else { ThePosExtract2.path_saveFolder = ""; }
+            //-----------------------
+            countPose(true, checkSaveKey.IsChecked.Value);
+            //-----------------------
+            ThePosExtract2.path_saveFolder = "";
+            ThePosExtract.extractKeyPose_algo_selected = 0;
+        }
+
+        private void butKE_01_Click(object sender, RoutedEventArgs e)
+        {
+            ThePosExtract2.samAlgo_threshold = TheTool.getDouble(txt_SamThreshold) / 1000;
+            KE(ThePosExtract.extractKeyPose_algo_sam, TheURL.url_saveFolder + @"/KE_Sam");
+        }
+
+        private void butKE_02_Click(object sender, RoutedEventArgs e)
+        {
+            KE(ThePosExtract.extractKeyPose_algo_angular, TheURL.url_saveFolder + @"/KE_Ang");
+        }
+
+        private void checkBound_Checked(object sender, RoutedEventArgs e)
+        {
+            ThePosExtract.useFirstRecord = checkCapFirst.IsChecked.Value;
+        }
+
+        private void txtKeyExtension_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ThePosExtract.extension_key = txtKeyExtension.Text.ToString();
+        }
+
+        private void butClearGT_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Instance inst in container.list_inst) { inst.keyPoseGT.Clear(); }
+        }
+
+        private void checkGT_CapJump_Checked(object sender, RoutedEventArgs e)
+        {
+            TheUKI.captureJump = checkGT_CapJump.IsChecked.Value;
+        }
+
+        private void butKE_Sam_FullEx_Click(object sender, RoutedEventArgs e)
+        {
+            checkKE_ExportDetail.IsChecked = false;
+            ThePosExtract.temp_performance.Clear();
+            ThePosExtract.temp_performance.Add("MID," + ThePosExtract.performance_header);
+            for (int i = 1; i <= 100; i++)
+            {
+                TheSys.showError(i + " ",false);
+                ThePosExtract2.samAlgo_threshold = (double)i / 1000;
+                KE(ThePosExtract.extractKeyPose_algo_sam, TheURL.url_saveFolder + @"/KE_Sam");
+                //----------
+                string path_Folder = TheURL.url_saveFolder + "KE";
+                TheTool.Folder_CreateIfMissing(path_Folder);
+                string path_segment1by1 = path_Folder + "/" + i + " FUllEx 02 (Segment) " + getPoseCount_fileSuffix();
+                string path_segmentByMotion = path_Folder + "/" + i + " FUllEx 03 (SegmentMID)" + getPoseCount_fileSuffix();
+                segmentAnalysis(path_segment1by1, path_segmentByMotion);
+            }
+            TheTool.exportCSV_orTXT(TheURL.url_saveFolder + "summary.csv", ThePosExtract.temp_performance, false);
+        }
+
+        private void butLoopKE_Click(object sender, RoutedEventArgs e)
+        {
+            ThePosExtract.temp_performance.Clear();
+            ThePosExtract.temp_performance.Add("MID," + ThePosExtract.performance_header);
+            checkReCal.IsChecked = true;
+            for (int i = 2; i <= 100; i++)
+            {
+                TheSys.showError(i + " ", false);
+                countPose();
+                txtThreStill.Text = Math.Round((double) i/100,2).ToString();
+                string path_Folder = TheURL.url_saveFolder + "KE";
+                TheTool.Folder_CreateIfMissing(path_Folder);
+                string path_segment1by1 = path_Folder + "/" + i + " FUllEx 02 (Segment) " + getPoseCount_fileSuffix();
+                string path_segmentByMotion = path_Folder + "/" + i + " FUllEx 03 (SegmentMID)" + getPoseCount_fileSuffix();
+                segmentAnalysis(path_segment1by1, path_segmentByMotion);
+            }
+            TheTool.exportCSV_orTXT(TheURL.url_saveFolder + "summary.csv", ThePosExtract.temp_performance, false);
+        }
+
+        //=============================================================
+
+        private void butLoadInsOth_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                resetTable();
+                string path = TheURL.url_saveFolder + TheURL.url_9_DB + "/" + txtDBoth.Text;
+                int skip = 0;
+                if (checkBox_DBothSkip.IsChecked.Value) { skip = TheTool.getInt(txtDBothSkip); }
+                container = TheInstanceContainer.loadInstanceList_fromDBoth_NoSubFolder(container, false, path, txtDBothFilter.Text, skip);
+                refreshTable();
+            }
+            catch (Exception ex) { TheSys.showError(ex); }
+        }
+
 
     }
 
-    //====================================================
+    //================================================================
 
     class SID_model
     {
@@ -1121,8 +1212,6 @@ namespace P_Tracker2
             excluded = _excluded;
         }
     }
-
-    
 
 
 }

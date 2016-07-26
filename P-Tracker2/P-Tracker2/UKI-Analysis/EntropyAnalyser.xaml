@@ -33,7 +33,6 @@
             </TabItem>
             <TabItem Header="oth" Name="tabItem2">
                 <Grid Background="#FF032B00">
-                    <Button Content="Test 3-18" Height="21" HorizontalAlignment="Left" Margin="468,43,0,0" Name="butTest" VerticalAlignment="Top" Width="62" Click="butTest_Click" />
                     <CheckBox Content="DCFS (Feature Selection based on Delta with Linear Correlation)" Foreground="#FFFFFFAF" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="6,26,0,0" Name="checkDCFS" VerticalAlignment="Top" />
                     <CheckBox Content="Greedy, MIFS, CMIM, JMIM" Foreground="#FFFFFFAF" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="6,6,0,0" Name="checkEntropy" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="95,43,0,0" Name="txtPartitionRange" Text="0.05" VerticalAlignment="Top" Width="31" />

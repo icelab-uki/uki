@@ -60,21 +60,18 @@ namespace P_Tracker2
                     if (inst.keyPose.Count() == temp_mode[0])
                     {
                         int key_number = 0;
-                        int start = 0;
-                        foreach (int end in inst.getKeyPose())
+                        foreach (int[] keyPose in inst.getKeyPose())
                         {
                             if (key_number > 0)
                             {
-                                List<UKI_DataRaw> selectedRange = TheUKI.UKI_DataRaw_selectRow(inst.getDataRaw(extraColumn), start, end);
+                                List<UKI_DataRaw> selectedRange = TheUKI.UKI_DataRaw_selectRow(inst.getDataRaw(extraColumn), keyPose[0], keyPose[1]);
                                 list_raw_seq[key_number - 1].AddRange(selectedRange);
-                                //
                                 if (key_number == 1)
                                 {
                                     list_raw_threshold[0].Add(selectedRange.First());
                                 }
                                 list_raw_threshold[key_number].Add(selectedRange.Last());
                             }
-                            start = end;
                             key_number++;
                         }
                     }

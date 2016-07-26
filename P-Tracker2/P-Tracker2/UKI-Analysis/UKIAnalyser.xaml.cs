@@ -179,7 +179,7 @@ namespace P_Tracker2
         {
             string currentFileName = TheTool.getFileName_byPath(path_load);
             string matrix_data = currentFileName;
-            List<UKI_DataRaw> list_raw = TheUKI.csv_loadFileTo_DataRaw(path_load);
+            List<UKI_DataRaw> list_raw = TheUKI.csv_loadFileTo_DataRaw(path_load,0);
             List<logDetection> log_list = new List<logDetection>();//keep output summary
             //--- Preprocess to obtain BasePosture Data
             UKI_Offline mr = new UKI_Offline();
@@ -219,7 +219,7 @@ namespace P_Tracker2
                         path_RawData = r[col_path].ToString();
                         string folderName = TheTool.getFileName_byPath(path_RawData);
                         UKI_Offline mr = new UKI_Offline();
-                        mr.UKI_OfflineProcessing(TheUKI.csv_loadFileTo_DataRaw(path_RawData), 1);
+                        mr.UKI_OfflineProcessing(TheUKI.csv_loadFileTo_DataRaw(path_RawData, 0), 1);
                         mr.data.exportFile(folderName, "UKI_", true, true, false);
                     }
                     catch (Exception ex) { TheSys.showError(r[col_path].ToString() + " : " + ex.ToString()); }
